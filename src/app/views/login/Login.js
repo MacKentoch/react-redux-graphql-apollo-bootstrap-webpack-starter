@@ -37,26 +37,8 @@ class Login extends Component {
           'animatedViews': animated,
           'view-enter': viewEntersAnim
         })}>
-        <Jumbotron>
-          <h1>
-            TODO
-          </h1>
-          <h2>
-            login view here
-          </h2>
-
-          <p>
-            <Link
-              className="btn btn-success btn-lg"
-              to={'/about'}>
-              <i className="fa fa-info"></i>
-              &nbsp;
-              go to about
-            </Link>
-          </p>
-        </Jumbotron>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-4 col-md-offset-4">
 
             <form className="form-horizontal">
               <fieldset>

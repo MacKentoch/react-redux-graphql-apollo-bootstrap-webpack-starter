@@ -9,6 +9,12 @@
       "isRouteBtn": true
     },
     {
+      "label":      "Login",
+      "link":       "/login",
+      "view":       "login",
+      "isRouteBtn": true
+    },
+    {
       "label":      "Components",
       "link":       "/components",
       "view":       "components",
