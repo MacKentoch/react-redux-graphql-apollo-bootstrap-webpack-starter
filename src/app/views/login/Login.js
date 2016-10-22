@@ -68,7 +68,7 @@ class Login extends Component {
                       id="inputEmail"
                       placeholder="Email"
                       value={email}
-                      onChange={this.onEmailChange}
+                      onChange={this.handlesOnEmailChange}
                     />
                   </div>
                 </div>
@@ -85,22 +85,22 @@ class Login extends Component {
                       id="inputPassword"
                       placeholder="Password"
                       value={password}
-                      onChange={this.onPasswordChange}
+                      onChange={this.handlesOnPasswordChange}
                     />
                   </div>
                 </div>
 
                 <div className="form-group">
                   <div className="col-lg-10 col-lg-offset-2">
-                    <button
-                      type="reset"
-                      className="btn btn-default">
+                    <Link
+                      className="btn btn-default"
+                      to={'/'}>
                       Cancel
-                    </button>
+                    </Link>
                     <button
-                      type="submit" 
-                      className="btn btn-primary">
-                      Submit
+                      className="btn btn-primary"
+                      onClick={this.handlesOnLogin}>
+                      Login
                     </button>
                   </div>
                 </div>
@@ -114,16 +114,21 @@ class Login extends Component {
     );
   }
 
-  onEmailChange = (event) => {
+  handlesOnEmailChange = (event) => {
     event.preventDefault();
     // should add some validator before setState in real use cases
     this.setState({ email: event.target.value });
   }
 
-  onPasswordChange = (event) => {
+  handlesOnPasswordChange = (event) => {
     event.preventDefault();
     // should add some validator before setState in real use cases
     this.setState({ password: event.target.value });
+  }
+
+  handlesOnChange = (event) => {
+    event.preventDefault();
+    // TODO: dispatch a login action here
   }
 }
 
