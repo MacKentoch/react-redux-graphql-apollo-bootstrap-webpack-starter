@@ -14,7 +14,6 @@ import {
   App,
   ConnectedHome,
   ConnectedAbout,
-  ConnectedComponents,
   ConnectedLogin,
   ConnectedRegister
 }                               from '../containers';
@@ -34,7 +33,6 @@ export const Routes = () => {
         <Router history={syncedHistory}>
           <Route path="/" component={App} >
             <IndexRoute component={ConnectedHome} />
-            <Route path="/components" component={ConnectedComponents} />
             <Route path="/about" component={ConnectedAbout} />
             <Route path="/login" component={ConnectedLogin} />
             <Route path="/register" component={ConnectedRegister} />

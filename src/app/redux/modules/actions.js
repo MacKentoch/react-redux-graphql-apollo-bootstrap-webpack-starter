@@ -5,9 +5,9 @@ import {
   // about:
   enterAbout,
   leaveAbout,
-  // components:
-  enterComponents,
-  leaveComponents,
+  // register:
+  enterRegister,
+  leaveRegister,
   // login:
   enterLogin,
   leaveLogin
@@ -21,9 +21,9 @@ export {
   // about:
   enterAbout,
   leaveAbout,
-  // components:
-  enterComponents,
-  leaveComponents,
+  // register:
+  enterRegister,
+  leaveRegister,
   // login:
   enterLogin,
   leaveLogin
