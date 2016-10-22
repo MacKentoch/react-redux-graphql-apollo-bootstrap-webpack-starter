@@ -4,7 +4,23 @@ import ApolloClient, {
 }                       from 'apollo-client';
 import { appConfig }    from '../../config';
 
+// networkInterface:
+const networkInterface = createNetworkInterface(appConfig.apollo.networkInterface);
+
+// when need token based authentication:
+networkInterface.use([{
+  applyMiddleware(req, next) {
+    if (!req.options.headers) {
+      req.options.headers = {};  // Create the header object if needed.
+    }
+    // get the authentication token from local storage if it exists
+    req.options.headers.authorization = localStorage.getItem('token') || null;
+    next();
+  }
+}]);
+
+
 export const apolloClient = new ApolloClient({
-  networkInterface: createNetworkInterface(appConfig.apollo.networkInterface),
+  networkInterface: networkInterface,
   queryTransformer: addTypename
 });
