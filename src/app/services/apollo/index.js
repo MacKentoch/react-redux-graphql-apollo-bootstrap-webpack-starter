@@ -4,7 +4,7 @@ import ApolloClient, {
 }                       from 'apollo-client';
 import { appConfig }    from '../../config';
 
-export const client = new ApolloClient({
+export const apolloClient = new ApolloClient({
   networkInterface: createNetworkInterface(appConfig.apollo.networkInterface),
   queryTransformer: addTypename
 });

@@ -1,7 +1,12 @@
-import * as fetchTools from './fetchTools';
-import {getSomething} from './API/example';
+import * as fetchTools  from './fetchTools';
+import {getSomething}   from './API/example';
+import { apolloClient } from './apollo';
 
 export {
+  // fetch tools:
   fetchTools,
-  getSomething
+  // API:
+  getSomething,
+  // apollo client
+  apolloClient
 };
