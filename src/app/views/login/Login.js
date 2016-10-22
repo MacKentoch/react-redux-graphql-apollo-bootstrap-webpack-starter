@@ -89,6 +89,21 @@ class Login extends Component {
                     />
                   </div>
                 </div>
+
+                <div className="form-group">
+                  <div className="col-lg-10 col-lg-offset-2">
+                    <button
+                      type="reset"
+                      className="btn btn-default">
+                      Cancel
+                    </button>
+                    <button
+                      type="submit" 
+                      className="btn btn-primary">
+                      Submit
+                    </button>
+                  </div>
+                </div>
               </fieldset>
             </form>
 
