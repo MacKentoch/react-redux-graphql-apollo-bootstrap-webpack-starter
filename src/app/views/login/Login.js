@@ -53,7 +53,7 @@ class Login extends Component {
               noValidate>
               <fieldset>
                 <legend>
-                  login
+                  Login
                 </legend>
                 <div className="form-group">
                   <label
@@ -98,7 +98,7 @@ class Login extends Component {
                       Cancel
                     </Link>
                     <button
-                      className="btn btn-primary"
+                      className="btn btn-primary login-button"
                       onClick={this.handlesOnLogin}>
                       Login
                     </button>
