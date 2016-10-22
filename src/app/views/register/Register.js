@@ -98,7 +98,7 @@ class Register extends Component {
                     <button
                       className="btn btn-primary register-button"
                       onClick={this.handlesOnRegister}>
-                      Login
+                      Register
                     </button>
                   </div>
                 </div>

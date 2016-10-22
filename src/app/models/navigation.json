@@ -15,6 +15,12 @@
       "isRouteBtn": true
     },
     {
+      "label":      "Register",
+      "link":       "/register",
+      "view":       "register",
+      "isRouteBtn": true
+    },
+    {
       "label":      "Components",
       "link":       "/components",
       "view":       "components",
