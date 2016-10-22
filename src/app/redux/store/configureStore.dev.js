@@ -10,7 +10,7 @@ import createLogger             from 'redux-logger';
 import thunkMiddleware          from 'redux-thunk';
 import * as reducers            from '../modules/reducers';
 import DevTools                 from '../devTools/DevTools.jsx';
-
+import { apolloClient }         from './services/apollo';
 
 const loggerMiddleware = createLogger({
   level     : 'info',
@@ -19,7 +19,11 @@ const loggerMiddleware = createLogger({
 
 // createStore : enhancer
 const enhancer = compose(
-  applyMiddleware(thunkMiddleware, loggerMiddleware), // logger after thunk to avoid undefined actions
+  applyMiddleware(
+    thunkMiddleware,
+    apolloClient.middleware(), // apollo middleware
+    loggerMiddleware
+  ), // logger after thunk to avoid undefined actions
   persistState(getDebugSessionKey()),
   DevTools.instrument()
 );
@@ -32,9 +36,11 @@ function getDebugSessionKey() {
 // combine reducers -> createStore reducer
 const reducer = combineReducers({
   ...reducers,
+  apollo: apolloClient.reducer(), // apollo reducer
   routing: routerReducer
 });
 
+// export default = "redux store"
 export default function configureStore(initialState) {
   const store = createStore(reducer, initialState, enhancer);
   module.hot.accept('../modules/reducers', () =>
@@ -42,3 +48,6 @@ export default function configureStore(initialState) {
   );
   return store;
 }
+
+// export "apollo client"
+export const client = apolloClient;

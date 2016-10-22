@@ -8,7 +8,8 @@ import {
   // hashHistory,
   browserHistory
  }                              from 'react-router';
-import { Provider }             from 'react-redux';
+// import { Provider }             from 'react-redux';
+import { ApolloProvider }       from 'react-apollo'; // replace Provider from react-redux
 import { syncHistoryWithStore } from 'react-router-redux';
 import {
   App,
@@ -20,7 +21,9 @@ import {
 import {
   PageNotFound
 }                               from '../views';
-import configureStore           from '../redux/store/configureStore';
+import configureStore, {
+  client
+}                               from '../redux/store/configureStore';
 import DevTools                 from '../redux/devTools/DevTools.jsx';
 
 const store         = configureStore();
@@ -28,7 +31,7 @@ const syncedHistory = syncHistoryWithStore(browserHistory, store);
 
 export const Routes = () => {
   return (
-    <Provider store={store}>
+    <ApolloProvider store={store} client={client}>
       <div>
         <Router history={syncedHistory}>
           <Route path="/" component={App} >
@@ -41,6 +44,6 @@ export const Routes = () => {
         </Router>
         { process.env.NODE_ENV !== 'production' ? <DevTools /> : null }
       </div>
-    </Provider>
+    </ApolloProvider>
   );
 };
