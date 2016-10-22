@@ -11,7 +11,10 @@ class Login extends Component {
 
   state = {
     animated: true,
-    viewEntersAnim: true
+    viewEntersAnim: true,
+
+    email: '',
+    password: ''
   };
 
   componentDidMount() {
@@ -29,7 +32,12 @@ class Login extends Component {
   }
 
   render() {
-    const { animated, viewEntersAnim } = this.state;
+    const {
+      animated,
+      viewEntersAnim,
+      email,
+      password
+    } = this.state;
     return(
       <div
         key="homeView"
@@ -40,7 +48,9 @@ class Login extends Component {
         <div className="row">
           <div className="col-md-4 col-md-offset-4">
 
-            <form className="form-horizontal">
+            <form
+              className="form-horizontal"
+              noValidate>
               <fieldset>
                 <legend>
                   login
@@ -57,6 +67,8 @@ class Login extends Component {
                       className="form-control"
                       id="inputEmail"
                       placeholder="Email"
+                      value={email}
+                      onChange={this.onEmailChange}
                     />
                   </div>
                 </div>
@@ -72,6 +84,8 @@ class Login extends Component {
                       className="form-control"
                       id="inputPassword"
                       placeholder="Password"
+                      value={password}
+                      onChange={this.onPasswordChange}
                     />
                   </div>
                 </div>
@@ -83,6 +97,18 @@ class Login extends Component {
 
       </div>
     );
+  }
+
+  onEmailChange = (event) => {
+    event.preventDefault();
+    // should add some validator before setState in real use cases
+    this.setState({ email: event.target.value });
+  }
+
+  onPasswordChange = (event) => {
+    event.preventDefault();
+    // should add some validator before setState in real use cases
+    this.setState({ password: event.target.value });
   }
 }
 
