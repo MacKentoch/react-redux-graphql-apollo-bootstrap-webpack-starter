@@ -39,7 +39,7 @@ class Home extends Component {
         })}>
         <Jumbotron>
           <h1>
-            Full ES2015 ReactJS + Bootstrap
+            Full ES2015 ReactJS + Redux + graphQL + Apollo + Bootstrap
           </h1>
           <h2>
             with Hot Reload!!!
@@ -50,7 +50,7 @@ class Home extends Component {
           <h1>
             Starter
           </h1>
-          <h1></h1>
+
           <p>
             <Link
               className="btn btn-success btn-lg"

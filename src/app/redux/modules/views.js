@@ -10,7 +10,8 @@ const ENTER_COMPONENTS_VIEW = 'ENTER_COMPONENTS_VIEW';
 const LEAVE_COMPONENTS_VIEW = 'LEAVE_COMPONENTS_VIEW';
 const ENTER_ABOUT_VIEW = 'ENTER_ABOUT_VIEW';
 const LEAVE_ABOUT_VIEW = 'LEAVE_ABOUT_VIEW';
-
+const ENTER_LOGIN_VIEW = 'ENTER_LOGIN_VIEW';
+const LEAVE_LOGIN_VIEW = 'LEAVE_LOGIN_VIEW';
 
 // /////////////////////
 // reducer
@@ -27,6 +28,7 @@ export default function (state = initialState, action) {
   case ENTER_HOME_VIEW:
   case ENTER_COMPONENTS_VIEW:
   case ENTER_ABOUT_VIEW:
+  case ENTER_LOGIN_VIEW:
     // can't enter if you are already inside
     if (state.currentView !== action.currentView) {
       return {
@@ -41,6 +43,7 @@ export default function (state = initialState, action) {
   case LEAVE_HOME_VIEW:
   case LEAVE_COMPONENTS_VIEW:
   case LEAVE_ABOUT_VIEW:
+  case LEAVE_LOGIN_VIEW:
     // can't leave if you aren't already inside
     if (state.currentView === action.currentView) {
       return {
@@ -110,6 +113,24 @@ export function leaveAbout(time = moment().format(dateFormat)) {
   return {
     type:         LEAVE_ABOUT_VIEW,
     currentView:  'about',
+    enterTime:    null,
+    leaveTime:    time
+  };
+}
+
+export function enterLogin(time = moment().format(dateFormat)) {
+  return {
+    type:         ENTER_LOGIN_VIEW,
+    currentView:  'login',
+    enterTime:    time,
+    leaveTime:    null
+  };
+}
+
+export function leaveLogin(time = moment().format(dateFormat)) {
+  return {
+    type:         LEAVE_LOGIN_VIEW,
+    currentView:  'login',
     enterTime:    null,
     leaveTime:    time
   };

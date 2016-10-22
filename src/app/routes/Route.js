@@ -14,7 +14,8 @@ import {
   App,
   ConnectedHome,
   ConnectedAbout,
-  ConnectedComponents
+  ConnectedComponents,
+  ConnectedLogin
 }                               from '../containers';
 import {
   PageNotFound
@@ -34,6 +35,7 @@ export const Routes = () => {
             <IndexRoute component={ConnectedHome} />
             <Route path="/components" component={ConnectedComponents} />
             <Route path="/about" component={ConnectedAbout} />
+            <Route path="/login" component={ConnectedLogin} />
             <Route path="*" component={PageNotFound} />
           </Route>
         </Router>
