@@ -2,12 +2,11 @@ import React, {
   Component,
   PropTypes
 }                     from 'react';
-import {Jumbotron}    from '../../components';
 import cx             from 'classnames';
 import shallowCompare from 'react-addons-shallow-compare';
 import { Link }       from 'react-router';
 
-class Login extends Component {
+class Register extends Component {
 
   state = {
     animated: true,
@@ -18,8 +17,8 @@ class Login extends Component {
   };
 
   componentDidMount() {
-    const { enterLogin } = this.props;
-    enterLogin();
+    const { enterRegister } = this.props;
+    enterRegister();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -27,8 +26,8 @@ class Login extends Component {
   }
 
   componentWillUnmount() {
-    const { leaveLogin } = this.props;
-    leaveLogin();
+    const { leaveRegister } = this.props;
+    leaveRegister();
   }
 
   render() {
@@ -52,7 +51,7 @@ class Login extends Component {
               noValidate>
               <fieldset>
                 <legend>
-                  Login
+                  Register
                 </legend>
                 <div className="form-group">
                   <label
@@ -97,8 +96,8 @@ class Login extends Component {
                       Cancel
                     </Link>
                     <button
-                      className="btn btn-primary login-button"
-                      onClick={this.handlesOnLogin}>
+                      className="btn btn-primary register-button"
+                      onClick={this.handlesOnRegister}>
                       Login
                     </button>
                   </div>
@@ -125,16 +124,16 @@ class Login extends Component {
     this.setState({ password: event.target.value });
   }
 
-  handlesOnLogin = (event) => {
+  handlesOnRegister = (event) => {
     event.preventDefault();
     // TODO: dispatch a login action here
   }
 }
 
-Login.propTypes= {
-  currentView:  PropTypes.string.isRequired,
-  enterLogin:    PropTypes.func.isRequired,
-  leaveLogin:    PropTypes.func.isRequired
+Register.propTypes= {
+  currentView:    PropTypes.string.isRequired,
+  enterRegister:  PropTypes.func.isRequired,
+  leaveRegister:  PropTypes.func.isRequired
 };
 
-export default Login;
+export default Register;
