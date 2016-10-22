@@ -3,7 +3,7 @@ Full ES2015 React + React-Router + Redux + GraphQL + Apollo + Bootstrap with Hot
 
 #### full ES6-ES2015
 
-> My new React + redux project starter. This time I add graphQL and I better use Apollo Client than Relay.
+> My new React + redux project starter. This time I add graphQL and Apollo Client (*I better use Apollo Client than Relay*).
 
 - *webpack is as simple as possible*
 - *ReactJS is written with `optimization tricks` (stateless, pure render...).*
