@@ -2,14 +2,13 @@ import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as viewsActions      from '../../redux/modules/views';
 import { Home }               from '../../views';
-
 import gql                    from 'graphql-tag';
 import { graphql }            from 'react-apollo';
 
 
-/*
+/* -----------------------------------------
   GraphQL - Apollo client
- */
+ ------------------------------------------*/
 
 const CurrentUser = gql`
  query GetUser ($user: ID!) {
@@ -28,14 +27,6 @@ const CurrentUser = gql`
 }
 `;
 
-const logUser = gql`
-  mutation loginUser($user: LoginUserInput!) {
-    loginUser(input: $user) {
-      token
-    }
-  }
-`;
-
 // 1- add queries:
 const HomeWithQuery = graphql(
   CurrentUser,
@@ -46,39 +37,19 @@ const HomeWithQuery = graphql(
       }
     },
     name: 'getCurrentUser',
-    props: ({ ownProps, getCurrentUser: { loading, getUser, refetch } }) => ({
+    props: ({ ownProps, getCurrentUser: { loading, getUser, getRole, refetch } }) => ({
       userLoading: loading,
-      user: getUser,
+      user: {...getUser, ...getRole},
       refetchUser: refetch
     })
   }
 )(Home);
 
-// 2- add mutation "logUser":
-const HomeWithMutation = graphql(
-  logUser,
-  {
-    options: {
-      variables: {
-        user: {
-          username: 'test',
-          password: 'test'
-        }
-      }
-    },
-    name: 'logUser'
-  },
-  // props: ({ ownProps, mutate }) => ({
-  //   loginUser() {
-  //     return mutate()
-  //       .then(result => ownProps.onSelectList(result.id));
-  //   },
-  // })
-)(HomeWithQuery);
 
- /*
-   Redux
-  */
+/* -----------------------------------------
+  Redux
+ ------------------------------------------*/
+
 const mapStateToProps = (state) => {
   return {
     currentView:  state.views.currentView
@@ -95,17 +66,7 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 
-/*
-  without bindActionCreators:
- */
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     enterHome: () => dispatch(viewsActions.enterHome()),
-//     leaveHome: () => dispatch(viewsActions.leaveHome())
-//   };
-// };
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HomeWithMutation);
+)(HomeWithQuery);

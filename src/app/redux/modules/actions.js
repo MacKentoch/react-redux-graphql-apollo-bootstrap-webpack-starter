@@ -1,3 +1,4 @@
+// views actions creators
 import {
   // home:
   enterHome,
@@ -13,8 +14,16 @@ import {
   leaveLogin
 } from './views';
 
+// userAuth action creators:
+import {
+  receivedUserLoggedIn
+} from './userAuth';
+
 
 export {
+  /* -------------------
+    views
+   ------------------- */
   // home:
   enterHome,
   leaveHome,
@@ -26,5 +35,10 @@ export {
   leaveRegister,
   // login:
   enterLogin,
-  leaveLogin
+  leaveLogin,
+
+  /* -------------------
+    userAuth
+   ------------------- */
+   receivedUserLoggedIn
 };

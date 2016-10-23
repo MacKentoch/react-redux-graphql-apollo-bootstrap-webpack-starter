@@ -127,14 +127,25 @@ class Login extends Component {
 
   handlesOnLogin = (event) => {
     event.preventDefault();
-    // TODO: dispatch a login action here
+    const { loginUser } = this.props;
+    loginUser();
   }
 }
 
 Login.propTypes= {
+  // views props:
   currentView:  PropTypes.string.isRequired,
   enterLogin:    PropTypes.func.isRequired,
-  leaveLogin:    PropTypes.func.isRequired
+  leaveLogin:    PropTypes.func.isRequired,
+
+  // auth props:
+  userIsAuthenticated: PropTypes.bool.isRequired,
+
+  // apollo actions
+  loginUser: PropTypes.func.isRequired,
+
+  // redux actions
+  onUserLoggedIn: PropTypes.func.isRequired
 };
 
 export default Login;
