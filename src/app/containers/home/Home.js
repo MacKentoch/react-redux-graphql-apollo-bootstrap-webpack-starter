@@ -36,7 +36,6 @@ const logUser = gql`
   }
 `;
 
-
 // 1- add queries:
 const HomeWithQuery = graphql(
   CurrentUser,

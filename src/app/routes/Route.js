@@ -12,11 +12,15 @@ import {
 import { ApolloProvider }       from 'react-apollo'; // replace Provider from react-redux
 import { syncHistoryWithStore } from 'react-router-redux';
 import {
+  // app:
   App,
+  // non protected views
   ConnectedHome,
   ConnectedAbout,
   ConnectedLogin,
-  ConnectedRegister
+  ConnectedRegister,
+  // protected views
+  ConnectedProtected
 }                               from '../containers';
 import {
   PageNotFound
@@ -35,10 +39,14 @@ export const Routes = () => {
       <div>
         <Router history={syncedHistory}>
           <Route path="/" component={App} >
+            {/* non protected */}
             <IndexRoute component={ConnectedHome} />
             <Route path="/about" component={ConnectedAbout} />
             <Route path="/login" component={ConnectedLogin} />
             <Route path="/register" component={ConnectedRegister} />
+            {/* protected */}
+            <Route path="/protected" component={ConnectedProtected} />
+            {/* page not found */}
             <Route path="*" component={PageNotFound} />
           </Route>
         </Router>

@@ -25,6 +25,12 @@
       "link":       "/about",
       "view":       "about",
       "isRouteBtn": true
+    },
+    {
+      "label":      "Protected",
+      "link":       "/protected",
+      "view":       "protected",
+      "isRouteBtn": true
     }
   ]
 }
