@@ -29,6 +29,8 @@ import configureStore, {
   client
 }                               from '../redux/store/configureStore';
 import DevTools                 from '../redux/devTools/DevTools.jsx';
+import { auth }                 from '../services/auth';
+
 
 const store         = configureStore();
 const syncedHistory = syncHistoryWithStore(browserHistory, store);
@@ -45,7 +47,7 @@ export const Routes = () => {
             <Route path="/login" component={ConnectedLogin} />
             <Route path="/register" component={ConnectedRegister} />
             {/* protected */}
-            <Route path="/protected" component={ConnectedProtected} />
+            <Route path="/protected" component={ConnectedProtected}  onEnter={requireAuth} />
             {/* page not found */}
             <Route path="*" component={PageNotFound} />
           </Route>
@@ -55,3 +57,13 @@ export const Routes = () => {
     </ApolloProvider>
   );
 };
+
+// authentication check to access protected routes
+function requireAuth(nextState, replace) {
+  if (!auth.isAuthenticated()) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    });
+  }
+}

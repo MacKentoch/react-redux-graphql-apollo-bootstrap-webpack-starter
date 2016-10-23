@@ -41,7 +41,7 @@ export const auth = {
     }
   },
 
-  isAthenticated(fromStorage = APP_PERSIST_STORES_TYPES[0], tokenKey = TOKEN_KEY) {
+  isAuthenticated(fromStorage = APP_PERSIST_STORES_TYPES[0], tokenKey = TOKEN_KEY) {
     // localStorage:
     if (fromStorage === APP_PERSIST_STORES_TYPES[0]) {
       if ((localStorage && localStorage.getItem(tokenKey))) {
