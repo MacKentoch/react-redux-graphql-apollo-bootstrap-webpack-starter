@@ -128,7 +128,16 @@ class Login extends Component {
   handlesOnLogin = (event) => {
     event.preventDefault();
     const { loginUser } = this.props;
-    loginUser();
+    const { email, password } = this.state;
+
+    const variables = {
+      user: {
+        username: email,
+        password: password
+      }
+    };
+
+    loginUser({variables});
   }
 }
 

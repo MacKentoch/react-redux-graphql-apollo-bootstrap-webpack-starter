@@ -7,6 +7,7 @@ const dateFormat = 'DD/MM/YYYY HH:mm';
 // /////////////////////
 
 const RECEIVED_USER_LOGGED_IN  = 'RECEIVED_USER_LOGGED_IN';
+const ERROR_USER_LOGGED_IN = 'ERROR_USER_LOGGED_IN';
 
 
 // /////////////////////
@@ -19,10 +20,21 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
   case RECEIVED_USER_LOGGED_IN:
     return {
-      ...state
+      ...state,
+      lastActionTime: action.time,
+      isAuthenticated: action.isAuthenticated
     };
+
+  case ERROR_USER_LOGGED_IN:
+    return {
+      ...state,
+      lastActionTime: action.time,
+      isAuthenticated: action.isAuthenticated
+    };
+
   default:
     return state;
   }
@@ -41,5 +53,16 @@ export function receivedUserLoggedIn(userToken = null, time = moment().format(da
     type: RECEIVED_USER_LOGGED_IN,
     time,
     isAuthenticated
+  };
+}
+
+export function errorUserLoggedIn(errors = null, time = moment().format(dateFormat)) {
+  auth.clearToken(); // clear previous token
+
+  return {
+    type: ERROR_USER_LOGGED_IN,
+    time,
+    errors,
+    isAuthenticated: false
   };
 }

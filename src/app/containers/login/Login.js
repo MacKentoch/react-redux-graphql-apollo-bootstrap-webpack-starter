@@ -1,3 +1,4 @@
+/* eslint no-unused-vars:0 */
 import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as viewsActions      from '../../redux/modules/views';
@@ -47,7 +48,15 @@ const LoginWithQuery = graphql(
       }
     },
     name: 'getCurrentUser',
-    props: ({ _, getCurrentUser: { loading, getUser, getRole, refetch } }) => ({
+    props: ({
+      ownProps,
+      getCurrentUser: {
+        loading,
+        getUser,
+        getRole,
+        refetch
+      }
+    }) => ({
       userLoading: loading,
       user: {...getUser, ...getRole},
       refetchUser: refetch
@@ -59,19 +68,16 @@ const LoginWithQuery = graphql(
 const LoginWithMutation = graphql(
   logUser,
   {
-    options: {
-      variables: {
-        user: {
-          username: 'test',
-          password: 'test'
-        }
-      }
-    },
-    name: 'logUser',
-    props: ({ ownProps, logUser }) => ({
-      loginUser() {
-        return logUser()
-          .then(result => ownProps.onUserLoggedIn(result.data.loginUser.token));
+    name: 'logUserMutation',
+    props: ({ ownProps, logUserMutation }) => ({
+      loginUser(user) {
+        return logUserMutation(user)
+          .then(
+            ({data: {loginUser}}) => ownProps.onUserLoggedIn(loginUser.token)
+          )
+          .catch(
+            ({errors})=> ownProps.onUserLogError(errors)
+          );
       }
     })
   }
@@ -87,8 +93,7 @@ const mapStateToProps = (state) => {
     // views props:
     currentView:  state.views.currentView,
     // user Auth props:
-    userIsAuthenticated: state.userAuth.isAuthenticated,
-
+    userIsAuthenticated: state.userAuth.isAuthenticated
   };
 };
 
@@ -99,7 +104,8 @@ const mapDispatchToProps = (dispatch) => {
       enterLogin: viewsActions.enterLogin,
       leaveLogin: viewsActions.leaveLogin,
       // userAuth actions:
-      onUserLoggedIn: userAuthActions.receivedUserLoggedIn
+      onUserLoggedIn: userAuthActions.receivedUserLoggedIn,
+      onUserLogError: userAuthActions.errorUserLoggedIn
     },
     dispatch
   );
