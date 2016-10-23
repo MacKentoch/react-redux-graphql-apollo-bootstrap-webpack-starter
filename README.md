@@ -3,11 +3,17 @@ Full ES2015 React + React-Router + Redux + GraphQL + Apollo + Bootstrap with Hot
 
 #### full ES6-ES2015
 
-> My new React + redux project starter. This time I add graphQL and Apollo Client (*I better use Apollo Client than Relay*).
+> My new `React + redux project starter`. This time I add `graphQL` and `Apollo Client` (*I better use Apollo Client than Relay*).
+This starter also embeds `JWT token based` `authentication` (check [Route](https://github.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/blob/master/src/app/routes/Route.js) to get an example of dealing with protected routes).
+
+
 
 - *webpack is as simple as possible*
 - *ReactJS is written with `optimization tricks` (stateless, pure render...).*
 - *`pure front-end` = server independant (use whatever you want as server: NodeJS, Rails, .NET...)*
+- *`redux` + `devTools` + `hot reload`= how did I developed without them before?*
+- *graphQL makes API to be " `has been` "*
+ - *no more struggle in redux with async thank to Apollo Client (you can even get rid of redux thunk or redux saga if you needed theses just for your asyncs. Otherwise keep them since they are nice :smile:)*
 
 
 ## Detailed Content
