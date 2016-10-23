@@ -47,7 +47,7 @@ const LoginWithQuery = graphql(
       }
     },
     name: 'getCurrentUser',
-    props: ({ ownProps, getCurrentUser: { loading, getUser, getRole, refetch } }) => ({
+    props: ({ _, getCurrentUser: { loading, getUser, getRole, refetch } }) => ({
       userLoading: loading,
       user: {...getUser, ...getRole},
       refetchUser: refetch
@@ -68,10 +68,10 @@ const LoginWithMutation = graphql(
       }
     },
     name: 'logUser',
-    props: ({ ownProps, mutate }) => ({
+    props: ({ ownProps, logUser }) => ({
       loginUser() {
-        return mutate()
-          .then(result => ownProps.onUserLoggedIn(result.token));
+        return logUser()
+          .then(result => ownProps.onUserLoggedIn(result.data.loginUser.token));
       }
     })
   }
