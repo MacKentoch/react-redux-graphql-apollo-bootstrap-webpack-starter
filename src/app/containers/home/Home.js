@@ -37,8 +37,7 @@ const logUser = gql`
 `;
 
 
-
-// 1- add query
+// 1- add queries:
 const HomeWithQuery = graphql(
   CurrentUser,
   {
@@ -56,20 +55,26 @@ const HomeWithQuery = graphql(
   }
 )(Home);
 
-// 2- add mutations
+// 2- add mutation "logUser":
 const HomeWithMutation = graphql(
   logUser,
   {
     options: {
       variables: {
         user: {
-          username: 'tets',
+          username: 'test',
           password: 'test'
         }
       }
     },
     name: 'logUser'
-  }
+  },
+  // props: ({ ownProps, mutate }) => ({
+  //   loginUser() {
+  //     return mutate()
+  //       .then(result => ownProps.onSelectList(result.id));
+  //   },
+  // })
 )(HomeWithQuery);
 
  /*
