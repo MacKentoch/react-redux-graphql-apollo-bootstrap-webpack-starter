@@ -40,7 +40,18 @@ export const auth = {
       }
     }
   },
+  /*
+      Note: 'isAuthenticated' just checks 'tokenKey' on store (localStorage by default or sessionStorage)
 
+      You may think: 'ok I just put an empty token key and I have access to protected routes?''
+          -> answer is:  YES^^
+       BUT
+       -> : your backend will not recognize a wrong token so private data or safe and you protected view could be a bit ugly without any data.
+
+       => ON CONCLUSION: this aim of 'isAuthenticated'
+          -> is to help for a better "user experience"  (= better than displaying a view with no data since server did not accept the user).
+          -> it is not a security purpose (security comes from backend, since frontend is easily hackable => user has access to all your frontend)
+   */
   isAuthenticated(fromStorage = APP_PERSIST_STORES_TYPES[0], tokenKey = TOKEN_KEY) {
     // localStorage:
     if (fromStorage === APP_PERSIST_STORES_TYPES[0]) {
