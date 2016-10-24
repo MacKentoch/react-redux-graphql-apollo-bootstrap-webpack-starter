@@ -1,23 +1,43 @@
 import React, { PropTypes } from 'react';
 import RightNavButton       from './rightNavButton/RightNavButton';
 
-const RightNav = ({ rightLinks, onRightNavButtonClick }) => {
+const RightNav = ({ rightLinks, onRightNavButtonClick, userIsAuthenticated }) => {
   return (
     <ul className="nav navbar-nav navbar-right">
       {
-        rightLinks.map(
-          (aLinkBtn, index) => {
-            return (
-              <RightNavButton
-                key={index}
-                link={aLinkBtn.link}
-                label={aLinkBtn.label}
-                viewName={aLinkBtn.view}
-                onClick={onRightNavButtonClick}
-              />
-            );
-          }
-        )
+        userIsAuthenticated
+        ? rightLinks
+          .filter(btnLink => btnLink.showWhenUserAuth === true)
+          .map(
+            (aLinkBtn, index) => {
+              return (
+                  <RightNavButton
+                    key={index}
+                    link={aLinkBtn.link}
+                    label={aLinkBtn.label}
+                    viewName={aLinkBtn.view}
+                    onClick={onRightNavButtonClick}
+                  />
+                );
+            }
+          )
+        : rightLinks
+          .filter(btnLink => (
+            (btnLink.showWhenUserAuth === false) || (btnLink.alwaysShows === true))
+          )
+          .map(
+            (aLinkBtn, index) => {
+              return (
+                  <RightNavButton
+                    key={index}
+                    link={aLinkBtn.link}
+                    label={aLinkBtn.label}
+                    viewName={aLinkBtn.view}
+                    onClick={onRightNavButtonClick}
+                  />
+                );
+            }
+          )
       }
     </ul>
   );
@@ -31,7 +51,8 @@ RightNav.propTypes = {
       viewName: PropTypes.string
     })
   ),
-  onRightNavButtonClick: PropTypes.func
+  onRightNavButtonClick: PropTypes.func,
+  userIsAuthenticated: PropTypes.bool.isRequired
 };
 
 export default RightNav;

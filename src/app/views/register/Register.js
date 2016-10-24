@@ -154,6 +154,7 @@ Register.propTypes= {
   leaveRegister:  PropTypes.func.isRequired,
   // auth props:
   userIsAuthenticated: PropTypes.bool.isRequired,
+  mutationLoading: PropTypes.bool.isRequired,
 
   // apollo actions
   registerUser: PropTypes.func.isRequired

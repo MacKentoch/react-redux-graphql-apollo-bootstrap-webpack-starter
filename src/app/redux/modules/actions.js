@@ -18,9 +18,13 @@ import {
 import {
   receivedUserLoggedIn,
   errorUserLoggedIn,
+  setLoadingStateForUserLogin,
+  unsetLoadingStateForUserLogin,
 
   receivedUserRegister,
-  errorUserRegister
+  errorUserRegister,
+  setLoadingStateForUserRegister,
+  unsetLoadingStateForUserRegister
 } from './userAuth';
 
 
@@ -46,7 +50,11 @@ export {
    ------------------- */
    receivedUserLoggedIn,
    errorUserLoggedIn,
-   
+   setLoadingStateForUserLogin,
+   unsetLoadingStateForUserLogin,
+
    receivedUserRegister,
-   errorUserRegister
+   errorUserRegister,
+   setLoadingStateForUserRegister,
+   unsetLoadingStateForUserRegister
 };

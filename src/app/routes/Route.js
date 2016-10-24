@@ -46,6 +46,8 @@ export const Routes = () => {
             <Route path="/about" component={ConnectedAbout} />
             <Route path="/login" component={ConnectedLogin} />
             <Route path="/register" component={ConnectedRegister} />
+            {/* logout: just removes token and redirects to home */}
+            <Route path="/logout" onEnter={logOutUser} />
             {/* protected */}
             <Route path="/protected" component={ConnectedProtected}  onEnter={requireAuth} />
             {/* page not found */}
@@ -66,4 +68,13 @@ function requireAuth(nextState, replace) {
       state: { nextPathname: nextState.location.pathname }
     });
   }
+}
+
+function logOutUser(nextState, replace) {
+  auth.clearToken();
+
+  replace({
+    pathname: '/',
+    state: { nextPathname: nextState.location.pathname }
+  });
 }

@@ -10,6 +10,7 @@ import navigationModel        from '../../models/navigation.json';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 import * as viewsActions      from '../../redux/modules/views';
+// import * as userAuthActions   from '../../redux/modules/userAuth';
 
 class App extends Component {
 
@@ -19,12 +20,13 @@ class App extends Component {
 
   render() {
     const { navModel } = this.state;
-    const { children } = this.props;
+    const { children, userIsAuthenticated } = this.props;
     return (
       <div id="appContainer">
         <NavigationBar
           brand={navModel.brand}
           navModel={navModel}
+          userIsAuthenticated={userIsAuthenticated}
           handleLeftNavItemClick={this.handleLeftNavItemClick}
           handleRightNavItemClick={this.handleRightNavItemClick}
         />
@@ -55,12 +57,16 @@ App.propTypes = {
   children:   PropTypes.node,
   history:    PropTypes.object,
   location:   PropTypes.object,
-  actions:    PropTypes.object
+  actions:    PropTypes.object,
+
+  userIsAuthenticated: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => {
   return {
-    currentView:  state
+    currentView:  state,
+
+    userIsAuthenticated: state.userAuth.isAuthenticated
   };
 };
 

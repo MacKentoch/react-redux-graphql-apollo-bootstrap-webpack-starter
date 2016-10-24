@@ -47,6 +47,10 @@ class Login extends Component {
       email,
       password
     } = this.state;
+    const {
+      mutationLoading
+    } = this.props;
+
     return(
       <div className={
         cx({
@@ -111,6 +115,7 @@ class Login extends Component {
                     </Link>
                     <button
                       className="btn btn-primary login-button"
+                      disabled={mutationLoading}
                       onClick={this.handlesOnLogin}>
                       Login
                     </button>
@@ -173,6 +178,7 @@ Login.propTypes= {
 
   // auth props:
   userIsAuthenticated: PropTypes.bool.isRequired,
+  mutationLoading: PropTypes.bool.isRequired,
 
   // apollo actions
   loginUser: PropTypes.func.isRequired,

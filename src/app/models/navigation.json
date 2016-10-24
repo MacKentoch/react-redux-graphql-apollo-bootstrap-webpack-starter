@@ -6,31 +6,55 @@
       "label":      "Home",
       "link":       "/",
       "view":       "home",
-      "isRouteBtn": true
+      "isRouteBtn": true,
+      "alwaysShows": true,
+      "showWhenUserAuth": true,
+      "hideWhenUserAuth": false
     },
     {
       "label":      "Login",
       "link":       "/login",
       "view":       "login",
-      "isRouteBtn": true
+      "isRouteBtn": true,
+      "alwaysShows": false,
+      "showWhenUserAuth": false,
+      "hideWhenUserAuth": true
     },
     {
       "label":      "Register",
       "link":       "/register",
       "view":       "register",
-      "isRouteBtn": true
+      "isRouteBtn": true,
+      "alwaysShows": false,
+      "showWhenUserAuth": false,
+      "hideWhenUserAuth": true
+    },
+    {
+      "label":      "Logout",
+      "link":       "/logout",
+      "view":       "logout",
+      "isRouteBtn": true,
+      "alwaysShows": false,
+      "showWhenUserAuth": true,
+      "hideWhenUserAuth": false
     },
     {
       "label":      "About",
       "link":       "/about",
       "view":       "about",
-      "isRouteBtn": true
+      "isRouteBtn": true,
+      "alwaysShows": true,
+      "showWhenUserAuth": true,
+      "hideWhenUserAuth": false
     },
     {
       "label":      "Protected",
       "link":       "/protected",
       "view":       "protected",
-      "isRouteBtn": true
+      "isRouteBtn": true,
+      "alwaysShows": true,
+      "showWhenUserAuth": true,
+      "hideWhenUserAuth": false
     }
   ]
 }
