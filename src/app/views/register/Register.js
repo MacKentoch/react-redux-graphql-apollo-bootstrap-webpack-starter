@@ -126,14 +126,41 @@ class Register extends Component {
 
   handlesOnRegister = (event) => {
     event.preventDefault();
-    // TODO: dispatch a login action here
+    const { registerUser } = this.props;
+    const { email, password } = this.state;
+    const { router } = this.context;
+
+    const variables = {
+      user: {
+        username: email,
+        password: password
+      }
+    };
+
+    registerUser({variables})
+      .then(
+        () => router.push({ pathname: '/protected' })
+      )
+      .catch(
+        () => console.log('register user went wrong...')
+      );
   }
 }
 
 Register.propTypes= {
+  // views props:
   currentView:    PropTypes.string.isRequired,
   enterRegister:  PropTypes.func.isRequired,
-  leaveRegister:  PropTypes.func.isRequired
+  leaveRegister:  PropTypes.func.isRequired,
+  // auth props:
+  userIsAuthenticated: PropTypes.bool.isRequired,
+
+  // apollo actions
+  registerUser: PropTypes.func.isRequired
+};
+
+Register.contextTypes = {
+  router: React.PropTypes.object.isRequired
 };
 
 export default Register;

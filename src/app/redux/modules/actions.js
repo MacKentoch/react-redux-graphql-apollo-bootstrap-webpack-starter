@@ -16,7 +16,11 @@ import {
 
 // userAuth action creators:
 import {
-  receivedUserLoggedIn
+  receivedUserLoggedIn,
+  errorUserLoggedIn,
+
+  receivedUserRegister,
+  errorUserRegister
 } from './userAuth';
 
 
@@ -40,5 +44,9 @@ export {
   /* -------------------
     userAuth
    ------------------- */
-   receivedUserLoggedIn
+   receivedUserLoggedIn,
+   errorUserLoggedIn,
+   
+   receivedUserRegister,
+   errorUserRegister
 };

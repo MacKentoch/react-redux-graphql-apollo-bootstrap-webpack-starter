@@ -2,7 +2,6 @@ import React, {
   Component,
   PropTypes
 }                     from 'react';
-import {Jumbotron}    from '../../components';
 import cx             from 'classnames';
 import shallowCompare from 'react-addons-shallow-compare';
 import { Link }       from 'react-router';
@@ -21,6 +20,16 @@ class Login extends Component {
     const { enterLogin } = this.props;
     enterLogin();
   }
+
+  // componentWillReceiveProps(newProps) {
+  //   const { user: { username } } = newProps;
+  //
+  //   if (username &&
+  //       username.length > 0 &&
+  //       this.props.user.username !== username) {
+  //     this.setState({email: username});
+  //   }
+  // }
 
   shouldComponentUpdate(nextProps, nextState) {
     return shallowCompare(this, nextProps, nextState);
@@ -66,6 +75,8 @@ class Login extends Component {
                       className="form-control"
                       id="inputEmail"
                       placeholder="Email"
+                      // autoComplete="nofill"
+                      // role="presentation"
                       value={email}
                       onChange={this.handlesOnEmailChange}
                     />
@@ -82,6 +93,8 @@ class Login extends Component {
                       type="password"
                       className="form-control"
                       id="inputPassword"
+                      // autoComplete="nofill"
+                      // role="presentation"
                       placeholder="Password"
                       value={password}
                       onChange={this.handlesOnPasswordChange}
@@ -129,6 +142,7 @@ class Login extends Component {
     event.preventDefault();
     const { loginUser } = this.props;
     const { email, password } = this.state;
+    const { router } = this.context;
 
     const variables = {
       user: {
@@ -137,7 +151,13 @@ class Login extends Component {
       }
     };
 
-    loginUser({variables});
+    loginUser({variables})
+      .then(
+        () => router.push({ pathname: '/protected' })
+      )
+      .catch(
+        () => console.log('login went wrong...')
+      );
   }
 }
 
@@ -146,6 +166,10 @@ Login.propTypes= {
   currentView:  PropTypes.string.isRequired,
   enterLogin:    PropTypes.func.isRequired,
   leaveLogin:    PropTypes.func.isRequired,
+  // apollo props:
+  user: PropTypes.shape({
+    username: PropTypes.string
+  }),
 
   // auth props:
   userIsAuthenticated: PropTypes.bool.isRequired,
@@ -155,6 +179,10 @@ Login.propTypes= {
 
   // redux actions
   onUserLoggedIn: PropTypes.func.isRequired
+};
+
+Login.contextTypes = {
+  router: React.PropTypes.object.isRequired
 };
 
 export default Login;

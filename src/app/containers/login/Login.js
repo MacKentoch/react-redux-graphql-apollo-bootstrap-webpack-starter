@@ -23,9 +23,7 @@ const CurrentUser = gql`
      lastLogin
    }
    getRole(id: $user) {
-     id
      name
-     createdAt
    }
 }
 `;
@@ -73,10 +71,16 @@ const LoginWithMutation = graphql(
       loginUser(user) {
         return logUserMutation(user)
           .then(
-            ({data: {loginUser}}) => ownProps.onUserLoggedIn(loginUser.token)
+            ({data: {loginUser}}) => {
+              ownProps.onUserLoggedIn(loginUser.token);
+              return Promise.resolve();
+            }
           )
           .catch(
-            ({errors})=> ownProps.onUserLogError(errors)
+            ({data: {error}})=> {
+              ownProps.onUserRegisterError(error);
+              return Promise.reject();
+            }
           );
       }
     })
