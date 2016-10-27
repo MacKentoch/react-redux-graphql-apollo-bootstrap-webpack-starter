@@ -72,9 +72,7 @@ const HomeWithQuery = graphql(
 const mapStateToProps = (state) => {
   return {
     // view store:
-    currentView:  state.views.currentView,
-    // user store:
-    userId: state.user.id
+    currentView:  state.views.currentView
   };
 };
 

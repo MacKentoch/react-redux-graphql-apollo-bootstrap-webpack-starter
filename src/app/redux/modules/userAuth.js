@@ -23,10 +23,19 @@ const UNSET_LOADING_REGISTER = 'UNSET_LOADING_REGISTER';
 // /////////////////////
 // reducer
 // /////////////////////
+const emptyUser = {
+  id:  null,
+  username: '',
+  lastLogin: '',
+  createdAt: '',
+  modifiedAt: ''
+};
+
 const initialState = {
   isAuthenticated: false,
   lastActionTime: null,
-  mutationLoading: false
+  mutationLoading: false,
+  ...emptyUser
 };
 
 export default function (state = initialState, action) {
@@ -37,7 +46,13 @@ export default function (state = initialState, action) {
     return {
       ...state,
       lastActionTime: action.time,
-      isAuthenticated: action.isAuthenticated
+      isAuthenticated: action.isAuthenticated,
+      id: action.user.id,
+      username: action.user.username,
+      lastLogin: action.user.lastLogin,
+      createdAt: action.user.createdAt,
+      modifiedAt: action.user.modifiedAt,
+      lastRefreshTime: action.time
     };
 
   case ERROR_USER_LOGGED_IN:
@@ -45,7 +60,12 @@ export default function (state = initialState, action) {
     return {
       ...state,
       lastActionTime: action.time,
-      isAuthenticated: action.isAuthenticated
+      isAuthenticated: action.isAuthenticated,
+      id: initialState.id,
+      username: initialState.username,
+      lastLogin: initialState.lastLogin,
+      createdAt: initialState.createdAt,
+      modifiedAt: initialState.modifiedAt
     };
 
   case SET_LOADING_LOGGED_IN:
@@ -75,21 +95,22 @@ export default function (state = initialState, action) {
 // /////////////////////
 
 // login sucess:
-export function receivedUserLoggedIn(userToken = null, time = moment().format(dateFormat)) {
+export function receivedUserLoggedIn(userToken = null, user = emptyUser, time = moment().format(dateFormat)) {
   const isAuthenticated = userToken ? true : false;
 
-  auth.clearToken(); // clear previous token
+  auth.clearAllAppStorage(); // clear previous token
   auth.setToken(userToken); // set token to default store = localStorage and to default token key = 'token'
 
   return {
     type: RECEIVED_USER_LOGGED_IN,
     time,
-    isAuthenticated
+    isAuthenticated,
+    user
   };
 }
 // login error:
 export function errorUserLoggedIn(errors = null, time = moment().format(dateFormat)) {
-  auth.clearToken(); // clear previous token
+  auth.clearAllAppStorage(); // clear previous token
 
   return {
     type: ERROR_USER_LOGGED_IN,
@@ -116,7 +137,7 @@ export function unsetLoadingStateForUserLogin(time = moment().format(dateFormat)
 export function receivedUserRegister(userToken = null, time = moment().format(dateFormat)) {
   const isAuthenticated = userToken ? true : false;
 
-  auth.clearToken(); // clear previous token
+  auth.clearAllAppStorage(); // clear previous token
   auth.setToken(userToken); // set token to default store = localStorage and to default token key = 'token'
 
   return {
@@ -127,7 +148,7 @@ export function receivedUserRegister(userToken = null, time = moment().format(da
 }
 // register error:
 export function errorUserRegister(errors = null, time = moment().format(dateFormat)) {
-  auth.clearToken(); // clear previous token
+  auth.clearAllAppStorage(); // clear previous token
 
   return {
     type: ERROR_USER_REGISTER,
