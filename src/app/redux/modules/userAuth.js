@@ -61,6 +61,7 @@ export default function (state = initialState, action) {
       ...state,
       lastActionTime: action.time,
       isAuthenticated: action.isAuthenticated,
+      // user infos:
       id: initialState.id,
       username: initialState.username,
       lastLogin: initialState.lastLogin,
@@ -82,7 +83,13 @@ export default function (state = initialState, action) {
     return {
       ...state,
       lastActionTime: action.time,
-      isAuthenticated: action.isAuthenticated
+      isAuthenticated: action.isAuthenticated,
+      // user infos from storage if authenticated:
+      id: action.user.id,
+      username: action.user.username,
+      lastLogin: action.user.lastLogin,
+      createdAt: action.user.createdAt,
+      modifiedAt: action.user.modifiedAt
     };
 
   default:
@@ -98,8 +105,9 @@ export default function (state = initialState, action) {
 export function receivedUserLoggedIn(userToken = null, user = emptyUser, time = moment().format(dateFormat)) {
   const isAuthenticated = userToken ? true : false;
 
-  auth.clearAllAppStorage(); // clear previous token
-  auth.setToken(userToken); // set token to default store = localStorage and to default token key = 'token'
+  auth.clearAllAppStorage();  // clear previous token
+  auth.setToken(userToken);   // set token to default store = localStorage and to default token key = 'token'
+  auth.setUserInfo(user);
 
   return {
     type: RECEIVED_USER_LOGGED_IN,
@@ -174,10 +182,18 @@ export function unsetLoadingStateForUserRegister(time = moment().format(dateForm
 
 // check user auth (check token)
 export function checkIfUserIsAuthenticated(time = moment().format(dateFormat)) {
-  const isAuthenticated = auth.getToken() ? true : false;
+  const user = auth.getUserInfo() ? auth.getUserInfo() : emptyUser;
+  const isAuthenticated = (auth.getToken() && checkUserHasId(user)) ? true : false;
+
   return {
     type: CHECK_IS_USER_IS_AUTHENTICATED,
     time,
-    isAuthenticated: isAuthenticated
+    isAuthenticated: isAuthenticated,
+    user
   };
+}
+
+
+function checkUserHasId(user) {
+  return user && user.id && (user.id.length > 0);
 }

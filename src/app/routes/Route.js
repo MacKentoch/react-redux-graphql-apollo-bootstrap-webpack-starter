@@ -62,7 +62,10 @@ export const Routes = () => {
 
 // authentication check to access protected routes
 function requireAuth(nextState, replace) {
-  if (!auth.isAuthenticated()) {
+  const user = auth.getUserInfo() ? auth.getUserInfo() : null;
+  const isAuthenticated = (auth.getToken() && checkUserHasId(user)) ? true : false;
+
+  if (!isAuthenticated) {
     replace({
       pathname: '/login',
       state: { nextPathname: nextState.location.pathname }
@@ -71,10 +74,14 @@ function requireAuth(nextState, replace) {
 }
 
 function logOutUser(nextState, replace) {
-  auth.clearToken();
+  auth.clearAllAppStorage();
 
   replace({
     pathname: '/',
     state: { nextPathname: nextState.location.pathname }
   });
+}
+
+function checkUserHasId(user) {
+  return user && user.id && (user.id.length > 0);
 }

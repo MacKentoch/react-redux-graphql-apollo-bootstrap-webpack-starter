@@ -1,7 +1,10 @@
 const TOKEN_KEY = 'token';
+const USER_INFO = 'userInfo';
 
 const APP_PERSIST_STORES_TYPES = ['localStorage', 'sessionStorage'];
 
+const parse = JSON.parse;
+const stringify = JSON.stringify;
 /*
   auth object
   -> store "TOKEN_KEY"
@@ -9,7 +12,9 @@ const APP_PERSIST_STORES_TYPES = ['localStorage', 'sessionStorage'];
   - default token key is 'token'
  */
 export const auth = {
-
+  // -------------------------
+  // token
+  // -------------------------
   getToken(fromStorage = APP_PERSIST_STORES_TYPES[0], tokenKey = TOKEN_KEY) {
     // localStorage:
     if (fromStorage === APP_PERSIST_STORES_TYPES[0]) {
@@ -84,6 +89,56 @@ export const auth = {
     }
   },
 
+
+  // -------------------------
+  // USER_INFO
+  // -------------------------
+  getUserInfo(fromStorage = APP_PERSIST_STORES_TYPES[0], userInfoKey = USER_INFO) {
+    // localStorage:
+    if (fromStorage === APP_PERSIST_STORES_TYPES[0]) {
+      return (localStorage && parse(localStorage.getItem(userInfoKey))) || null;
+    }
+    // sessionStorage:
+    if (fromStorage === APP_PERSIST_STORES_TYPES[1]) {
+      return (sessionStorage && parse(sessionStorage.getItem(userInfoKey))) || null;
+    }
+    // default:
+    return null;
+  },
+
+  setUserInfo(value = '', toStorage = APP_PERSIST_STORES_TYPES[0], userInfoKey = USER_INFO) {
+    if (!value || value.length <= 0) {
+      return;
+    }
+    // localStorage:
+    if (toStorage === APP_PERSIST_STORES_TYPES[0]) {
+      if (localStorage) {
+        localStorage.setItem(userInfoKey, stringify(value));
+      }
+    }
+    // sessionStorage:
+    if (toStorage === APP_PERSIST_STORES_TYPES[1]) {
+      if (sessionStorage) {
+        sessionStorage.setItem(userInfoKey, stringify(value));
+      }
+    }
+  },
+
+  clearUserInfo(userInfoKey = USER_INFO) {
+    // localStorage:
+    if (localStorage && localStorage[userInfoKey]) {
+      localStorage.removeItem(userInfoKey);
+    }
+    // sessionStorage:
+    if (sessionStorage && sessionStorage[userInfoKey]) {
+      sessionStorage.removeItem(userInfoKey);
+    }
+  },
+
+
+  // ---------------------------
+  // common
+  // ---------------------------
   clearAllAppStorage() {
     if (localStorage) {
       localStorage.clear();
