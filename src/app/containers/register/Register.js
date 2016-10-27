@@ -11,7 +11,6 @@ import { graphql }            from 'react-apollo';
   GraphQL - Apollo client
  ------------------------------------------*/
 
-
 const CreateUser = gql`
 mutation CreateUser ($user: CreateUserInput!) {
    createUser (input: $user) {
@@ -23,7 +22,6 @@ mutation CreateUser ($user: CreateUserInput!) {
    }
 }
 `;
-
 
 // 2- add mutation "CreateUser":
 const RegisterWithCreatUserMutation = graphql(

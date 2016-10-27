@@ -33,16 +33,25 @@ const HomeWithQuery = graphql(
   CurrentUser,
   {
     options: {
+      // variables: (ownProps) => ({variables: {user: 'VXNlcjox'}})
       variables: {
         user: 'VXNlcjox'
       }
     },
     name: 'getCurrentUser',
-    props: ({ ownProps, getCurrentUser: { loading, getUser, getRole, refetch } }) => {
-      // TODO: find a better solution to disaptch redux action on query result to set 'state.userAuth.isAuthenticated'
+    props: ({
+      ownProps,
+      getCurrentUser:
+      {
+        loading,
+        getUser,
+        getRole,
+        refetch
+      }
+    }) => {
+      // TODO: find a better solution to dispatch redux action on query result to set 'state.userAuth.isAuthenticated'
       setTimeout(
-        () => ownProps.checkUserAuth()
-        , 0
+        () => ownProps.checkUserAuth(), 0
       );
 
       return {
@@ -62,7 +71,10 @@ const HomeWithQuery = graphql(
 
 const mapStateToProps = (state) => {
   return {
-    currentView:  state.views.currentView
+    // view store:
+    currentView:  state.views.currentView,
+    // user store:
+    userId: state.user.id
   };
 };
 

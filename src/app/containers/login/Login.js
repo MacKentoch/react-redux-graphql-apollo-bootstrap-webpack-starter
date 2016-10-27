@@ -13,54 +13,22 @@ import { graphql }            from 'react-apollo';
   GraphQL - Apollo client
  ------------------------------------------*/
 
-const CurrentUser = gql`
- query GetUser ($user: ID!) {
-   getUser (id: $user) {
-     id
-     username
-     createdAt
-     modifiedAt
-     lastLogin
-   }
-   getRole(id: $user) {
-     name
-   }
-}
-`;
-
 const logUser = gql`
   mutation LoginUser($user: LoginUserInput!) {
     loginUser(input: $user) {
-      token
+      token,
+      user {
+        id,
+        username,
+        createdAt,
+        modifiedAt,
+        lastLogin
+      }
     }
   }
 `;
 
 // 1- add queries:
-const LoginWithQuery = graphql(
-  CurrentUser,
-  {
-    options: {
-      variables: {
-        user: 'VXNlcjox'
-      }
-    },
-    name: 'getCurrentUser',
-    props: ({
-      ownProps,
-      getCurrentUser: {
-        loading,
-        getUser,
-        getRole,
-        refetch
-      }
-    }) => ({
-      userLoading: loading,
-      user: {...getUser, ...getRole},
-      refetchUser: refetch
-    })
-  }
-)(Login);
 
 // 2- add mutation "logUser":
 const LoginWithMutation = graphql(
@@ -74,7 +42,7 @@ const LoginWithMutation = graphql(
         return logUserMutation(user)
           .then(
             ({data: {loginUser}}) => {
-              ownProps.onUserLoggedIn(loginUser.token);
+              ownProps.onUserLoggedIn(loginUser.token, loginUser.user);
               ownProps.unsetMutationLoading();
               return Promise.resolve();
             }
@@ -89,7 +57,7 @@ const LoginWithMutation = graphql(
       }
     })
   }
-)(LoginWithQuery);
+)(Login);
 
 
 /* -----------------------------------------

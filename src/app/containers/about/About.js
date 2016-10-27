@@ -4,6 +4,9 @@ import * as viewsActions      from '../../redux/modules/views';
 import { About }              from '../../views';
 
 
+/* -----------------------------------------
+  Redux
+ ------------------------------------------*/
 const mapStateToProps = (state) => {
   return {
     currentView:  state.views.currentView
@@ -19,16 +22,6 @@ const mapDispatchToProps = (dispatch) => {
     dispatch
   );
 };
-
-/*
-  without bindActionCreators:
- */
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     enterAbout: () => dispatch(viewsActions.enterAbout()),
-//     leaveAbout: () => dispatch(viewsActions.leaveAbout())
-//   };
-// };
 
 export default connect(
     mapStateToProps,

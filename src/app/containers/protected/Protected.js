@@ -3,7 +3,9 @@ import { bindActionCreators } from 'redux';
 import * as viewsActions      from '../../redux/modules/views';
 import { Protected }          from '../../views';
 
-
+/* -----------------------------------------
+  Redux
+ ------------------------------------------*/
 const mapStateToProps = (state) => {
   return {
     currentView:  state.views.currentView
@@ -19,16 +21,6 @@ const mapDispatchToProps = (dispatch) => {
     dispatch
   );
 };
-
-/*
-  without bindActionCreators:
- */
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     enterProtected: () => dispatch(viewsActions.enterProtected()),
-//     leaveProtected: () => dispatch(viewsActions.leaveProtected())
-//   };
-// };
 
 export default connect(
     mapStateToProps,
