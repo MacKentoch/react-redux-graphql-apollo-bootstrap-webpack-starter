@@ -146,8 +146,10 @@ export function receivedUserRegister(userToken = null, time = moment().format(da
   const isAuthenticated = userToken ? true : false;
 
   auth.clearAllAppStorage(); // clear previous token
-  auth.setToken(userToken); // set token to default store = localStorage and to default token key = 'token'
-
+  if (userToken) {
+    auth.setToken(userToken); // set token to default store = localStorage and to default token key = 'token'
+  }
+  
   return {
     type: RECEIVED_USER_REGISTER,
     time,

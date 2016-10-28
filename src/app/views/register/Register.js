@@ -126,7 +126,7 @@ class Register extends Component {
 
   handlesOnRegister = (event) => {
     event.preventDefault();
-    const { registerUser } = this.props;
+    const { registerUser, loginUser } = this.props;
     const { email, password } = this.state;
     const { router } = this.context;
 
@@ -139,10 +139,19 @@ class Register extends Component {
 
     registerUser({variables})
       .then(
-        () => router.push({ pathname: '/protected' })
+        () => {
+          console.log('register done, now login');
+          loginUser({variables})
+            .then(
+              () => router.push({ pathname: '/protected' })
+            )
+          .catch(
+            () => console.log('login user went wrong...')
+          )
+        }
       )
       .catch(
-        () => console.log('register user went wrong...')
+        () => console.log('register user went wrong..., ')
       );
   }
 }
@@ -157,6 +166,7 @@ Register.propTypes= {
   mutationLoading: PropTypes.bool.isRequired,
 
   // apollo actions
+  loginUser: PropTypes.func.isRequired,
   registerUser: PropTypes.func.isRequired
 };
 
