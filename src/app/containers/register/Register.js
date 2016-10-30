@@ -79,8 +79,8 @@ const RegisterWithCreatUserMutation = graphql(
 
         return createUserMutation(user)
           .then(
-            ({data: {createUser}}) => {
-              ownProps.onUserRegisterSuccess(null);
+            ({data: {createUser: {changedUser: {id, username}}}}) => {
+              ownProps.onUserRegisterSuccess(null, id, username);
               ownProps.unsetMutationLoading();
               return Promise.resolve();
             }

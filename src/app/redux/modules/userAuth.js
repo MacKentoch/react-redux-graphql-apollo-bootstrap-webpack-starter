@@ -142,18 +142,25 @@ export function unsetLoadingStateForUserLogin(time = moment().format(dateFormat)
   };
 }
 // register sucess:
-export function receivedUserRegister(userToken = null, time = moment().format(dateFormat)) {
+export function receivedUserRegister(
+  userToken = null,
+  userId = null,
+  username = null,
+  time = moment().format(dateFormat)) {
   const isAuthenticated = userToken ? true : false;
 
   auth.clearAllAppStorage(); // clear previous token
   if (userToken) {
     auth.setToken(userToken); // set token to default store = localStorage and to default token key = 'token'
   }
-  
+
   return {
     type: RECEIVED_USER_REGISTER,
     time,
-    isAuthenticated
+    isAuthenticated,
+    // user infos:
+    id: userId,
+    username: username
   };
 }
 // register error:
