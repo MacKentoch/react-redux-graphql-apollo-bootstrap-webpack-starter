@@ -60,6 +60,23 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 
 ## Usage
 
+### Prerequisite
+
+An Easy and fast way to get your graphql backend is to register for free at [scaphold](https://scaphold.io).
+
+> This starter has been created with a scaphold free plan.
+
+Then, configure your networkInterface in the app config in `./src/app/config.index.js`:
+
+```javascript
+export const appConfig = {
+  // apollo client:
+  apollo: {
+    networkInterface: 'http://localhost:8080/graphql'
+  }
+};
+```
+
 ### Install
 
 ```bash
