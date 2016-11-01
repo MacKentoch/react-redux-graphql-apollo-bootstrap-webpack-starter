@@ -15,9 +15,8 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    const { enterHome, checkUserAuth } = this.props;
+    const { enterHome } = this.props;
     enterHome();
-    checkUserAuth();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -72,9 +71,7 @@ Home.propTypes= {
   currentView:  PropTypes.string.isRequired,
   // view actions:
   enterHome:    PropTypes.func.isRequired,
-  leaveHome:    PropTypes.func.isRequired,
-  // auth actions:
-  checkUserAuth: PropTypes.func.isRequired
+  leaveHome:    PropTypes.func.isRequired
 };
 
 export default Home;

@@ -141,26 +141,20 @@ export function unsetLoadingStateForUserLogin(time = moment().format(dateFormat)
     loading: false
   };
 }
+
 // register sucess:
-export function receivedUserRegister(
-  userToken = null,
-  userId = null,
-  username = null,
-  time = moment().format(dateFormat)) {
+export function receivedUserRegister(userToken = null, user = emptyUser, time = moment().format(dateFormat)) {
   const isAuthenticated = userToken ? true : false;
 
-  auth.clearAllAppStorage(); // clear previous token
-  if (userToken) {
-    auth.setToken(userToken); // set token to default store = localStorage and to default token key = 'token'
-  }
+  auth.clearAllAppStorage();  // clear previous token
+  auth.setToken(userToken);   // set token to default store = localStorage and to default token key = 'token'
+  auth.setUserInfo(user);
 
   return {
     type: RECEIVED_USER_REGISTER,
     time,
     isAuthenticated,
-    // user infos:
-    id: userId,
-    username: username
+    user
   };
 }
 // register error:
@@ -192,7 +186,8 @@ export function unsetLoadingStateForUserRegister(time = moment().format(dateForm
 // check user auth (check token)
 export function checkIfUserIsAuthenticated(time = moment().format(dateFormat)) {
   const user = auth.getUserInfo() ? auth.getUserInfo() : emptyUser;
-  const isAuthenticated = (auth.getToken() && checkUserHasId(user)) ? true : false;
+  // need token and user info in localStorage to be authenticated
+  const isAuthenticated = (auth.isAuthenticated() && checkUserHasId(user)) ? true : false;
 
   return {
     type: CHECK_IS_USER_IS_AUTHENTICATED,
@@ -201,7 +196,6 @@ export function checkIfUserIsAuthenticated(time = moment().format(dateFormat)) {
     user
   };
 }
-
 
 function checkUserHasId(user) {
   return user && user.id && (user.id.length > 0);

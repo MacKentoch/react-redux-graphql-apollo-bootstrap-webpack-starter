@@ -41,7 +41,13 @@ const LoginWithMutation = graphql(
 
         return logUserMutation(user)
           .then(
-            ({data: {loginUser}}) => {
+            (
+              {
+                data: {
+                  loginUser
+                }
+              }
+            ) => {
               ownProps.onUserLoggedIn(loginUser.token, loginUser.user);
               ownProps.unsetMutationLoading();
               return Promise.resolve();

@@ -49,11 +49,10 @@ const HomeWithQuery = graphql(
         refetch
       }
     }) => {
-      // TODO: find a better solution to dispatch redux action on query result to set 'state.userAuth.isAuthenticated'
-      setTimeout(
-        () => ownProps.checkUserAuth(), 0
-      );
-
+      // // TODO: find a better solution to dispatch redux action on query result to set 'state.userAuth.isAuthenticated'
+      // setTimeout(
+      //   () => ownProps.checkUserAuth(), 0
+      // );
       return {
         userLoading: loading,
         user: {...getUser, ...getRole},
@@ -81,10 +80,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       // views actions
       enterHome: viewsActions.enterHome,
-      leaveHome: viewsActions.leaveHome,
-
-      // userAuth actions:
-      checkUserAuth: userAuthActions.checkIfUserIsAuthenticated
+      leaveHome: viewsActions.leaveHome
     },
     dispatch
   );

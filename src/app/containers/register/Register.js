@@ -15,42 +15,38 @@ const CreateUser = gql`
 mutation CreateUser ($user: CreateUserInput!) {
    createUser (input: $user) {
        changedUser {
-           id
-           username
+         id,
+         username,
+         createdAt,
+         modifiedAt,
+         lastLogin
        }
        token
    }
 }
 `;
-
-const logUser = gql`
-  mutation LoginUser($user: LoginUserInput!) {
-    loginUser(input: $user) {
-      token,
-      user {
-        id,
-        username,
-        createdAt,
-        modifiedAt,
-        lastLogin
-      }
-    }
-  }
-`;
-
-// 1 - add mutation loginUser
-const LoginWithMutation = graphql(
-  logUser,
+// 1- add mutation "CreateUser":
+const RegisterWithCreatUserMutation = graphql(
+  CreateUser,
   {
-    name: 'logUserMutation',
-    props: ({ ownProps, logUserMutation }) => ({
-      loginUser(user) {
+    name: 'createUserMutation',
+    props: ({ ownProps, createUserMutation }) => ({
+      registerUser(user) {
         ownProps.setMutationLoading();
 
-        return logUserMutation(user)
+        return createUserMutation(user)
           .then(
-            ({data: {loginUser}}) => {
-              ownProps.onUserLoggedIn(loginUser.token, loginUser.user);
+            (
+              {
+                data: {
+                  createUser: {
+                    changedUser,
+                    token
+                  }
+                }
+              }
+            ) => {
+              ownProps.onUserRegisterSuccess(token, changedUser);
               ownProps.unsetMutationLoading();
               return Promise.resolve();
             }
@@ -66,36 +62,6 @@ const LoginWithMutation = graphql(
     })
   }
 )(Register);
-
-
-// 2- add mutation "CreateUser":
-const RegisterWithCreatUserMutation = graphql(
-  CreateUser,
-  {
-    name: 'createUserMutation',
-    props: ({ ownProps, createUserMutation }) => ({
-      registerUser(user) {
-        ownProps.setMutationLoading();
-
-        return createUserMutation(user)
-          .then(
-            ({data: {createUser: {changedUser: {id, username}}}}) => {
-              ownProps.onUserRegisterSuccess(null, id, username);
-              ownProps.unsetMutationLoading();
-              return Promise.resolve();
-            }
-          )
-          .catch(
-            ({errors})=> {
-              ownProps.onUserRegisterError(errors);
-              ownProps.unsetMutationLoading();
-              return Promise.reject(errors);
-            }
-          );
-      }
-    })
-  }
-)(LoginWithMutation);
 
 
 /* -----------------------------------------
@@ -118,9 +84,6 @@ const mapDispatchToProps = (dispatch) => {
       enterRegister: viewsActions.enterRegister,
       leaveRegister: viewsActions.leaveRegister,
       // userAuth actions:
-      onUserLoggedIn: userAuthActions.receivedUserLoggedIn,
-      onUserLogError: userAuthActions.errorUserLoggedIn,
-
       onUserRegisterSuccess: userAuthActions.receivedUserRegister,
       onUserRegisterError: userAuthActions.errorUserRegister,
 

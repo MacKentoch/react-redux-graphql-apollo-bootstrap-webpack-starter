@@ -10,13 +10,23 @@ import navigationModel        from '../../models/navigation.json';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 import * as viewsActions      from '../../redux/modules/views';
-// import * as userAuthActions   from '../../redux/modules/userAuth';
+import * as userAuthActions   from '../../redux/modules/userAuth';
 
 class App extends Component {
 
   state = {
     navModel : navigationModel
   };
+
+  componentWillMount() {
+    const {
+      actions: {
+        checkIfUserIsAuthenticated
+      }
+    } = this.props;
+
+    checkIfUserIsAuthenticated();
+  }
 
   render() {
     const { navModel } = this.state;
@@ -75,7 +85,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     actions : bindActionCreators(
       {
-        ...viewsActions
+        ...viewsActions,
+        ...userAuthActions
       },
       dispatch)
   };
