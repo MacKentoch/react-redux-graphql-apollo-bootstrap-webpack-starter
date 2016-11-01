@@ -41,14 +41,14 @@ export const Routes = () => {
       <div>
         <Router history={syncedHistory}>
           <Route path="/" component={App} >
-            {/* non protected */}
+            {/* non protected views */}
             <IndexRoute component={ConnectedHome} />
             <Route path="/about" component={ConnectedAbout} />
             <Route path="/login" component={ConnectedLogin} />
             <Route path="/register" component={ConnectedRegister} />
-            {/* logout: just removes token and redirects to home */}
+            {/* logout: just redirects to home (App will take care of removing the token) */}
             <Route path="/logout" onEnter={logOutUser} />
-            {/* protected */}
+            {/* protected views */}
             <Route path="/protected" component={ConnectedProtected}  onEnter={requireAuth} />
             {/* page not found */}
             <Route path="*" component={PageNotFound} />
@@ -74,8 +74,6 @@ function requireAuth(nextState, replace) {
 }
 
 function logOutUser(nextState, replace) {
-  auth.clearAllAppStorage();
-
   replace({
     pathname: '/',
     state: { nextPathname: nextState.location.pathname }

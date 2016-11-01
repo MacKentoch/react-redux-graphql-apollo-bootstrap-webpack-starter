@@ -3,7 +3,13 @@ import Humburger          from './humburger/Humburger';
 import LeftNav            from './leftNav/LeftNav';
 import RightNav           from './rightNav/RightNav';
 
-const NavigationBar = ({brand, navModel, handleLeftNavItemClick, handleRightNavItemClick, userIsAuthenticated}) => {
+const NavigationBar = ({
+  brand,
+  navModel,
+  handleLeftNavItemClick,
+  handleRightNavItemClick,
+  userIsAuthenticated
+}) => {
   return (
     <nav className="navbar navbar-default">
       <div className="containersCustom">

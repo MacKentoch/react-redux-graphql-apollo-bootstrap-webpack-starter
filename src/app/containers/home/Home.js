@@ -1,7 +1,6 @@
 import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as viewsActions      from '../../redux/modules/views';
-import * as userAuthActions   from '../../redux/modules/userAuth';
 import { Home }               from '../../views';
 import gql                    from 'graphql-tag';
 import { graphql }            from 'react-apollo';

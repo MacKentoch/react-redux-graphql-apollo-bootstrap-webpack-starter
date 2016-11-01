@@ -1,9 +1,9 @@
 import moment from 'moment';
 const dateFormat = 'DD/MM/YYYY HH:mm';
 
-// /////////////////////
-// constants
-// /////////////////////
+/* -----------------------------------------
+  constants
+ ------------------------------------------*/
 // non protected views:
 const ENTER_HOME_VIEW  = 'ENTER_HOME_VIEW';
 const LEAVE_HOME_VIEW  = 'LEAVE_HOME_VIEW';
@@ -17,9 +17,9 @@ const LEAVE_REGISTER_VIEW = 'LEAVE_REGISTER_VIEW';
 const ENTER_PROTECTED_VIEW = 'ENTER_PROTECTED_VIEW';
 const LEAVE_PROTECTED_VIEW = 'LEAVE_PROTECTED_VIEW';
 
-// /////////////////////
-// reducer
-// /////////////////////
+/* -----------------------------------------
+  Reducer
+ ------------------------------------------*/
 const initialState = {
   currentView:  'not set',
   enterTime:    null,
@@ -87,9 +87,9 @@ export default function (state = initialState, action) {
 }
 
 
-// /////////////////////
-// action creators
-// /////////////////////
+/* -----------------------------------------
+  Reducer
+ ------------------------------------------*/
 export function enterHome(time = moment().format(dateFormat)) {
   return {
     type:         ENTER_HOME_VIEW,

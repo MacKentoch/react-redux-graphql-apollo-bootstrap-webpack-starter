@@ -18,7 +18,7 @@ class App extends Component {
     navModel : navigationModel
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const {
       actions: {
         checkIfUserIsAuthenticated
@@ -31,6 +31,8 @@ class App extends Component {
   render() {
     const { navModel } = this.state;
     const { children, userIsAuthenticated } = this.props;
+
+
     return (
       <div id="appContainer">
         <NavigationBar
@@ -54,15 +56,28 @@ class App extends Component {
   }
 
   handleLeftNavItemClick = (event, viewName) => {
-    // something to do here?
+    if (viewName === 'logout') {
+      const {
+        actions: {
+          setUserLogout
+        }
+      } = this.props;
+      setUserLogout();
+    }
   }
 
   handleRightNavItemClick = (event, viewName) => {
-    // something to do here?
+    if (viewName === 'logout') {
+      const {
+        actions: {
+          setUserLogout
+        }
+      } = this.props;
+      setUserLogout();
+    }
   }
 }
 
-// statics :
 App.propTypes = {
   children:   PropTypes.node,
   history:    PropTypes.object,
@@ -74,13 +89,11 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    currentView:  state,
-
+    // userAuth:
     userIsAuthenticated: state.userAuth.isAuthenticated
   };
 };
 
-// "bindActionCreators" use-case is to pass dispatch to "store non aware children components" (but I feel like it is a good habbit to use it everytime)
 const mapDispatchToProps = (dispatch) => {
   return {
     actions : bindActionCreators(
