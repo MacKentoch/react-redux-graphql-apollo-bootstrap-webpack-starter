@@ -85,7 +85,7 @@ An Easy and fast way to get your graphql backend is to **register for free at [S
 
 **Configure starter application:**
 
-In Scaphold click on `My API and copy your application link`.
+In Scaphold click on `My API` and `copy your application link`.
 
 Then, past it (*to replace http://localhost:8080/graphql*) in your `networkInterface` in the app config (in `./src/app/config.index.js`):
 
@@ -97,6 +97,8 @@ export const appConfig = {
   }
 };
 ```
+
+> from now you got all needed to run this starter
 
 ### Install
 
