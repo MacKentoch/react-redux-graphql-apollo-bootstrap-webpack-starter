@@ -80,11 +80,11 @@ An Easy and fast way to get your graphql backend is to **register for free at [S
 
 - you can define you own schema (*not needed for this starter to run*). But I suggest you have a look on well written `tutorials` to get more familiar with the schema designer.
 
-**GraphiQL is integrated in Scaphold so, discover and train predefined graphQL queries and mutations:**
+**GraphiQL is integrated in Scaphold so discover and train predefined graphQL queries and mutations:**
 
 ![graphiQL_overview.png](https://raw.githubusercontent.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/master/print_screens/graphiQL_overview.png)
 
-**Configure starter application:**
+### Configure starter application:
 
 In Scaphold click on `My API` and `copy your application link`.
 
@@ -101,28 +101,13 @@ export const appConfig = {
 
 > from now you got all needed to run this starter
 
-### Install
+### Install dependencies
 
 ```bash
 npm install
 ```
-### bundle dev mode (*+ redux-devtools*)
 
-*General case:*
-```bash
-npm run dev
-```
-
-*Windows - particular - case:*
-```bash
-npm run dev-win
-```
-
-##### Note : redux-devtools shortcuts
-- `ctrl+h`: to toggle devtools panel
-- `ctrl+q`: to change devtools panel position (*by default: on the right*)
-
-### dev : hot reload mode (*+ redux-devtools*)
+### run dev : hot reload mode (*+ redux-devtools*)
 
 *General case:*
 
@@ -138,6 +123,19 @@ npm run start-win
 ##### Note : redux-devtools shortcuts
 - `ctrl+h`: to toggle devtools panel
 - `ctrl+q`: to change devtools panel position (*by default: on the right*)
+
+
+### bundle dev mode (*+ redux-devtools*)
+
+*General case:*
+```bash
+npm run dev
+```
+
+*Windows - particular - case:*
+```bash
+npm run dev-win
+```
 
 ### tests
 
