@@ -66,22 +66,28 @@ An Easy and fast way to get your graphql backend is to **register for free at [S
 
 > This starter has been created with a scaphold free plan.
 
-**Create an application**
+**Go to [Scaphold](https://scaphold.io) and create an application**
 
 ![create_app_modal.png](https://raw.githubusercontent.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/master/print_screens/create_app_modal.png)
+
+- set `AppName`
+- and a `description` (*so that after creating hundreds of applications you won't get lost*).
 
 **You will be able to dicover predefined schemas. This starter will not need more than predefined (User):**
 
 ![schema_desiner_overview.png](https://raw.githubusercontent.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/master/print_screens/schema_desiner_overview.png)
 
+- you can define you own schema. But I suggest you have a look on well written `tutorials` to get more familiar with the schema designer.
 
 **GraphiQL is integrated in Scaphold so, discover and train predefined graphQL queries and mutations:**
 
 ![graphiQL_overview.png](https://raw.githubusercontent.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/master/print_screens/graphiQL_overview.png)
 
+**Configure starter application:**
 
+In Scaphold click on `My API and copy your application link`.
 
-Then, configure your networkInterface in the app config in `./src/app/config.index.js`:
+Then, past it (*to replace http://localhost:8080/graphql*) in your `networkInterface` in the app config (in `./src/app/config.index.js`):
 
 ```javascript
 export const appConfig = {
