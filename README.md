@@ -66,7 +66,7 @@ An Easy and fast way to get your graphql backend is to **register for free at [S
 
 > This starter has been created with a scaphold free plan.
 
-**Go to [Scaphold](https://scaphold.io) and create an application**
+**Go to [Scaphold](https://scaphold.io) register and create an application**
 
 <img src="https://raw.githubusercontent.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/master/print_screens/create_app_modal.png" alt="create_app_modal preview" width="400px"></img>
 
