@@ -21,7 +21,7 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 **Front:**
 - React JS (15.x - [github :link:](https://github.com/facebook/react))
 - Redux (*as you application grows managing state will be a serious concern, save pain with Redux*)
-- apollo-client (*learn about this beast [here in officiel website](http://dev.apollodata.com/)*)
+- apollo-client (*futur of API. Learn about this beast [here in officiel website](http://dev.apollodata.com/)*)
 - React-Redux (*Redux is not specific to ReactJS, you could easily use it with Angular2 for instance*)
 - Redux-devtools (*want to time travel your application State?*)
 - React-Router-Redux (*previously named react-simple-router*)
@@ -62,9 +62,14 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 
 ### Prerequisite
 
-An Easy and fast way to get your graphql backend is to register for free at [scaphold](https://scaphold.io).
+An Easy and fast way to get your graphql backend is to **register for free at [Scaphold](https://scaphold.io)**.
 
 > This starter has been created with a scaphold free plan.
+
+**Create an application**
+
+- ![sample request before submitting](https://raw.githubusercontent.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/master/print_screens/create_app_modal.png)
+
 
 Then, configure your networkInterface in the app config in `./src/app/config.index.js`:
 

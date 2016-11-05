@@ -1,12 +1,11 @@
 {
   "name": "react-redux-graphql-apollo-bootstrap-webpack-starter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "react js + redux + graphQL + Apollo + react router + hot reload + devTools + bootstrap + webpack starter",
   "main": "src/index.js",
   "scripts": {
     "dev": "NODE_ENV=dev webpack",
     "test": "NODE_ENV=test nyc mocha test/.setup.js test/**/*.spec.js --compilers js:babel-core/register --recursive",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "prod": "NODE_ENV=production webpack -p --config webpack.production.config.babel.js ",
     "start": "NODE_ENV=dev babel-node --presets es2015 ./server.hot.reload.js",
     "dev-win": "setx NODE_ENV=dev webpack",
@@ -36,10 +35,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MacKentoch/react-redux-bootstrap-webpack-starter.git"
+    "url": "git+https://github.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter.git"
   },
   "bugs": {
-    "url": "https://github.com/MacKentoch/react-redux-bootstrap-webpack-starter/issues"
+    "url": "https://github.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/issues"
   },
   "author": "Erwan DATIN (MacKentoch)",
   "license": "MIT",
