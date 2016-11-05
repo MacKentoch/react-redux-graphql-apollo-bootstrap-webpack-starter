@@ -77,7 +77,7 @@ An Easy and fast way to get your graphql backend is to **register for free at [S
 
 ![schema_desiner_overview.png](https://raw.githubusercontent.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/master/print_screens/schema_desiner_overview.png)
 
-- you can define you own schema. But I suggest you have a look on well written `tutorials` to get more familiar with the schema designer.
+- you can define you own schema (*not needed for this starter to run*). But I suggest you have a look on well written `tutorials` to get more familiar with the schema designer.
 
 **GraphiQL is integrated in Scaphold so, discover and train predefined graphQL queries and mutations:**
 
