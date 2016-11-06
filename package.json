@@ -1,6 +1,7 @@
 {
   "engine": {
-    "node" : ">6.5.0"
+    "node" : "^6.5.0",
+    "npm": "*"
   },
   "name": "react-redux-graphql-apollo-bootstrap-webpack-starter",
   "version": "0.1.1",
