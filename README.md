@@ -62,6 +62,11 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 
 ### Prerequisite
 
+#### Node JS version required is `>=6.5.0+`.
+*Node JS 4.x will enter maintenance phase in April 2017 so you better upgrade now or soon to new LTS which is v6.x.*
+
+> Better use [nvm](https://github.com/creationix/nvm) to manage your Node JS versions.
+
 An Easy and fast way to get your graphql backend is to **register for free at [Scaphold](https://scaphold.io)**.
 
 > This starter has been created with a scaphold free plan.
