@@ -5,7 +5,6 @@ import {
   Router,
   Route,
   IndexRoute,
-  // hashHistory,
   browserHistory
  }                              from 'react-router';
 // import { Provider }             from 'react-redux';

@@ -1,21 +1,22 @@
 {
   "engine": {
-    "node" : "^6.5.0",
+    "node": "^6.5.0",
     "npm": "*"
   },
   "name": "react-redux-graphql-apollo-bootstrap-webpack-starter",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "react js + redux + graphQL + Apollo + react router + hot reload + devTools + bootstrap + webpack starter",
   "main": "src/index.js",
   "scripts": {
     "dev": "NODE_ENV=dev webpack",
-    "test": "NODE_ENV=test nyc mocha test/.setup.js test/**/*.spec.js --compilers js:babel-core/register --recursive",
-    "prod": "NODE_ENV=production webpack -p --config webpack.production.config.babel.js ",
-    "start": "NODE_ENV=dev babel-node --presets es2015 ./server.hot.reload.js",
-    "dev-win": "setx NODE_ENV=dev webpack",
-    "test-win": "setx NODE_ENV=test nyc mocha test/.setup.js test/**/*.spec.js --compilers js:babel-core/register --recursive",
-    "prod-win": "setx NODE_ENV=production webpack -p --config webpack.production.config.babel.js ",
-    "start-win": "setx NODE_ENV=dev babel-node --presets es2015 ./server.hot.reload.js"
+    "test": "NODE_ENV=test nyc mocha test/.setup.js test/**/*.spec.js --recursive",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "prod": "NODE_ENV=production webpack -p --config webpack.production.config.js ",
+    "start": "NODE_ENV=dev node server.hot.reload",
+    "dev-win": "set NODE_ENV=dev && webpack",
+    "test-win": "set NODE_ENV=test && nyc mocha test/.setup.js test/**/*.spec.js --recursive",
+    "prod-win": "set NODE_ENV=production && webpack -p --config webpack.production.config.js ",
+    "start-win": "set NODE_ENV=dev && node server.hot.reload"
   },
   "keywords": [
     "react",
@@ -108,7 +109,7 @@
     "react-redux": "^4.4.1",
     "react-router": "^2.0.0",
     "react-router-redux": "^4.0.1",
-    "react-tap-event-plugin": "^0.2.2",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.3.1",
     "redux-thunk": "^2.0.1",
     "whatwg-fetch": "^1.0.0"

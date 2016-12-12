@@ -27,9 +27,12 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  switch (action.type) {
+  const currentTime = moment().format(dateFormat);
 
+  switch (action.type) {
+  // /////////////////////
   // non protected views:
+  // /////////////////////
   case ENTER_HOME_VIEW:
   case ENTER_ABOUT_VIEW:
   case ENTER_LOGIN_VIEW:
@@ -38,9 +41,8 @@ export default function (state = initialState, action) {
     if (state.currentView !== action.currentView) {
       return {
         ...state,
-        currentView:  action.currentView,
-        enterTime:    action.enterTime,
-        leaveTime:    action.leaveTime
+        currentView: action.currentView,
+        enterTime: currentTime
       };
     }
     return state;
@@ -53,20 +55,19 @@ export default function (state = initialState, action) {
       return {
         ...state,
         currentView:  action.currentView,
-        enterTime:    action.enterTime,
-        leaveTime:    action.leaveTime
+        leaveTime:    currentTime
       };
     }
     return state;
-
+  // /////////////////////
   // protected views:
+  // /////////////////////
   case ENTER_PROTECTED_VIEW:
     if (state.currentView !== action.currentView) {
       return {
         ...state,
         currentView:  action.currentView,
-        enterTime:    action.enterTime,
-        leaveTime:    action.leaveTime
+        enterTime:    currentTime
       };
     }
     return state;
@@ -75,8 +76,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         currentView:  action.currentView,
-        enterTime:    action.enterTime,
-        leaveTime:    action.leaveTime
+        leaveTime:    currentTime
       };
     }
     return state;
@@ -90,87 +90,67 @@ export default function (state = initialState, action) {
 /* -----------------------------------------
   Reducer
  ------------------------------------------*/
-export function enterHome(time = moment().format(dateFormat)) {
+export function enterHome() {
   return {
     type:         ENTER_HOME_VIEW,
-    currentView:  'home',
-    enterTime:    time,
-    leaveTime:    null
+    currentView:  'home'
   };
 }
-export function leaveHome(time = moment().format(dateFormat)) {
+export function leaveHome() {
   return {
     type:         LEAVE_HOME_VIEW,
-    currentView:  'home',
-    enterTime:    null,
-    leaveTime:    time
+    currentView:  'home'
   };
 }
 
-export function enterAbout(time = moment().format(dateFormat)) {
+export function enterAbout() {
   return {
     type:         ENTER_ABOUT_VIEW,
-    currentView:  'about',
-    enterTime:    time,
-    leaveTime:    null
+    currentView:  'about'
   };
 }
-export function leaveAbout(time = moment().format(dateFormat)) {
+export function leaveAbout() {
   return {
     type:         LEAVE_ABOUT_VIEW,
-    currentView:  'about',
-    enterTime:    null,
-    leaveTime:    time
+    currentView:  'about'
   };
 }
 
-export function enterLogin(time = moment().format(dateFormat)) {
+export function enterLogin() {
   return {
     type:         ENTER_LOGIN_VIEW,
-    currentView:  'login',
-    enterTime:    time,
-    leaveTime:    null
+    currentView:  'login'
   };
 }
-export function leaveLogin(time = moment().format(dateFormat)) {
+export function leaveLogin() {
   return {
     type:         LEAVE_LOGIN_VIEW,
-    currentView:  'login',
-    enterTime:    null,
-    leaveTime:    time
+    currentView:  'login'
   };
 }
 
-export function enterRegister(time = moment().format(dateFormat)) {
+export function enterRegister() {
   return {
     type:         ENTER_REGISTER_VIEW,
-    currentView:  'register',
-    enterTime:    time,
-    leaveTime:    null
+    currentView:  'register'
   };
 }
-export function leaveRegister(time = moment().format(dateFormat)) {
+export function leaveRegister() {
   return {
     type:         LEAVE_REGISTER_VIEW,
-    currentView:  'register',
-    enterTime:    null,
-    leaveTime:    time
+    currentView:  'register'
   };
 }
 
-export function enterProtected(time = moment().format(dateFormat)) {
+export function enterProtected() {
   return {
     type:         ENTER_PROTECTED_VIEW,
-    currentView:  'protected',
-    enterTime:    time,
-    leaveTime:    null
+    currentView:  'protected'
   };
 }
-export function leaveProtected(time = moment().format(dateFormat)) {
+export function leaveProtected() {
   return {
     type:         LEAVE_PROTECTED_VIEW,
-    currentView:  'protected',
-    enterTime:    null,
-    leaveTime:    time
+    currentView:  'protected'
   };
 }

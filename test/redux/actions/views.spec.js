@@ -1,81 +1,101 @@
 import chai, {expect} from 'chai';
 import dirtyChai      from 'dirty-chai';
-import moment         from 'moment';
 import {
   enterHome,
   leaveHome,
   enterAbout,
   leaveAbout,
-  enterComponents,
-  leaveComponents
+  enterLogin,
+  leaveLogin,
+  enterRegister,
+  leaveRegister,
+  enterProtected,
+  leaveProtected
 }                       from '../../../src/app/redux/modules/views';
-
-const dateFormat = 'DD/MM/YYYY HH:mm';
 
 chai.use(dirtyChai);
 
 
 describe('redux - action creator "views"', () => {
-  const  now = moment().format(dateFormat);
 
   it('should return enterHome action object', () => {
     const enterHomeACTION = {
       type:         'ENTER_HOME_VIEW',
-      currentView:  'home',
-      enterTime:    now,
-      leaveTime:    null
+      currentView:  'home'
     };
-    expect(enterHome(now)).to.deep.equal(enterHomeACTION);
+    expect(enterHome()).to.deep.equal(enterHomeACTION);
   });
 
   it('should return leaveHome action object', () => {
     const leaveHomeACTION = {
       type:         'LEAVE_HOME_VIEW',
-      currentView:  'home',
-      enterTime:    null,
-      leaveTime:    now
+      currentView:  'home'
     };
-    expect(leaveHome(now)).to.deep.equal(leaveHomeACTION);
+    expect(leaveHome()).to.deep.equal(leaveHomeACTION);
   });
 
 
   it('should return enterAbout action object', () => {
     const enterAboutACTION = {
       type:         'ENTER_ABOUT_VIEW',
-      currentView:  'about',
-      enterTime:    now,
-      leaveTime:    null
+      currentView:  'about'
     };
-    expect(enterAbout(now)).to.deep.equal(enterAboutACTION);
+    expect(enterAbout()).to.deep.equal(enterAboutACTION);
   });
 
   it('should return leaveAbout action object', () => {
     const leaveAboutACTION = {
       type:         'LEAVE_ABOUT_VIEW',
-      currentView:  'about',
-      enterTime:    null,
-      leaveTime:    now
+      currentView:  'about'
     };
-    expect(leaveAbout(now)).to.deep.equal(leaveAboutACTION);
+    expect(leaveAbout()).to.deep.equal(leaveAboutACTION);
   });
 
-  it('should return enterComponents action object', () => {
-    const enterComponentsACTION = {
-      type:         'ENTER_COMPONENTS_VIEW',
-      currentView:  'components',
-      enterTime:    now,
-      leaveTime:    null
+  it('should return enterLogin action object', () => {
+    const enterLoginACTION = {
+      type:         'ENTER_LOGIN_VIEW',
+      currentView:  'login'
     };
-    expect(enterComponents(now)).to.deep.equal(enterComponentsACTION);
+    expect(enterLogin()).to.deep.equal(enterLoginACTION);
   });
 
-  it('should return leaveAbout action object', () => {
-    const leaveComponentsACTION = {
-      type:         'LEAVE_COMPONENTS_VIEW',
-      currentView:  'components',
-      enterTime:    null,
-      leaveTime:    now
+  it('should return leaveLogin action object', () => {
+    const leaveLoginACTION = {
+      type:         'LEAVE_LOGIN_VIEW',
+      currentView:  'login'
     };
-    expect(leaveComponents(now)).to.deep.equal(leaveComponentsACTION);
+    expect(leaveLogin()).to.deep.equal(leaveLoginACTION);
+  });
+
+  it('should return enterRegister action object', () => {
+    const enterRegisterACTION = {
+      type:         'ENTER_REGISTER_VIEW',
+      currentView:  'register'
+    };
+    expect(enterRegister()).to.deep.equal(enterRegisterACTION);
+  });
+
+  it('should return leaveRegister action object', () => {
+    const leaveRegisterACTION = {
+      type:         'LEAVE_REGISTER_VIEW',
+      currentView:  'register'
+    };
+    expect(leaveRegister()).to.deep.equal(leaveRegisterACTION);
+  });
+
+  it('should return enterProtected action object', () => {
+    const enterProtectedACTION = {
+      type:         'ENTER_PROTECTED_VIEW',
+      currentView:  'protected'
+    };
+    expect(enterProtected()).to.deep.equal(enterProtectedACTION);
+  });
+
+  it('should return leaveProtected action object', () => {
+    const leaveProtectedACTION = {
+      type:         'LEAVE_PROTECTED_VIEW',
+      currentView:  'protected'
+    };
+    expect(leaveProtected()).to.deep.equal(leaveProtectedACTION);
   });
 });
