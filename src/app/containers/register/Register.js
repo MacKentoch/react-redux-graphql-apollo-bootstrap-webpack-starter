@@ -52,8 +52,8 @@ const RegisterWithCreatUserMutation = graphql(
             }
           )
           .catch(
-            ({errors})=> {
-              ownProps.onUserRegisterError(errors);
+            (error)=> {
+              ownProps.onUserRegisterError(error);
               ownProps.unsetMutationLoading();
               return Promise.reject(errors);
             }
@@ -73,7 +73,9 @@ const mapStateToProps = (state) => {
     currentView:  state.views.currentView,
     // user Auth props:
     userIsAuthenticated: state.userAuth.isAuthenticated,
-    mutationLoading: state.userAuth.mutationLoading
+    mutationLoading: state.userAuth.mutationLoading,
+    // errors:
+    error: state.userAuth.error
   };
 };
 
@@ -86,6 +88,7 @@ const mapDispatchToProps = (dispatch) => {
       // userAuth actions:
       onUserRegisterSuccess: userAuthActions.receivedUserRegister,
       onUserRegisterError: userAuthActions.errorUserRegister,
+      resetError: userAuthActions.resetLogError,
 
       setMutationLoading: userAuthActions.setLoadingStateForUserRegister,
       unsetMutationLoading: userAuthActions.unsetLoadingStateForUserRegister

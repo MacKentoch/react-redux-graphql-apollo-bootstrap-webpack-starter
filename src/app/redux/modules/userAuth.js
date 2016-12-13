@@ -21,6 +21,8 @@ const UNSET_LOADING_REGISTER = 'UNSET_LOADING_REGISTER';
 
 const SET_USER_LOGOUT = 'SET_USER_LOGOUT';
 
+const RESET_LOG_ERRORS = 'RESET_LOG_ERRORS';
+
 /* -----------------------------------------
   Reducer
  ------------------------------------------*/
@@ -36,7 +38,7 @@ const initialState = {
   isAuthenticated: false,
   lastActionTime: null,
   mutationLoading: false,
-  errors: [],
+  errors: null,
   ...emptyUser
 };
 
@@ -55,7 +57,7 @@ export default function (state = initialState, action) {
       createdAt: action.user.createdAt,
       modifiedAt: action.user.modifiedAt,
       lastRefreshTime: action.time,
-      errors: []
+      error: null
     };
 
   case ERROR_USER_LOGGED_IN:
@@ -65,7 +67,7 @@ export default function (state = initialState, action) {
       lastActionTime: action.time,
       isAuthenticated: action.isAuthenticated,
       // errors:
-      errors: [...action.errors],
+      error: {...action.error},
       // user infos:
       id: initialState.id,
       username: initialState.username,
@@ -109,6 +111,12 @@ export default function (state = initialState, action) {
       modifiedAt: action.user.modifiedAt
     };
 
+  case RESET_LOG_ERRORS:
+    return {
+      ...state,
+      error: null
+    };
+
   default:
     return state;
   }
@@ -138,13 +146,13 @@ export function receivedUserLoggedIn(userToken = null, user = emptyUser, time = 
 // //////////////////
 // login error:
 // //////////////////
-export function errorUserLoggedIn(errors = null, time = moment().format(dateFormat)) {
+export function errorUserLoggedIn(error = null, time = moment().format(dateFormat)) {
   auth.clearAllAppStorage(); // clear previous token
 
   return {
     type: ERROR_USER_LOGGED_IN,
     time,
-    errors,
+    error,
     isAuthenticated: false
   };
 }
@@ -188,13 +196,13 @@ export function receivedUserRegister(userToken = null, user = emptyUser, time = 
 // //////////////////
 // register error:
 // //////////////////
-export function errorUserRegister(errors = null, time = moment().format(dateFormat)) {
+export function errorUserRegister(error = null, time = moment().format(dateFormat)) {
   auth.clearAllAppStorage(); // clear previous token
 
   return {
     type: ERROR_USER_REGISTER,
     time,
-    errors,
+    error,
     isAuthenticated: false
   };
 }
@@ -248,4 +256,13 @@ export function checkIfUserIsAuthenticated(time = moment().format(dateFormat)) {
 
 function checkUserHasId(user) {
   return user && user.id && (user.id.length > 0);
+}
+
+// ////////////////////////////////
+// reset ligon and register error:
+// ////////////////////////////////
+export function resetLogError(time = moment().format(dateFormat)) {
+  return {
+    type: RESET_LOG_ERRORS
+  };
 }

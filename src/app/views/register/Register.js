@@ -5,6 +5,7 @@ import React, {
 import cx             from 'classnames';
 import shallowCompare from 'react-addons-shallow-compare';
 import { Link }       from 'react-router';
+import { ErrorAlert } from '../../components';
 
 class Register extends Component {
 
@@ -37,6 +38,11 @@ class Register extends Component {
       email,
       password
     } = this.state;
+    const {
+      mutationLoading,
+      error
+    } = this.props;
+
     return(
       <div className={
         cx({
@@ -45,7 +51,12 @@ class Register extends Component {
         })}>
         <div className="row">
           <div className="col-md-4 col-md-offset-4">
-
+            <ErrorAlert
+              showAlert={!!error}
+              errorTitle={'Error'}
+              errorMessage={error ? error.message : ''}
+              onClose={this.closeError}
+            />
             <form
               className="form-horizontal"
               noValidate>
@@ -97,6 +108,7 @@ class Register extends Component {
                     </Link>
                     <button
                       className="btn btn-primary register-button"
+                      disabled={mutationLoading}
                       onClick={this.handlesOnRegister}>
                       Register
                     </button>
@@ -144,6 +156,12 @@ class Register extends Component {
       .catch(
         (err) => console.log('register user went wrong..., ', err)
       );
+  }
+
+  closeError = (event) => {
+    event.preventDefault();
+    const { resetError } = this.props;
+    resetError();
   }
 }
 

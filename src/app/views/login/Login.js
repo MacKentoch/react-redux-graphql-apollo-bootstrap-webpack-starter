@@ -50,7 +50,7 @@ class Login extends Component {
     } = this.state;
     const {
       mutationLoading,
-      errors
+      error
     } = this.props;
 
     return(
@@ -62,10 +62,10 @@ class Login extends Component {
         <div className="row">
           <div className="col-md-4 col-md-offset-4">
             <ErrorAlert
-              showAlert={errors.length > 0}
+              showAlert={!!error}
               errorTitle={'Error'}
-              errorMessage={'login failed'}
-              onClose={()=>console.log('coming soon...')}
+              errorMessage={error ? error.message : ''}
+              onClose={this.closeError}
             />
             <form
               className="form-horizontal"
@@ -171,6 +171,12 @@ class Login extends Component {
         () => console.log('login went wrong...')
       );
   }
+
+  closeError = (event) => {
+    event.preventDefault();
+    const { resetError } = this.props;
+    resetError();
+  }
 }
 
 Login.propTypes= {
@@ -186,13 +192,14 @@ Login.propTypes= {
   // auth props:
   userIsAuthenticated: PropTypes.bool.isRequired,
   mutationLoading: PropTypes.bool.isRequired,
-  errors: PropTypes.array.isRequired,
+  error: PropTypes.object,
 
   // apollo actions
   loginUser: PropTypes.func.isRequired,
 
   // redux actions
-  onUserLoggedIn: PropTypes.func.isRequired
+  onUserLoggedIn: PropTypes.func.isRequired,
+  resetError: PropTypes.func.isRequired
 };
 
 Login.contextTypes = {

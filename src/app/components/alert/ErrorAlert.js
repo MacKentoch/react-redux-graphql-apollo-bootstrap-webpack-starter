@@ -21,7 +21,7 @@ const ErrorAlert = ({ showAlert, errorTitle, errorMessage, onClose }) => (
           <button
             type="button"
             className="close"
-            data-dismiss="alert"
+            // data-dismiss="alert"
             onClick={onClose}>
             &times;
           </button>

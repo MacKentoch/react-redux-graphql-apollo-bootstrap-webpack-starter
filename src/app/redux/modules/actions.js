@@ -26,7 +26,9 @@ import {
   setLoadingStateForUserRegister,
   unsetLoadingStateForUserRegister,
 
-  setUserLogout
+  setUserLogout,
+
+  resetLogError
 } from './userAuth';
 
 
@@ -59,5 +61,6 @@ export {
    errorUserRegister,
    setLoadingStateForUserRegister,
    unsetLoadingStateForUserRegister,
-   setUserLogout
+   setUserLogout,
+   resetLogError
 };

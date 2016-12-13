@@ -54,7 +54,7 @@ const LoginWithMutation = graphql(
             }
           )
           .catch(
-            ({data: {error}})=> {
+            (error)=> {
               ownProps.onUserLogError(error);
               ownProps.unsetMutationLoading();
               return Promise.reject();
@@ -78,7 +78,7 @@ const mapStateToProps = (state) => {
     userIsAuthenticated: state.userAuth.isAuthenticated,
     mutationLoading: state.userAuth.mutationLoading,
     // errors:
-    errors: state.userAuth.errors
+    error: state.userAuth.error
   };
 };
 
@@ -93,7 +93,8 @@ const mapDispatchToProps = (dispatch) => {
       onUserLoggedIn: userAuthActions.receivedUserLoggedIn,
       onUserLogError: userAuthActions.errorUserLoggedIn,
       setMutationLoading: userAuthActions.setLoadingStateForUserLogin,
-      unsetMutationLoading: userAuthActions.unsetLoadingStateForUserLogin
+      unsetMutationLoading: userAuthActions.unsetLoadingStateForUserLogin,
+      resetError: userAuthActions.resetLogError
     },
     dispatch
   );
