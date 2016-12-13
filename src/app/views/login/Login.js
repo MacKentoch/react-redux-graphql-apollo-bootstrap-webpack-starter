@@ -5,6 +5,7 @@ import React, {
 import cx             from 'classnames';
 import shallowCompare from 'react-addons-shallow-compare';
 import { Link }       from 'react-router';
+import { ErrorAlert } from '../../components';
 
 class Login extends Component {
 
@@ -48,7 +49,8 @@ class Login extends Component {
       password
     } = this.state;
     const {
-      mutationLoading
+      mutationLoading,
+      errors
     } = this.props;
 
     return(
@@ -59,7 +61,12 @@ class Login extends Component {
         })}>
         <div className="row">
           <div className="col-md-4 col-md-offset-4">
-
+            <ErrorAlert
+              showAlert={errors.length > 0}
+              errorTitle={'Error'}
+              errorMessage={'login failed'}
+              onClose={()=>console.log('coming soon...')}
+            />
             <form
               className="form-horizontal"
               noValidate>
@@ -179,6 +186,7 @@ Login.propTypes= {
   // auth props:
   userIsAuthenticated: PropTypes.bool.isRequired,
   mutationLoading: PropTypes.bool.isRequired,
+  errors: PropTypes.array.isRequired,
 
   // apollo actions
   loginUser: PropTypes.func.isRequired,

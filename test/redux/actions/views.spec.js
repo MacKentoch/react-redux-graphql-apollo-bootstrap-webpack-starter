@@ -17,7 +17,6 @@ chai.use(dirtyChai);
 
 
 describe('redux - action creator "views"', () => {
-
   it('should return enterHome action object', () => {
     const enterHomeACTION = {
       type:         'ENTER_HOME_VIEW',

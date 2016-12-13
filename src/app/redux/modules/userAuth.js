@@ -36,6 +36,7 @@ const initialState = {
   isAuthenticated: false,
   lastActionTime: null,
   mutationLoading: false,
+  errors: [],
   ...emptyUser
 };
 
@@ -53,7 +54,8 @@ export default function (state = initialState, action) {
       lastLogin: action.user.lastLogin,
       createdAt: action.user.createdAt,
       modifiedAt: action.user.modifiedAt,
-      lastRefreshTime: action.time
+      lastRefreshTime: action.time,
+      errors: []
     };
 
   case ERROR_USER_LOGGED_IN:
@@ -62,6 +64,8 @@ export default function (state = initialState, action) {
       ...state,
       lastActionTime: action.time,
       isAuthenticated: action.isAuthenticated,
+      // errors:
+      errors: [...action.errors],
       // user infos:
       id: initialState.id,
       username: initialState.username,
