@@ -173,9 +173,11 @@ Register.propTypes= {
   // auth props:
   userIsAuthenticated: PropTypes.bool.isRequired,
   mutationLoading: PropTypes.bool.isRequired,
+  error: PropTypes.object,
 
   // apollo actions
-  registerUser: PropTypes.func.isRequired
+  registerUser: PropTypes.func.isRequired,
+  resetError: PropTypes.func.isRequired
 };
 
 Register.contextTypes = {

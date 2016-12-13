@@ -261,7 +261,7 @@ function checkUserHasId(user) {
 // ////////////////////////////////
 // reset ligon and register error:
 // ////////////////////////////////
-export function resetLogError(time = moment().format(dateFormat)) {
+export function resetLogError() {
   return {
     type: RESET_LOG_ERRORS
   };

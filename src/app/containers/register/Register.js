@@ -55,7 +55,7 @@ const RegisterWithCreatUserMutation = graphql(
             (error)=> {
               ownProps.onUserRegisterError(error);
               ownProps.unsetMutationLoading();
-              return Promise.reject(errors);
+              return Promise.reject(error);
             }
           );
       }
