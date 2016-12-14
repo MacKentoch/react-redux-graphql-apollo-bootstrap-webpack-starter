@@ -48,7 +48,7 @@ describe('redux - reducer "views"', () => {
       leaveTime:    now
     };
     /* eslint-disable no-undefined */
-    expect(views({currentView: 'home'}, actionLeaveHome)).to.deep.equal(expectedState);
+    expect(views({currentView: 'home', enterTime: null}, actionLeaveHome)).to.deep.equal(expectedState);
     /* eslint-enable no-undefined */
   });
 
@@ -85,43 +85,7 @@ describe('redux - reducer "views"', () => {
       leaveTime:    now
     };
     /* eslint-disable no-undefined */
-    expect(views({currentView: 'about'}, actionLeaveAbout)).to.deep.equal(expectedState);
-    /* eslint-enable no-undefined */
-  });
-
-  it('should set state according to ENTER_COMPONENTS_VIEW action', () => {
-    const now = moment().format(dateFormat);
-    const actionEnterComponents = {
-      type:         'ENTER_COMPONENTS_VIEW',
-      currentView:  'components',
-      enterTime:    now,
-      leaveTime:    null
-    };
-    const expectedState = {
-      currentView:  'components',
-      enterTime:    now,
-      leaveTime:    null
-    };
-    /* eslint-disable no-undefined */
-    expect(views(undefined, actionEnterComponents)).to.deep.equal(expectedState);
-    /* eslint-enable no-undefined */
-  });
-
-  it('should set state according to LEAVE_COMPONENTS_VIEW action', () => {
-    const now = moment().format(dateFormat);
-    const actionLeaveComponents = {
-      type:         'LEAVE_COMPONENTS_VIEW',
-      currentView:  'components',
-      enterTime:    null,
-      leaveTime:    now
-    };
-    const expectedState = {
-      currentView:  'components',
-      enterTime:    null,
-      leaveTime:    now
-    };
-    /* eslint-disable no-undefined */
-    expect(views({currentView: 'components'}, actionLeaveComponents)).to.deep.equal(expectedState);
+    expect(views({currentView: 'about', enterTime: null}, actionLeaveAbout)).to.deep.equal(expectedState);
     /* eslint-enable no-undefined */
   });
 });

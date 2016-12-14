@@ -6,14 +6,21 @@ import {
   spring,
   presets
 }                 from 'react-motion';
+import cx         from 'classnames';
 
-
-const ErrorAlert = ({ showAlert, errorTitle, errorMessage, onClose }) => (
+const Alert = ({ type, showAlert, errorTitle, errorMessage, onClose }) => (
   <Motion style={{scale: spring(showAlert ? 1 : 0, presets.stiff)}}>
     {
       ({ scale }) => (
         <div
-          className="alert alert-dismissible alert-danger"
+          className={
+            cx({
+              'alert': true,
+              'alert-dismissible': true,
+              'alert-danger': type === 'error',
+              'alert-warning': type === 'warning'
+            })
+          }
           style={{
             WebkitTransform: `scale(${scale})`,
             transform: `scale(${scale})`
@@ -42,15 +49,17 @@ const ErrorAlert = ({ showAlert, errorTitle, errorMessage, onClose }) => (
 );
 
 
-ErrorAlert.propTypes = {
+Alert.propTypes = {
   showAlert: PropTypes.bool,
   errorTitle: PropTypes.string,
   errorMessage: PropTypes.string,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  type: PropTypes.oneOf(['warning', 'error'])
 };
 
-ErrorAlert.defaultProps = {
-  showAlert: false
+Alert.defaultProps = {
+  showAlert: false,
+  type: 'wanring'
 };
 
-export default ErrorAlert;
+export default Alert;

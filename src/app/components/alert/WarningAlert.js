@@ -8,12 +8,12 @@ import {
 }                 from 'react-motion';
 
 
-const ErrorAlert = ({ showAlert, errorTitle, errorMessage, onClose }) => (
+const WarningAlert = ({ showAlert, warningTitle, warningMessage, onClose }) => (
   <Motion style={{scale: spring(showAlert ? 1 : 0, presets.stiff)}}>
     {
       ({ scale }) => (
         <div
-          className="alert alert-dismissible alert-danger"
+          className="alert alert-dismissible alert-warning"
           style={{
             WebkitTransform: `scale(${scale})`,
             transform: `scale(${scale})`
@@ -25,14 +25,14 @@ const ErrorAlert = ({ showAlert, errorTitle, errorMessage, onClose }) => (
             &times;
           </button>
           {
-            errorTitle && errorTitle.length > 0 &&
+            warningTitle && warningTitle.length > 0 &&
             <strong>
-              {errorTitle}
+              {warningTitle}
             </strong>
           }
           {
             <p>
-              {errorMessage}
+              {warningMessage}
             </p>
           }
         </div>
@@ -42,15 +42,15 @@ const ErrorAlert = ({ showAlert, errorTitle, errorMessage, onClose }) => (
 );
 
 
-ErrorAlert.propTypes = {
+WarningAlert.propTypes = {
   showAlert: PropTypes.bool,
-  errorTitle: PropTypes.string,
-  errorMessage: PropTypes.string,
+  warningTitle: PropTypes.string,
+  warningMessage: PropTypes.string,
   onClose: PropTypes.func.isRequired
 };
 
-ErrorAlert.defaultProps = {
+WarningAlert.defaultProps = {
   showAlert: false
 };
 
-export default ErrorAlert;
+export default WarningAlert;

@@ -61,12 +61,6 @@ class Login extends Component {
         })}>
         <div className="row">
           <div className="col-md-4 col-md-offset-4">
-            <ErrorAlert
-              showAlert={!!error}
-              errorTitle={'Error'}
-              errorMessage={error ? error.message : ''}
-              onClose={this.closeError}
-            />
             <form
               className="form-horizontal"
               noValidate>
@@ -104,15 +98,12 @@ class Login extends Component {
                       type="password"
                       className="form-control"
                       id="inputPassword"
-                      // autoComplete="nofill"
-                      // role="presentation"
                       placeholder="Password"
                       value={password}
                       onChange={this.handlesOnPasswordChange}
                     />
                   </div>
                 </div>
-
                 <div className="form-group">
                   <div className="col-lg-10 col-lg-offset-2">
                     <Link
@@ -130,7 +121,12 @@ class Login extends Component {
                 </div>
               </fieldset>
             </form>
-
+            <ErrorAlert
+              showAlert={!!error}
+              errorTitle={'Error'}
+              errorMessage={error ? error.message : ''}
+              onClose={this.closeError}
+            />
           </div>
         </div>
 
@@ -203,7 +199,7 @@ Login.propTypes= {
 };
 
 Login.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object
 };
 
 export default Login;

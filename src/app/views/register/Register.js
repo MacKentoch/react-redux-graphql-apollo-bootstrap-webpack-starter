@@ -5,7 +5,10 @@ import React, {
 import cx             from 'classnames';
 import shallowCompare from 'react-addons-shallow-compare';
 import { Link }       from 'react-router';
-import { ErrorAlert } from '../../components';
+import {
+  ErrorAlert,
+  WarningAlert
+}                     from '../../components';
 
 class Register extends Component {
 
@@ -14,7 +17,9 @@ class Register extends Component {
     viewEntersAnim: true,
 
     email: '',
-    password: ''
+    password: '',
+
+    warning: null
   };
 
   componentDidMount() {
@@ -36,8 +41,10 @@ class Register extends Component {
       animated,
       viewEntersAnim,
       email,
-      password
+      password,
+      warning
     } = this.state;
+
     const {
       mutationLoading,
       error
@@ -51,12 +58,6 @@ class Register extends Component {
         })}>
         <div className="row">
           <div className="col-md-4 col-md-offset-4">
-            <ErrorAlert
-              showAlert={!!error}
-              errorTitle={'Error'}
-              errorMessage={error ? error.message : ''}
-              onClose={this.closeError}
-            />
             <form
               className="form-horizontal"
               noValidate>
@@ -116,7 +117,20 @@ class Register extends Component {
                 </div>
               </fieldset>
             </form>
-
+            <div style={{height: '150px'}}>
+              <WarningAlert
+                showAlert={!!warning}
+                warningTitle={'Warning'}
+                warningMessage={warning ? warning.message : ''}
+                onClose={this.closeWarning}
+              />
+              <ErrorAlert
+                showAlert={!!error}
+                errorTitle={'Error'}
+                errorMessage={error ? error.message : ''}
+                onClose={this.closeError}
+              />
+            </div>
           </div>
         </div>
 
@@ -127,7 +141,8 @@ class Register extends Component {
   handlesOnEmailChange = (event) => {
     event.preventDefault();
     // should add some validator before setState in real use cases
-    this.setState({ email: event.target.value });
+    const email = event.target.value;
+    this.setState({ email});
   }
 
   handlesOnPasswordChange = (event) => {
@@ -149,6 +164,20 @@ class Register extends Component {
       }
     };
 
+    const { resetError } = this.props;
+    resetError();
+    this.setState({ warning: null });
+
+    if (!this.isValidEmail(email)) {
+      this.setState({ warning: { message: 'Email is not valid.' } });
+      return;
+    }
+
+    if (!this.isValidPassword(password)) {
+      this.setState({ warning: { message: 'Password is empty or not valid.' } });
+      return;
+    }
+
     registerUser({variables})
       .then(
         () => router.push({ pathname: '/protected' })
@@ -158,10 +187,31 @@ class Register extends Component {
       );
   }
 
+  isValidEmail(email = '') {
+    // basic validation, better user "validate.js" for real validation
+    if (email && email.trim().length > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  isValidPassword(password = '') {
+    // basic validation, better user "validate.js" for real validation
+    if (password && password.trim().length > 0) {
+      return true;
+    }
+    return false;
+  }
+
   closeError = (event) => {
     event.preventDefault();
     const { resetError } = this.props;
     resetError();
+  }
+
+  closeWarning = event => {
+    event.preventDefault();
+    this.setState({ warning: null });
   }
 }
 

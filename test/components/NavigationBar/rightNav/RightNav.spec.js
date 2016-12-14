@@ -13,13 +13,19 @@ const rightLinksMock = [
     label:      'a right Link',
     link:       'link1',
     view:       'fake',
-    isRouteBtn: false
+    isRouteBtn: false,
+    alwaysShows: true,
+    showWhenUserAuth: true,
+    hideWhenUserAuth: false
   },
   {
     label:      'another right Link',
     link:       'link2',
     view:       'fake2',
-    isRouteBtn: true
+    isRouteBtn: true,
+    alwaysShows: true,
+    showWhenUserAuth: true,
+    hideWhenUserAuth: false
   }
 ];
 
@@ -29,6 +35,7 @@ chai.use(dirtyChai);
 describe('<RightNav />', () => {
   const props = {
     rightLinks: rightLinksMock,
+    userIsAuthenticated: false,
     onRightNavButtonClick: ()=>{}
   };
 
