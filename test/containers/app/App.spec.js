@@ -4,8 +4,14 @@ import {shallow}            from 'enzyme';
 import configureMockStore   from 'redux-mock-store';
 import thunk                from 'redux-thunk';
 import App                  from '../../../src/app/containers/app/App';
+import ApolloClient         from 'apollo-client';
 
-const mockStore = configureMockStore([ thunk ]);
+const apollo = new ApolloClient();
+const mockStore = configureMockStore([
+  thunk,
+  apollo.middleware() // apollo middleware
+]);
+
 const storeStateMock = {
   views: {
     currentView: 'home'
