@@ -17,10 +17,10 @@ let wrapper;
 describe('HomeConnected (Home container) ', () => {
   beforeEach(() => {
     store = mockStore(storeStateMock);
-    wrapper = shallow(<HomeConnected store={store} />).shallow();
+    wrapper = shallow(<HomeConnected store={store} />).shallow().shallow();
   });
 
   it('should render container', () => {
-    expect(wrapper.containsMatchingElement(<h1>Full ES2015 ReactJS + Bootstrap</h1>));
+    expect(wrapper.containsMatchingElement(<h1>Full ES2015 ReactJS + Redux + graphQL + Apollo + Bootstrap</h1>));
   });
 });
