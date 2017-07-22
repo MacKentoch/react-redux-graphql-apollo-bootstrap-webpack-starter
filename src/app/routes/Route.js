@@ -5,7 +5,8 @@ import {
   Router,
   Route,
   IndexRoute,
-  browserHistory
+  // browserHistory
+  hashHistory // when no server
  }                              from 'react-router';
 // import { Provider }             from 'react-redux';
 import { ApolloProvider }       from 'react-apollo'; // replace Provider from react-redux
@@ -30,9 +31,9 @@ import configureStore, {
 import DevTools                 from '../redux/devTools/DevTools.jsx';
 import { auth }                 from '../services/auth';
 
-
+const history       = hashHistory;
 const store         = configureStore();
-const syncedHistory = syncHistoryWithStore(browserHistory, store);
+const syncedHistory = syncHistoryWithStore(history, store);
 
 export const Routes = () => {
   return (
