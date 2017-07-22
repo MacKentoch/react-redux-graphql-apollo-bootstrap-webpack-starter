@@ -4,7 +4,7 @@
     "npm": "*"
   },
   "name": "react-redux-graphql-apollo-bootstrap-webpack-starter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "react js + redux + graphQL + Apollo + react router + hot reload + devTools + bootstrap + webpack starter",
   "main": "src/index.js",
   "scripts": {

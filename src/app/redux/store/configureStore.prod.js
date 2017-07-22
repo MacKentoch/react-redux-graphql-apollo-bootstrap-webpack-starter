@@ -6,9 +6,9 @@ import {
 }                         from 'redux';
 import createLogger       from 'redux-logger';
 import thunkMiddleware    from 'redux-thunk';
-import * as reducers      from '../reducers';
+import * as reducers      from '../modules/reducers';
 import { routerReducer }  from 'react-router-redux';
-import { apolloClient }   from './services/apollo';
+import { apolloClient }   from '../../services/apollo';
 
 const loggerMiddleware = createLogger({
   level     : 'info',
