@@ -1,8 +1,4 @@
 {
-  "engine": {
-    "node": "^6.5.0",
-    "npm": "*"
-  },
   "name": "react-redux-graphql-apollo-bootstrap-webpack-starter",
   "version": "0.2.1",
   "description": "react js + redux + graphQL + Apollo + react router + hot reload + devTools + bootstrap + webpack starter",
@@ -17,6 +13,10 @@
     "test-win": "set NODE_ENV=test && nyc mocha test/.setup.js test/**/*.spec.js --recursive",
     "prod-win": "set NODE_ENV=production && webpack -p --config webpack.production.config.js ",
     "start-win": "set NODE_ENV=dev && node server.hot.reload"
+  },
+  "engines": {
+    "node": "^6.5.0",
+    "npm": "*"
   },
   "keywords": [
     "react",
