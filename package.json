@@ -1,9 +1,10 @@
 {
   "name": "react-redux-graphql-apollo-bootstrap-webpack-starter",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "react js + redux + graphQL + Apollo + react router + hot reload + devTools + bootstrap + webpack starter",
   "main": "src/index.js",
   "scripts": {
+    "flow": "flow",
     "dev": "NODE_ENV=dev webpack",
     "test": "NODE_ENV=test nyc mocha test/.setup.js test/**/*.spec.js --recursive",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -66,6 +67,7 @@
     "eslint-plugin-react": "^4.2.3",
     "expose-loader": "^0.7.1",
     "file-loader": "^0.8.5",
+    "flow-bin": "^0.51.0",
     "jsdom": "^9.4.1",
     "json-loader": "^0.5.4",
     "mocha": "^2.5.3",

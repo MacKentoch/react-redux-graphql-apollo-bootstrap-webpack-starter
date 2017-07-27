@@ -1,0 +1,13 @@
+[ignore]
+
+[include]
+
+[libs]
+./interfaces/global.js
+
+[options]
+module.name_mapper='^.*\.css$' -> 'css-module-flow'
+module.system=haste
+strip_root=true
+
+[lints]
