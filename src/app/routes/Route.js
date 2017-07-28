@@ -28,7 +28,6 @@ import {
 import configureStore, {
   client
 }                               from '../redux/store/configureStore';
-import DevTools                 from '../redux/devTools/DevTools.jsx';
 import { auth }                 from '../services/auth';
 
 const history       = hashHistory;
@@ -54,7 +53,6 @@ export const Routes = () => {
             <Route path="*" component={PageNotFound} />
           </Route>
         </Router>
-        { process.env.NODE_ENV !== 'production' ? <DevTools /> : null }
       </div>
     </ApolloProvider>
   );

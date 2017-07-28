@@ -7,13 +7,16 @@
     "flow": "flow",
     "test": "cross-env NODE_ENV=test nyc mocha test/.setup.js test/**/*.spec.js --recursive",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "dev": "cross-env NODE_ENV=dev webpack",
+    "dev": "cross-env NODE_ENV=dev webpack --config webpack.dev.config.js",
     "prod": "cross-env NODE_ENV=production webpack -p --config webpack.production.config.js ",
-    "start": "cross-env NODE_ENV=dev node server.hot.reload"
+    "start": "cross-env NODE_ENV=dev node server.hot.reload",
+    "serve-spa-dev": "npm run dev && cross-env NODE_ENV=dev nodemon ./src/server/SPA/index.js",
+    "serve-spa-prod": "npm run prod && cross-env NODE_ENV=production node ./src/server/SPA/index.js"
   },
   "engines": {
-    "node": "^6.5.0",
-    "npm": "*"
+    "node": "^6.11.1",
+    "npm": "^5.3.0",
+    "yarn": "^0.27.5"
   },
   "keywords": [
     "react",
@@ -79,6 +82,7 @@
     "redux-devtools-log-monitor": "^1.0.9",
     "redux-logger": "^2.6.1",
     "redux-mock-store": "^1.1.2",
+    "rimraf": "^2.6.1",
     "sass-loader": "^3.1.2",
     "sinon": "^1.17.4",
     "style-loader": "^0.13.0",
@@ -91,6 +95,7 @@
     "apollo-client": "^0.4.22",
     "babel-polyfill": "^6.7.4",
     "bootstrap": "^3.3.6",
+    "chalk": "^2.0.1",
     "classnames": "^2.2.3",
     "font-awesome": "^4.5.0",
     "graphql-tag": "^0.1.15",
@@ -110,6 +115,7 @@
     "react-router-redux": "^4.0.1",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.3.1",
+    "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.0.1",
     "whatwg-fetch": "^1.0.0"
   }
