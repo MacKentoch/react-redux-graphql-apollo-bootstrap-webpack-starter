@@ -1,19 +1,15 @@
 {
   "name": "react-redux-graphql-apollo-bootstrap-webpack-starter",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "react js + redux + graphQL + Apollo + react router + hot reload + devTools + bootstrap + webpack starter",
   "main": "src/index.js",
   "scripts": {
     "flow": "flow",
-    "dev": "NODE_ENV=dev webpack",
-    "test": "NODE_ENV=test nyc mocha test/.setup.js test/**/*.spec.js --recursive",
+    "test": "cross-env NODE_ENV=test nyc mocha test/.setup.js test/**/*.spec.js --recursive",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "prod": "NODE_ENV=production webpack -p --config webpack.production.config.js ",
-    "start": "NODE_ENV=dev node server.hot.reload",
-    "dev-win": "set NODE_ENV=dev && webpack",
-    "test-win": "set NODE_ENV=test && nyc mocha test/.setup.js test/**/*.spec.js --recursive",
-    "prod-win": "set NODE_ENV=production && webpack -p --config webpack.production.config.js ",
-    "start-win": "set NODE_ENV=dev && node server.hot.reload"
+    "dev": "cross-env NODE_ENV=dev webpack",
+    "prod": "cross-env NODE_ENV=production webpack -p --config webpack.production.config.js ",
+    "start": "cross-env NODE_ENV=dev node server.hot.reload"
   },
   "engines": {
     "node": "^6.5.0",
@@ -60,6 +56,7 @@
     "babel-register": "^6.7.2",
     "chai": "^3.5.0",
     "coveralls": "^2.11.11",
+    "cross-env": "^5.0.1",
     "css-loader": "^0.23.1",
     "dirty-chai": "^1.2.2",
     "enzyme": "^2.4.1",

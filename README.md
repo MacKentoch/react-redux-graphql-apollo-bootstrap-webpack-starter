@@ -1,7 +1,5 @@
-Full ES2015 React + React-Router + Redux + GraphQL + Apollo + Bootstrap with Hot Reload and redux-devtools STARTER
+Full ES6+ React + React-Router + Redux + GraphQL + Apollo + Bootstrap with Hot Reload and redux-devtools STARTER
 ==========
-
-#### full ES6-ES2015
 
 > My new `React + redux project starter`. This time I add `graphQL` and `Apollo Client` (*I better use Apollo Client than Relay*).
 This starter also embeds `JWT token based` `authentication` (check [Route](https://github.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/blob/master/src/app/routes/Route.js) to get an example of dealing with protected routes).
@@ -114,16 +112,11 @@ npm install
 
 ### run dev : hot reload mode (*+ redux-devtools*)
 
-*General case:*
 
 ```bash
 npm run start
 ```
 
-*Windows - particular - case:*
-```bash
-npm run start-win
-```
 
 ##### Note : redux-devtools shortcuts
 - `ctrl+h`: to toggle devtools panel
@@ -132,45 +125,28 @@ npm run start-win
 
 ### bundle dev mode (*+ redux-devtools*)
 
-*General case:*
 ```bash
 npm run dev
 ```
 
-*Windows - particular - case:*
-```bash
-npm run dev-win
-```
-
 ### tests
 
-*General case:*
 ```bash
 npm run test
 ```
 
-*Windows - particular - case:*
-```bash
-npm run test-win
-```
-
 ### bundle production mode
 
-*General case:*
 ```bash
 npm run prod
 ```
 
-*Windows - particular - case:*
-```bash
-npm run prod-win
-```
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2016 Erwan DATIN
+Copyright (c) 2017 Erwan DATIN
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
