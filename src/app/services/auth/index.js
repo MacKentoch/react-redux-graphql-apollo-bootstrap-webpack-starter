@@ -1,3 +1,5 @@
+// @flow weak
+
 const TOKEN_KEY = 'token';
 const USER_INFO = 'userInfo';
 
@@ -148,3 +150,5 @@ export const auth = {
     }
   }
 };
+
+export default auth;

@@ -1,34 +1,49 @@
+// @flow weak
+
 import React, {
-  Component,
-  PropTypes
+  PureComponent
 }                     from 'react';
+import PropTypes      from 'prop-types';
 import cx             from 'classnames';
-import shallowCompare from 'react-addons-shallow-compare';
-import { Link }       from 'react-router';
+import { Link }       from 'react-router-dom';
 import {
   ErrorAlert,
   WarningAlert
 }                     from '../../components';
 
-class Register extends Component {
+class Register extends PureComponent {
+  static propTypes= {
+    // react-router 4:
+    match:    PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history:  PropTypes.object.isRequired,
+
+    // views props:
+    currentView:    PropTypes.string.isRequired,
+    enterRegister:  PropTypes.func.isRequired,
+    leaveRegister:  PropTypes.func.isRequired,
+    // auth props:
+    userIsAuthenticated: PropTypes.bool.isRequired,
+    mutationLoading: PropTypes.bool.isRequired,
+    error: PropTypes.object,
+
+    // apollo actions
+    registerUser: PropTypes.func.isRequired,
+    resetError: PropTypes.func.isRequired
+  };
 
   state = {
-    animated: true,
     viewEntersAnim: true,
 
-    email: '',
-    password: '',
+    email:          '',
+    password:       '',
 
-    warning: null
+    warning:        null
   };
 
   componentDidMount() {
     const { enterRegister } = this.props;
     enterRegister();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
   }
 
   componentWillUnmount() {
@@ -38,7 +53,6 @@ class Register extends Component {
 
   render() {
     const {
-      animated,
       viewEntersAnim,
       email,
       password,
@@ -51,11 +65,7 @@ class Register extends Component {
     } = this.props;
 
     return(
-      <div className={
-        cx({
-          'animatedViews': animated,
-          'view-enter': viewEntersAnim
-        })}>
+      <div className={cx({ "view-enter": viewEntersAnim })}>
         <div className="row">
           <div className="col-md-4 col-md-offset-4">
             <form
@@ -153,9 +163,15 @@ class Register extends Component {
 
   handlesOnRegister = (event) => {
     event.preventDefault();
-    const { registerUser } = this.props;
-    const { email, password } = this.state;
-    const { router } = this.context;
+    const {
+      registerUser,
+      router
+    } = this.props;
+
+    const {
+      email,
+      password
+    } = this.state;
 
     const variables = {
       user: {
@@ -179,12 +195,8 @@ class Register extends Component {
     }
 
     registerUser({variables})
-      .then(
-        () => router.push({ pathname: '/protected' })
-      )
-      .catch(
-        (err) => console.log('register user went wrong..., ', err)
-      );
+      .then(() => router.push({ pathname: '/protected' }))
+      .catch((err) => console.log('register user went wrong..., ', err));
   }
 
   isValidEmail(email = '') {
@@ -214,24 +226,5 @@ class Register extends Component {
     this.setState({ warning: null });
   }
 }
-
-Register.propTypes= {
-  // views props:
-  currentView:    PropTypes.string.isRequired,
-  enterRegister:  PropTypes.func.isRequired,
-  leaveRegister:  PropTypes.func.isRequired,
-  // auth props:
-  userIsAuthenticated: PropTypes.bool.isRequired,
-  mutationLoading: PropTypes.bool.isRequired,
-  error: PropTypes.object,
-
-  // apollo actions
-  registerUser: PropTypes.func.isRequired,
-  resetError: PropTypes.func.isRequired
-};
-
-Register.contextTypes = {
-  router: React.PropTypes.object
-};
 
 export default Register;

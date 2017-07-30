@@ -1,6 +1,8 @@
-import React, {
-  PropTypes
-}                 from 'react';
+// @flow weak
+
+import React      from 'react';
+import PropTypes  from 'prop-types';
+
 import {
   Motion,
   spring,
@@ -8,15 +10,23 @@ import {
 }                 from 'react-motion';
 
 
-const ErrorAlert = ({ showAlert, errorTitle, errorMessage, onClose }) => (
-  <Motion style={{scale: spring(showAlert ? 1 : 0, presets.stiff)}}>
+const ErrorAlert = ({
+  showAlert,
+  errorTitle,
+  errorMessage,
+  onClose
+}) => (
+  <Motion
+    style={{
+      interpolatedScale: spring(showAlert ? 1 : 0, presets.stiff)
+    }}>
     {
-      ({ scale }) => (
+      ({ interpolatedScale }) => (
         <div
           className="alert alert-dismissible alert-danger"
           style={{
-            WebkitTransform: `scale(${scale})`,
-            transform: `scale(${scale})`
+            WebkitTransform:  `scale(${interpolatedScale})`,
+            transform:        `scale(${interpolatedScale})`
           }}>
           <button
             type="button"
@@ -43,10 +53,10 @@ const ErrorAlert = ({ showAlert, errorTitle, errorMessage, onClose }) => (
 
 
 ErrorAlert.propTypes = {
-  showAlert: PropTypes.bool,
-  errorTitle: PropTypes.string,
+  showAlert:    PropTypes.bool,
+  errorTitle:   PropTypes.string,
   errorMessage: PropTypes.string,
-  onClose: PropTypes.func.isRequired
+  onClose:      PropTypes.func.isRequired
 };
 
 ErrorAlert.defaultProps = {

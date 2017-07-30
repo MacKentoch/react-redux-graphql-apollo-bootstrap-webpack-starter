@@ -1,14 +1,25 @@
-import React, {
-  Component,
-  PropTypes
-}                     from 'react';
-import cx             from 'classnames';
-import shallowCompare from 'react-addons-shallow-compare';
+// @flow weak
 
-class Protected extends Component {
+import React, {
+  PureComponent
+}                     from 'react';
+import PropTypes      from 'prop-types';
+import cx             from 'classnames';
+
+class Protected extends PureComponent {
+  static propTypes= {
+    // react-router 4:
+    match:    PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history:  PropTypes.object.isRequired,
+
+    // views
+    currentView:    PropTypes.string.isRequired,
+    enterProtected: PropTypes.func.isRequired,
+    leaveProtected: PropTypes.func.isRequired
+  };
 
   state = {
-    animated: true,
     viewEntersAnim: true
   };
 
@@ -17,23 +28,15 @@ class Protected extends Component {
     enterProtected();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
-  }
-
   componentWillUnmount() {
     const { leaveProtected } = this.props;
     leaveProtected();
   }
 
   render() {
-    const { animated, viewEntersAnim } = this.state;
+    const { viewEntersAnim } = this.state;
     return(
-      <div
-        className={cx({
-          'animatedViews': animated,
-          'view-enter': viewEntersAnim
-        })}>
+      <div className={cx({ "view-enter": viewEntersAnim })}>
         <h1 className="text-danger">
           Here is a protected view!
         </h1>
@@ -44,11 +47,5 @@ class Protected extends Component {
     );
   }
 }
-
-Protected.propTypes= {
-  currentView:    PropTypes.string.isRequired,
-  enterProtected: PropTypes.func.isRequired,
-  leaveProtected: PropTypes.func.isRequired
-};
 
 export default Protected;

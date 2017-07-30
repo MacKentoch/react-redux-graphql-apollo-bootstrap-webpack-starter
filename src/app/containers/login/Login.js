@@ -1,3 +1,5 @@
+// @flow weak
+
 /* eslint no-unused-vars:0 */
 import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';

@@ -1,6 +1,9 @@
-import React, {PropTypes} from 'react';
-import cx from 'classnames';
-import UpIcon from './UpIcon';
+// @flow weak
+
+import React      from 'react';
+import PropTypes  from 'prop-types';
+import cx         from 'classnames';
+import UpIcon     from './UpIcon';
 
 const defaultBackGroundColor = '#4A4A4A';
 const sideOffset    = '-10px';
@@ -19,7 +22,12 @@ const defaultStyle = {
   backgroundColor: defaultBackGroundColor
 };
 
-const BackToTopButton = ({onClick, position, children, motionStyle}) => {
+const BackToTopButton = ({
+  onClick,
+  position,
+  children,
+  motionStyle
+}) => {
   const buttonStyle = setPosition(position, {...motionStyle, ...defaultStyle});
 
   return (
@@ -44,9 +52,9 @@ const BackToTopButton = ({onClick, position, children, motionStyle}) => {
 };
 
 BackToTopButton.propTypes = {
-  position: PropTypes.oneOf(['bottom-left', 'bottom-right']),
-  onClick: PropTypes.func.isRequired,
-  children: PropTypes.node,
+  position:    PropTypes.oneOf(['bottom-left', 'bottom-right']),
+  onClick:     PropTypes.func.isRequired,
+  children:    PropTypes.node,
   motionStyle: PropTypes.object
 };
 
@@ -60,12 +68,12 @@ function setPosition(position = 'bottom-right', refStyle = defaultStyle) {
   switch (position) {
   case 'bottom-right':
     style.right = sideOffset;
-    style.left = '';
+    style.left  = '';
     return style;
 
   case 'bottom-left':
     style.right = '';
-    style.left = sideOffset;
+    style.left  = sideOffset;
     return style;
 
   default:

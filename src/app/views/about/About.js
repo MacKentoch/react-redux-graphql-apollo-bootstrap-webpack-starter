@@ -1,14 +1,26 @@
-import React, {
-  Component,
-  PropTypes
-}                     from 'react';
-import cx             from 'classnames';
-import shallowCompare from 'react-addons-shallow-compare';
+// @flow weak
 
-class About extends Component {
+import React, {
+  PureComponent
+}                     from 'react';
+import PropTypes      from 'prop-types';
+import cx             from 'classnames';
+import { Link }       from "react-router-dom";
+
+class About extends PureComponent {
+  static propTypes= {
+    // react-router 4:
+    match:    PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history:  PropTypes.object.isRequired,
+
+    // views
+    currentView:  PropTypes.string.isRequired,
+    enterAbout:   PropTypes.func.isRequired,
+    leaveAbout:   PropTypes.func.isRequired
+  };
 
   state = {
-    animated: true,
     viewEntersAnim: true
   };
 
@@ -17,35 +29,20 @@ class About extends Component {
     enterAbout();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
-  }
-
   componentWillUnmount() {
     const { leaveAbout } = this.props;
     leaveAbout();
   }
 
   render() {
-    const { animated, viewEntersAnim } = this.state;
-    return(
-      <div
-        className={cx({
-          'animatedViews': animated,
-          'view-enter': viewEntersAnim
-        })}>
-        <h1>
-          About
-        </h1>
+    const { viewEntersAnim } = this.state;
+
+    return (
+      <div className={cx({ "view-enter": viewEntersAnim })}>
+        <h1>About</h1>
       </div>
     );
   }
 }
-
-About.propTypes= {
-  currentView:  PropTypes.string.isRequired,
-  enterAbout:   PropTypes.func.isRequired,
-  leaveAbout:   PropTypes.func.isRequired
-};
 
 export default About;

@@ -33,7 +33,6 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 - Webpack ([github :link:](https://github.com/webpack/webpack))
 - babel 6+ ([github :link:](https://github.com/babel/babel))
 - react-addons-shallow-compare (*pure render mixin equivalent for ES6*)
-- whatwg-fetch (*Why: because it is a fetch `Web API` polyfill*)
 
 **Tool chain:**
 - babel 6+
@@ -46,7 +45,6 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
   - json
   - images formats
   - svg and fonts formats
-- autoprefixer (css and sass)
 
 **tests:**
 - Mocha

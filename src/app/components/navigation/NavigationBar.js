@@ -1,4 +1,7 @@
-import React, {PropTypes} from 'react';
+// @flow weak
+
+import React              from 'react';
+import PropTypes          from 'prop-types';
 import Humburger          from './humburger/Humburger';
 import LeftNav            from './leftNav/LeftNav';
 import RightNav           from './rightNav/RightNav';
@@ -50,7 +53,7 @@ const NavigationBar = ({
 
 NavigationBar.propTypes = {
   brand:                    PropTypes.string,
-  userIsAuthenticated: PropTypes.bool.isRequired,
+  userIsAuthenticated:      PropTypes.bool.isRequired,
   handleLeftNavItemClick:   PropTypes.func,
   handleRightNavItemClick:  PropTypes.func,
   navModel:                 PropTypes.shape({

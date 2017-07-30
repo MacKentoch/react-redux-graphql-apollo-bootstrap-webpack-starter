@@ -1,16 +1,28 @@
-import React, {
-  Component,
-  PropTypes
-}                     from 'react';
-import {Jumbotron}    from '../../components';
-import cx             from 'classnames';
-import shallowCompare from 'react-addons-shallow-compare';
-import { Link }       from 'react-router';
+// @flow weak
 
-class Home extends Component {
+import React, {
+  PureComponent,
+}                     from 'react';
+import PropTypes      from 'prop-types';
+import Jumbotron      from '../../components/jumbotron/Jumbotron';
+import cx             from 'classnames';
+import { Link }       from 'react-router-dom';
+
+class Home extends PureComponent {
+  static propTypes= {
+    // react-router 4:
+    match:    PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history:  PropTypes.object.isRequired,
+
+    // view props:
+    currentView:  PropTypes.string.isRequired,
+    // view actions:
+    enterHome:    PropTypes.func.isRequired,
+    leaveHome:    PropTypes.func.isRequired
+  };
 
   state = {
-    animated: true,
     viewEntersAnim: true
   };
 
@@ -19,24 +31,20 @@ class Home extends Component {
     enterHome();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
-  }
-
   componentWillUnmount() {
     const { leaveHome } = this.props;
     leaveHome();
   }
 
   render() {
-    const { animated, viewEntersAnim } = this.state;
+    const {
+      viewEntersAnim
+    } = this.state;
+
     return(
       <div
         key="homeView"
-        className={cx({
-          'animatedViews': animated,
-          'view-enter': viewEntersAnim
-        })}>
+        className={ cx({ 'view-enter': viewEntersAnim }) }>
         <Jumbotron>
           <h1>
             Full ES2015 ReactJS + Redux + graphQL + Apollo + Bootstrap
@@ -50,7 +58,6 @@ class Home extends Component {
           <h1>
             Starter
           </h1>
-
           <p>
             <Link
               className="btn btn-success btn-lg"
@@ -65,13 +72,5 @@ class Home extends Component {
     );
   }
 }
-
-Home.propTypes= {
-  // view props:
-  currentView:  PropTypes.string.isRequired,
-  // view actions:
-  enterHome:    PropTypes.func.isRequired,
-  leaveHome:    PropTypes.func.isRequired
-};
 
 export default Home;

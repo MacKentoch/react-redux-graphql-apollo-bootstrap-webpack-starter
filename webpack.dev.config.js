@@ -1,45 +1,120 @@
-const webpack      = require('webpack');
-const path         = require('path');
-const autoprefixer = require('autoprefixer');
-const precss       = require('precss');
+// @flow weak
 
-const assetsDir       = path.resolve(__dirname, 'public/assets');
+const webpack           = require('webpack');
+const path              = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const assetsDir       = path.resolve(__dirname, 'docs/assets');
 const nodeModulesDir  = path.resolve(__dirname, 'node_modules');
+const indexFile       = path.resolve(__dirname, 'src/app/index.js');
+
+const SPLIT_STYLE = true;
 
 const config = {
-  entry: [
-    path.resolve(__dirname, 'src/app/index.js')
-  ],
+  devtool: '#source-map',
+  entry: {
+    app: [
+      'babel-polyfill',
+      indexFile
+    ],
+    vendor: [
+      'animate.css',
+      'apollo-client',
+      'babel-polyfill',
+      'bootstrap',
+      'classnames',
+      'graphql-tag',
+      'jquery',
+      'js-base64',
+      'moment',
+      'react',
+      'react-apollo',
+      'react-bootstrap',
+      'react-dom',
+      'react-motion',
+      'react-notification',
+      'react-redux',
+      'react-router-dom',
+      'history',
+      'react-router',
+      'react-router-redux',
+      'react-tap-event-plugin',
+      'redux',
+      // 'redux-devtools-extension',
+      'redux-thunk'
+    ]
+  },
   output: {
-    path: assetsDir,
-    filename: 'bundle.js'
+    path:     assetsDir,
+    filename: 'app.bundle.js'
   },
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      loader: 'babel',
-      exclude: [nodeModulesDir]
-    }, {
-      test: /\.scss$/,
-      loader: 'style!css!postcss!sass'
-    }, {
-      test: /\.css$/,
-      loader: 'style!css!postcss'
-    }, {
-      test: /\.json$/,
-      loader: 'json'
-    }, {
-      test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
-      loader: 'url?limit=100000@name=[name][ext]'
-    }]
-  },
-  postcss: function () {
-    return [precss, autoprefixer({ browsers: ['last 2 versions'] })];
+    rules: [
+      {
+        test:     /\.jsx?$/,
+        exclude:  [nodeModulesDir],
+        loader:   'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        use:  SPLIT_STYLE 
+          ? ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              {loader: 'css-loader', options: { importLoaders: 1 }},
+              'postcss-loader'
+            ]
+          })
+          : [
+            'style-loader',
+            {loader: 'css-loader', options: { importLoaders: 1 }},
+            'postcss-loader'
+          ]
+      },
+      {
+        test: /\.scss$/,
+        use:  SPLIT_STYLE 
+        ? ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {loader: 'css-loader', options: { importLoaders: 1 }},
+            'postcss-loader',
+            'sass-loader'
+          ]
+        })
+        : [
+          'style-loader',
+          {loader: 'css-loader', options: { importLoaders: 1 }},
+          'postcss-loader',
+          'sass-loader'
+        ]
+      },
+      {
+        test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
+        use: [
+          {
+            loader:  'url-loader',
+            options: {
+              limit: 100000,
+              name: '[name].[ext]'
+            }
+          }
+        ]
+      }
+    ]
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     getImplicitGlobals(),
-    setNodeEnv()
+    setNodeEnv(),
+    new ExtractTextPlugin({
+      filename: 'app.styles.css'
+      // disable: false,
+      // allChunks: true
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name:     'vendor',
+      filename: 'app.vendor.bundle.js' 
+    })
   ]
 };
 

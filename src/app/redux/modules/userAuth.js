@@ -1,3 +1,5 @@
+// @flow weak
+
 import moment from 'moment';
 import { auth } from '../../services/auth';
 const dateFormat = 'DD/MM/YYYY HH:mm';

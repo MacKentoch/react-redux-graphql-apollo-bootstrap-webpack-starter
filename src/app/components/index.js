@@ -1,15 +1,8 @@
-import Jumbotron          from './jumbotron/Jumbotron';
-import NavigationBar      from './navigation/NavigationBar';
-import BackToTop          from './backToTop/BackToTop';
-import ErrorAlert         from './alert/ErrorAlert';
-import WarningAlert       from './alert/WarningAlert';
-import Alert              from './alert/Alert';
+// @flow weak
 
-export {
-  Jumbotron,
-  NavigationBar,
-  BackToTop,
-  ErrorAlert,
-  WarningAlert,
-  Alert
-};
+export { default as Jumbotron  }        from './jumbotron/Jumbotron';
+export { default as NavigationBar }     from './navigation/NavigationBar';
+export { default as BackToTop }         from './backToTop/BackToTop';
+export { default as ErrorAlert }        from './alert/ErrorAlert';
+export { default as WarningAlert }      from './alert/WarningAlert';
+export { default as Alert }             from './alert/Alert';

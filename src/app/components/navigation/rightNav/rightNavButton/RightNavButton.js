@@ -1,18 +1,25 @@
+// @flow weak
+
 import React, {
-  Component,
-  PropTypes
+  PureComponent
 }                     from 'react';
-import { Link }       from 'react-router';
-import shallowCompare from 'react-addons-shallow-compare';
+import PropTypes      from 'prop-types';
+import { Link }       from 'react-router-dom';
 
-class RightNavButton extends Component {
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
-  }
+class RightNavButton extends PureComponent {
+  static propTypes = {
+    link:     PropTypes.string,
+    label:    PropTypes.string,
+    viewName: PropTypes.string,
+    onClick:  PropTypes.func
+  };
 
   render() {
-    const { link, label } = this.props;
+    const {
+      link,
+      label
+    } = this.props;
+
     return (
       <li>
         <Link
@@ -29,12 +36,5 @@ class RightNavButton extends Component {
     onClick(event, viewName);
   }
 }
-
-RightNavButton.propTypes = {
-  link: PropTypes.string,
-  label: PropTypes.string,
-  viewName: PropTypes.string,
-  onClick: PropTypes.func
-};
 
 export default RightNavButton;

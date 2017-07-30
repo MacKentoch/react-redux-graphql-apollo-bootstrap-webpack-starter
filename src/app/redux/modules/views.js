@@ -1,3 +1,5 @@
+// @flow weak
+
 import moment from 'moment';
 const dateFormat = 'DD/MM/YYYY HH:mm';
 

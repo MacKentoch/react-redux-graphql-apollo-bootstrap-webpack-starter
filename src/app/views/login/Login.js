@@ -1,39 +1,53 @@
+// @flow weak
+
 import React, {
-  Component,
-  PropTypes
+  PureComponent
 }                     from 'react';
+import PropTypes      from 'prop-types';
 import cx             from 'classnames';
-import shallowCompare from 'react-addons-shallow-compare';
-import { Link }       from 'react-router';
+import { Link }       from 'react-router-dom';
 import { ErrorAlert } from '../../components';
 
-class Login extends Component {
+class Login extends PureComponent {
+  static propTypes= {
+    // react-router 4:
+    match:    PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history:  PropTypes.object.isRequired,
+
+    // views props:
+    currentView: PropTypes.string.isRequired,
+    enterLogin:  PropTypes.func.isRequired,
+    leaveLogin:  PropTypes.func.isRequired,
+
+    // apollo props:
+    user: PropTypes.shape({
+      username: PropTypes.string
+    }),
+
+    // auth props:
+    userIsAuthenticated: PropTypes.bool.isRequired,
+    mutationLoading:     PropTypes.bool.isRequired,
+    error:               PropTypes.object,
+
+    // apollo actions
+    loginUser: PropTypes.func.isRequired,
+
+    // redux actions
+    onUserLoggedIn: PropTypes.func.isRequired,
+    resetError:     PropTypes.func.isRequired
+  };
 
   state = {
-    animated: true,
     viewEntersAnim: true,
 
-    email: '',
-    password: ''
+    email:          '',
+    password:       ''
   };
 
   componentDidMount() {
     const { enterLogin } = this.props;
     enterLogin();
-  }
-
-  // componentWillReceiveProps(newProps) {
-  //   const { user: { username } } = newProps;
-  //
-  //   if (username &&
-  //       username.length > 0 &&
-  //       this.props.user.username !== username) {
-  //     this.setState({email: username});
-  //   }
-  // }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
   }
 
   componentWillUnmount() {
@@ -43,7 +57,6 @@ class Login extends Component {
 
   render() {
     const {
-      animated,
       viewEntersAnim,
       email,
       password
@@ -53,12 +66,8 @@ class Login extends Component {
       error
     } = this.props;
 
-    return(
-      <div className={
-        cx({
-          'animatedViews': animated,
-          'view-enter': viewEntersAnim
-        })}>
+    return (
+      <div className={cx({ "view-enter": viewEntersAnim })}>
         <div className="row">
           <div className="col-md-4 col-md-offset-4">
             <form
@@ -129,7 +138,6 @@ class Login extends Component {
             />
           </div>
         </div>
-
       </div>
     );
   }
@@ -148,9 +156,15 @@ class Login extends Component {
 
   handlesOnLogin = (event) => {
     event.preventDefault();
-    const { loginUser } = this.props;
-    const { email, password } = this.state;
-    const { router } = this.context;
+    const {
+      loginUser,
+      router
+    } = this.props;
+
+    const {
+      email,
+      password
+    } = this.state;
 
     const variables = {
       user: {
@@ -160,12 +174,8 @@ class Login extends Component {
     };
 
     loginUser({variables})
-      .then(
-        () => router.push({ pathname: '/protected' })
-      )
-      .catch(
-        () => console.log('login went wrong...')
-      );
+      .then(() => router.push({ pathname: '/protected' }))
+      .catch(() => console.log('login went wrong...'));
   }
 
   closeError = (event) => {
@@ -174,32 +184,5 @@ class Login extends Component {
     resetError();
   }
 }
-
-Login.propTypes= {
-  // views props:
-  currentView:  PropTypes.string.isRequired,
-  enterLogin:    PropTypes.func.isRequired,
-  leaveLogin:    PropTypes.func.isRequired,
-  // apollo props:
-  user: PropTypes.shape({
-    username: PropTypes.string
-  }),
-
-  // auth props:
-  userIsAuthenticated: PropTypes.bool.isRequired,
-  mutationLoading: PropTypes.bool.isRequired,
-  error: PropTypes.object,
-
-  // apollo actions
-  loginUser: PropTypes.func.isRequired,
-
-  // redux actions
-  onUserLoggedIn: PropTypes.func.isRequired,
-  resetError: PropTypes.func.isRequired
-};
-
-Login.contextTypes = {
-  router: PropTypes.object
-};
 
 export default Login;

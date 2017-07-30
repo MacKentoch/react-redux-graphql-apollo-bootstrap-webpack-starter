@@ -1,6 +1,7 @@
-import React, {
-  PropTypes
-}                 from 'react';
+// @flow weak
+
+import React      from 'react';
+import PropTypes  from 'prop-types';
 import {
   Motion,
   spring,
@@ -8,16 +9,25 @@ import {
 }                 from 'react-motion';
 
 
-const WarningAlert = ({ showAlert, warningTitle, warningMessage, onClose }) => (
-  <Motion style={{scale: spring(showAlert ? 1 : 0, presets.stiff)}}>
-    {
-      ({ scale }) => (
+const WarningAlert = ({
+  showAlert,
+  warningTitle,
+  warningMessage,
+  onClose
+}) => (
+  // <Motion
+  //   style={{
+  //     interpolatedScale: spring(showAlert ? 1 : 0, presets.stiff)
+  //   }}>
+  //   {
+  //     ({ interpolatedScale }) => (
         <div
           className="alert alert-dismissible alert-warning"
-          style={{
-            WebkitTransform: `scale(${scale})`,
-            transform: `scale(${scale})`
-          }}>
+         // style={{
+         //   WebkitTransform:  `scale(${interpolatedScale})`,
+         //   transform:        `scale(${interpolatedScale})`
+         // }}
+        >
           <button
             type="button"
             className="close"
@@ -36,17 +46,17 @@ const WarningAlert = ({ showAlert, warningTitle, warningMessage, onClose }) => (
             </p>
           }
         </div>
-      )
-    }
-  </Motion>
+  //     )
+  //   }
+  // </Motion>
 );
 
 
 WarningAlert.propTypes = {
-  showAlert: PropTypes.bool,
-  warningTitle: PropTypes.string,
+  showAlert:      PropTypes.bool,
+  warningTitle:   PropTypes.string,
   warningMessage: PropTypes.string,
-  onClose: PropTypes.func.isRequired
+  onClose:        PropTypes.func.isRequired
 };
 
 WarningAlert.defaultProps = {

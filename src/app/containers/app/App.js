@@ -1,7 +1,9 @@
+// @flow weak
+
 import React, {
-  Component,
-  PropTypes
+  Component
 }                             from 'react';
+import PropTypes              from 'prop-types';
 import {
   NavigationBar,
   BackToTop
@@ -11,8 +13,21 @@ import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 import * as viewsActions      from '../../redux/modules/views';
 import * as userAuthActions   from '../../redux/modules/userAuth';
+import MainRoutes             from '../../routes/MainRoutes';
+import {
+  withRouter
+}                             from 'react-router-dom';
 
 class App extends Component {
+  static propTypes = {
+    // react-router 4:
+    match:    PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history:  PropTypes.object.isRequired,
+
+    // userAuth
+    userIsAuthenticated: PropTypes.bool.isRequired
+  }
 
   state = {
     navModel : navigationModel
@@ -45,7 +60,7 @@ class App extends Component {
       <h1>
       </h1>
         <div className="container-fluid">
-          {children}
+          <MainRoutes />
         </div>
         <BackToTop
           minScrollY={40}
@@ -78,14 +93,6 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  children:   PropTypes.node,
-  history:    PropTypes.object,
-  location:   PropTypes.object,
-  actions:    PropTypes.object,
-
-  userIsAuthenticated: PropTypes.bool.isRequired
-};
 
 const mapStateToProps = (state) => {
   return {
@@ -105,7 +112,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);

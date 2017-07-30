@@ -1,18 +1,22 @@
+// @flow weak
+
 import React, {
-  Component
+  PureComponent
 }                     from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
-import {Jumbotron}    from '../../components';
+import PropTypes      from 'prop-types';
+import Jumbotron      from '../../components/jumbotron/Jumbotron';
 
-class PageNotFound extends Component {
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
+class PageNotFound extends PureComponent {
+  static propTypes = {
+    // react-router 4:
+    match:    PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history:  PropTypes.object.isRequired
   }
 
   render() {
     return(
-      <div>
+      <div className={cx({ "view-enter": true })}>
         <Jumbotron>
           <h1>
             Sorry this page does not exists...

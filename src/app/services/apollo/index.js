@@ -1,3 +1,5 @@
+// @flow weak
+
 import ApolloClient, {
   createNetworkInterface,
   addTypename
@@ -5,7 +7,9 @@ import ApolloClient, {
 import { appConfig }    from '../../config';
 
 // networkInterface:
-const networkInterface = createNetworkInterface(appConfig.apollo.networkInterface);
+const networkInterface = createNetworkInterface({
+  uri: appConfig.apollo.networkInterface
+});
 
 // when need token based authentication:
 networkInterface.use([{

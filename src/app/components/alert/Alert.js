@@ -1,6 +1,7 @@
-import React, {
-  PropTypes
-}                 from 'react';
+// @flow weak
+
+import React      from 'react';
+import PropTypes  from 'prop-types';
 import {
   Motion,
   spring,
@@ -8,22 +9,31 @@ import {
 }                 from 'react-motion';
 import cx         from 'classnames';
 
-const Alert = ({ type, showAlert, errorTitle, errorMessage, onClose }) => (
-  <Motion style={{scale: spring(showAlert ? 1 : 0, presets.stiff)}}>
+const Alert = ({
+  type,
+  showAlert,
+  errorTitle,
+  errorMessage,
+  onClose
+}) => (
+  <Motion
+    style={{
+      interpolatedScale: spring(showAlert ? 1 : 0, presets.stiff)
+    }}>
     {
-      ({ scale }) => (
+      ({ interpolatedScale }) => (
         <div
           className={
             cx({
-              'alert': true,
-              'alert-dismissible': true,
-              'alert-danger': type === 'error',
-              'alert-warning': type === 'warning'
+              'alert':              true,
+              'alert-dismissible':  true,
+              'alert-danger':       type === 'error',
+              'alert-warning':      type === 'warning'
             })
           }
           style={{
-            WebkitTransform: `scale(${scale})`,
-            transform: `scale(${scale})`
+            WebkitTransform:  `scale(${interpolatedScale})`,
+            transform:        `scale(${interpolatedScale})`
           }}>
           <button
             type="button"
@@ -50,16 +60,16 @@ const Alert = ({ type, showAlert, errorTitle, errorMessage, onClose }) => (
 
 
 Alert.propTypes = {
-  showAlert: PropTypes.bool,
-  errorTitle: PropTypes.string,
+  showAlert:    PropTypes.bool,
+  errorTitle:   PropTypes.string,
   errorMessage: PropTypes.string,
-  onClose: PropTypes.func.isRequired,
-  type: PropTypes.oneOf(['warning', 'error'])
+  onClose:      PropTypes.func.isRequired,
+  type:         PropTypes.oneOf(['warning', 'error'])
 };
 
 Alert.defaultProps = {
   showAlert: false,
-  type: 'wanring'
+  type:      'warning'
 };
 
 export default Alert;
