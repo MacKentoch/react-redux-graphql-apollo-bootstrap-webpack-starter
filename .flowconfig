@@ -8,5 +8,4 @@
 [options]
 module.name_mapper='^.*\.css$' -> 'css-module-flow'
 module.system=haste
-
-[lints]
+strip_root=true

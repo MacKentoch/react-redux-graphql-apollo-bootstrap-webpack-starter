@@ -18,7 +18,7 @@ const config = {
       indexFile
     ],
     vendor: [
-      'animate.css',
+      // 'animate.css',
       'apollo-client',
       'babel-polyfill',
       'bootstrap',

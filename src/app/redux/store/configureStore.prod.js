@@ -5,22 +5,16 @@ import {
   applyMiddleware,
   compose
 }                         from 'redux';
-import createLogger       from 'redux-logger';
 import thunkMiddleware    from 'redux-thunk';
 import reducer            from '../modules/reducers';
 import { apolloClient }   from '../../services/apollo';
 
-const loggerMiddleware = createLogger({
-  level     : 'info',
-  collapsed : true
-});
 
 // createStore : enhancer
 const enhancer = compose(
   applyMiddleware(
     thunkMiddleware,
-    apolloClient.middleware(),  // apollo middleware
-    loggerMiddleware            // logger after thunk to avoid undefined actions
+    apolloClient.middleware()  // apollo middleware
   )
 );
 
