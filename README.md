@@ -17,22 +17,22 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 ## Detailed Content
 
 **Front:**
-- React JS (15.x - [github :link:](https://github.com/facebook/react))
+- React JS (15.6.x - [github :link:](https://github.com/facebook/react))
 - Redux (*as you application grows managing state will be a serious concern, save pain with Redux*)
-- apollo-client (*futur of API. Learn about this beast [here in officiel website](http://dev.apollodata.com/)*)
-- React-Redux (*Redux is not specific to ReactJS, you could easily use it with Angular2 for instance*)
-- Redux-devtools (*want to time travel your application State?*)
+- apollo-client 1.9.x (*futur of API. Learn about this beast [here in officiel website](http://dev.apollodata.com/)*)
+- React-Redux 3.7.x (*Redux is not specific to ReactJS, you could easily use it with Angular2 for instance*)
 - React-Router-Redux (*previously named react-simple-router*)
-- react-router (2.x- [github :link:](https://github.com/reactjs/react-router))
+- react-router (4.x- [github :link:](https://github.com/reactjs/react-router))
 - Bootstrap (3.x - [github :link:](https://github.com/twbs/bootstrap))
 - React-Bootstrap ([github :link:](https://github.com/react-bootstrap/react-bootstrap))
 - font-awesome ([github :link:](https://github.com/FortAwesome/Font-Awesome))
 - animate.css ([github :link:](https://github.com/daneden/animate.css))
 - classnames ([github :link:](https://github.com/JedWatson/classnames))
 - react-motion ([github :link:](https://github.com/chenglou/react-motion))
-- Webpack ([github :link:](https://github.com/webpack/webpack))
+- Webpack 3.x ([github :link:](https://github.com/webpack/webpack))
+- postcss
 - babel 6+ ([github :link:](https://github.com/babel/babel))
-- react-addons-shallow-compare (*pure render mixin equivalent for ES6*)
+- redux-devtool-extension ([github :link:](https://github.com/zalmoxisus/redux-devtools-extension#redux-devtools-extension))
 
 **Tool chain:**
 - babel 6+
@@ -58,10 +58,12 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 
 ### Prerequisite
 
-#### Node JS version required is `>=6.5.0+`.
-*Node JS 4.x will enter maintenance phase in April 2017 so you better upgrade now or soon to new LTS which is v6.x.*
+#### Node JS version required is `>=6.x`.
+*Build with node js v8.x but should be ok with node js 6.x.*
 
 > Better use [nvm](https://github.com/creationix/nvm) to manage your Node JS versions.
+
+### server
 
 An Easy and fast way to get your graphql backend is to **register for free at [Scaphold](https://scaphold.io)**.
 
@@ -137,6 +139,16 @@ npm run test
 
 ```bash
 npm run prod
+```
+
+### run dev bundle
+```bash
+npm run start-spa-dev
+```
+
+### run prod bundle
+```bash
+npm run start-spa-prod
 ```
 
 

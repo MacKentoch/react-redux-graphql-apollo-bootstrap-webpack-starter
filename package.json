@@ -1,7 +1,7 @@
 {
   "name": "react-redux-graphql-apollo-bootstrap-webpack-starter",
   "version": "1.0.0",
-  "description": "react js + redux + graphQL + Apollo + react router + hot reload + devTools + bootstrap + webpack starter",
+  "description": "react js + redux + graphQL + Apollo + react router4 + hot reload + devTools + bootstrap + webpack 3 starter",
   "main": "src/index.js",
   "scripts": {
     "flow": "flow",
@@ -15,7 +15,7 @@
     "serve-spa-prod": "npm run prod && cross-env NODE_ENV=production node ./src/server/SPA/index.js"
   },
   "engines": {
-    "node": "^6.11.1",
+    "node": ">=6.11.1",
     "npm": "^5.3.0",
     "yarn": "^0.27.5"
   },
