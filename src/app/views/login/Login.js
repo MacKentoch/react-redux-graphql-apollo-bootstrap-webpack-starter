@@ -154,11 +154,11 @@ class Login extends PureComponent {
     this.setState({ password: event.target.value });
   }
 
-  handlesOnLogin = (event) => {
+  handlesOnLogin = async (event) => {
     event.preventDefault();
     const {
       loginUser,
-      router
+      history
     } = this.props;
 
     const {
@@ -173,9 +173,12 @@ class Login extends PureComponent {
       }
     };
 
-    loginUser({variables})
-      .then(() => router.push({ pathname: '/protected' }))
-      .catch(() => console.log('login went wrong...'));
+    try {
+      await loginUser({variables});
+      history.push({ pathname: '/protected' });
+    } catch (error) {
+      console.log('login went wrong..., error: ', error);
+    }
   }
 
   closeError = (event) => {

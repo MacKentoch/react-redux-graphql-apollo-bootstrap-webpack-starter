@@ -1,7 +1,8 @@
 // @flow weak
 
-import moment from 'moment';
-import { auth } from '../../services/auth';
+import moment     from 'moment';
+import { auth }   from '../../services/auth';
+
 const dateFormat = 'DD/MM/YYYY HH:mm';
 
 /* -----------------------------------------
@@ -9,27 +10,27 @@ const dateFormat = 'DD/MM/YYYY HH:mm';
  ------------------------------------------*/
 const CHECK_IS_USER_IS_AUTHENTICATED = 'CHECK_IS_USER_IS_AUTHENTICATED';
 
-const RECEIVED_USER_LOGGED_IN  = 'RECEIVED_USER_LOGGED_IN';
-const ERROR_USER_LOGGED_IN = 'ERROR_USER_LOGGED_IN';
+const RECEIVED_USER_LOGGED_IN        = 'RECEIVED_USER_LOGGED_IN';
+const ERROR_USER_LOGGED_IN           = 'ERROR_USER_LOGGED_IN';
 
-const SET_LOADING_LOGGED_IN = 'SET_LOADING_LOGGED_IN';
-const UNSET_LOADING_LOGGED_IN = 'UNSET_LOADING_LOGGED_IN';
+const SET_LOADING_LOGGED_IN          = 'SET_LOADING_LOGGED_IN';
+const UNSET_LOADING_LOGGED_IN        = 'UNSET_LOADING_LOGGED_IN';
 
-const RECEIVED_USER_REGISTER  = 'RECEIVED_USER_REGISTER';
-const ERROR_USER_REGISTER = 'ERROR_USER_REGISTER';
+const RECEIVED_USER_REGISTER         = 'RECEIVED_USER_REGISTER';
+const ERROR_USER_REGISTER            = 'ERROR_USER_REGISTER';
 
-const SET_LOADING_REGISTER = 'SET_LOADING_REGISTER';
-const UNSET_LOADING_REGISTER = 'UNSET_LOADING_REGISTER';
+const SET_LOADING_REGISTER           = 'SET_LOADING_REGISTER';
+const UNSET_LOADING_REGISTER         = 'UNSET_LOADING_REGISTER';
 
-const SET_USER_LOGOUT = 'SET_USER_LOGOUT';
+const SET_USER_LOGOUT                = 'SET_USER_LOGOUT';
 
-const RESET_LOG_ERRORS = 'RESET_LOG_ERRORS';
+const RESET_LOG_ERRORS               = 'RESET_LOG_ERRORS';
 
 /* -----------------------------------------
   Reducer
  ------------------------------------------*/
 const emptyUser = {
-  id:         null,
+  id:         '',
   username:   '',
   lastLogin:  '',
   createdAt:  '',
@@ -51,30 +52,30 @@ export default function (state = initialState, action) {
   case RECEIVED_USER_REGISTER:
     return {
       ...state,
-      lastActionTime: action.time,
+      lastActionTime:  action.time,
       isAuthenticated: action.isAuthenticated,
-      id: action.user.id,
-      username: action.user.username,
-      lastLogin: action.user.lastLogin,
-      createdAt: action.user.createdAt,
-      modifiedAt: action.user.modifiedAt,
+      id:              action.user.id,
+      username:        action.user.username,
+      lastLogin:       action.user.lastLogin,
+      createdAt:       action.user.createdAt,
+      modifiedAt:      action.user.modifiedAt,
       lastRefreshTime: action.time,
-      error: null
+      error:           null
     };
 
   case ERROR_USER_LOGGED_IN:
   case ERROR_USER_REGISTER:
     return {
       ...state,
-      lastActionTime: action.time,
-      isAuthenticated: action.isAuthenticated,
+      lastActionTime:   action.time,
+      isAuthenticated:  action.isAuthenticated,
       // errors:
       error: {...action.error},
       // user infos:
-      id: initialState.id,
-      username: initialState.username,
-      lastLogin: initialState.lastLogin,
-      createdAt: initialState.createdAt,
+      id:         initialState.id,
+      username:   initialState.username,
+      lastLogin:  initialState.lastLogin,
+      createdAt:  initialState.createdAt,
       modifiedAt: initialState.modifiedAt
     };
 
@@ -84,33 +85,33 @@ export default function (state = initialState, action) {
   case UNSET_LOADING_REGISTER:
     return {
       ...state,
-      lastActionTime: action.time,
+      lastActionTime:  action.time,
       mutationLoading: action.loading
     };
 
   case CHECK_IS_USER_IS_AUTHENTICATED:
     return {
       ...state,
-      lastActionTime: action.time,
-      isAuthenticated: action.isAuthenticated,
+      lastActionTime:   action.time,
+      isAuthenticated:  action.isAuthenticated,
       // user infos from storage if authenticated:
-      id: action.user.id,
-      username: action.user.username,
-      lastLogin: action.user.lastLogin,
-      createdAt: action.user.createdAt,
-      modifiedAt: action.user.modifiedAt
+      id:               action.user.id,
+      username:         action.user.username,
+      lastLogin:        action.user.lastLogin,
+      createdAt:        action.user.createdAt,
+      modifiedAt:       action.user.modifiedAt
     };
 
   case SET_USER_LOGOUT:
     return {
       ...state,
-      lastActionTime: action.time,
+      lastActionTime:  action.time,
       isAuthenticated: action.isAuthenticated,
-      id: action.user.id,
-      username: action.user.username,
-      lastLogin: action.user.lastLogin,
-      createdAt: action.user.createdAt,
-      modifiedAt: action.user.modifiedAt
+      id:              action.user.id,
+      username:        action.user.username,
+      lastLogin:       action.user.lastLogin,
+      createdAt:       action.user.createdAt,
+      modifiedAt:      action.user.modifiedAt
     };
 
   case RESET_LOG_ERRORS:

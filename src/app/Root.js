@@ -30,7 +30,8 @@ const client = apolloClient;
 
 class Root extends Component {
   render() {
-    return <ApolloProvider store={store} client={client}>
+    return (
+      <ApolloProvider store={store} client={client}>
         <div>
           <Router history={syncedHistory}>
             <ScrollToTop>
@@ -38,7 +39,8 @@ class Root extends Component {
             </ScrollToTop>
           </Router>
         </div>
-      </ApolloProvider>;
+      </ApolloProvider>
+    );
   }
 }
 

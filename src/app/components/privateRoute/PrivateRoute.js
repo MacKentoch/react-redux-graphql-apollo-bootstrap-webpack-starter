@@ -1,7 +1,7 @@
 // @flow weak
 
 import React, {
-  PureComponent
+  Component
 }                         from 'react';
 import PropTypes          from 'prop-types';
 import {
@@ -11,7 +11,7 @@ import {
 }                         from "react-router-dom";
 import auth               from '../../services/auth';
 
-class PrivateRoute extends PureComponent {
+class PrivateRoute extends Component {
   static propTypes = {
     // react-router 4:
     match:    PropTypes.object.isRequired,
@@ -23,17 +23,25 @@ class PrivateRoute extends PureComponent {
   };
 
   render() {
-    const { component, ...rest } = this.props;
+    const {
+      component: Component,
+      ...rest
+    } = this.props;
     const { location } = this.props;
 
     const isUserAuthenticated = this.isAuthenticated();
 
     return (
-      <Route {...rest}>
-        {isUserAuthenticated
-          ? <component {...this.props} />
-          : <Redirect to={{ pathname: "/login", state: { from: location } }} />}
-      </Route>
+      <Route
+        {...rest}
+        render={
+          props => (
+            isUserAuthenticated
+              ? <Component {...props} />
+              : <Redirect to={{ pathname: "/login", state: { from: location } }} />
+          )
+        }
+      />
     );
   }
 

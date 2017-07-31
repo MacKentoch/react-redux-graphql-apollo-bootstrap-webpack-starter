@@ -3,13 +3,15 @@
 
 import {
   ApolloClient,
-  createNetworkInterface
+  createNetworkInterface,
+  addTypename
 }                         from 'react-apollo';
 import { appConfig }      from '../../config';
 
 const networkInterface = createNetworkInterface({
-  uri: appConfig.apollo.networkInterface,
-  transportBatching: true
+  uri: appConfig.apollo.networkInterface
+  // connectToDevTools: true
+  // transportBatching: true
 });
 
 networkInterface.use([{
@@ -19,14 +21,15 @@ networkInterface.use([{
     }
     // get the authentication token from local storage if it exists
     const token = localStorage.getItem('token');
-    req.options.headers.authorization = token ? `Bearer ${token}` : null;
+    if (token) {
+      req.options.headers.authorization = token ? `Bearer ${token}` : null;
+    }
     next();
   }
 }]);
 
 export const apolloClient = new ApolloClient({
-  networkInterface,
-  queryTransformer: addTypename
+  networkInterface
 });
 
 export default apolloClient;

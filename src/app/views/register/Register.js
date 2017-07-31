@@ -161,11 +161,11 @@ class Register extends PureComponent {
     this.setState({ password: event.target.value });
   }
 
-  handlesOnRegister = (event) => {
+  handlesOnRegister = async (event) => {
     event.preventDefault();
     const {
       registerUser,
-      router
+      history
     } = this.props;
 
     const {
@@ -194,9 +194,12 @@ class Register extends PureComponent {
       return;
     }
 
-    registerUser({variables})
-      .then(() => router.push({ pathname: '/protected' }))
-      .catch((err) => console.log('register user went wrong..., ', err));
+    try {
+      await registerUser({variables});
+      history.push({ pathname: '/protected' });
+    } catch (error) {
+      console.log('register user went wrong..., error: ', error)
+    }
   }
 
   isValidEmail(email = '') {

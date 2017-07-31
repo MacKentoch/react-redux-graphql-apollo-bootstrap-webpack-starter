@@ -7,12 +7,12 @@ const dateFormat = 'DD/MM/YYYY HH:mm';
   constants
  ------------------------------------------*/
 // non protected views:
-const ENTER_HOME_VIEW  = 'ENTER_HOME_VIEW';
-const LEAVE_HOME_VIEW  = 'LEAVE_HOME_VIEW';
-const ENTER_ABOUT_VIEW = 'ENTER_ABOUT_VIEW';
-const LEAVE_ABOUT_VIEW = 'LEAVE_ABOUT_VIEW';
-const ENTER_LOGIN_VIEW = 'ENTER_LOGIN_VIEW';
-const LEAVE_LOGIN_VIEW = 'LEAVE_LOGIN_VIEW';
+const ENTER_HOME_VIEW     = 'ENTER_HOME_VIEW';
+const LEAVE_HOME_VIEW     = 'LEAVE_HOME_VIEW';
+const ENTER_ABOUT_VIEW    = 'ENTER_ABOUT_VIEW';
+const LEAVE_ABOUT_VIEW    = 'LEAVE_ABOUT_VIEW';
+const ENTER_LOGIN_VIEW    = 'ENTER_LOGIN_VIEW';
+const LEAVE_LOGIN_VIEW    = 'LEAVE_LOGIN_VIEW';
 const ENTER_REGISTER_VIEW = 'ENTER_REGISTER_VIEW';
 const LEAVE_REGISTER_VIEW = 'LEAVE_REGISTER_VIEW';
 // protected views:
@@ -43,8 +43,8 @@ export default function (state = initialState, action) {
     if (state.currentView !== action.currentView) {
       return {
         ...state,
-        currentView: action.currentView,
-        enterTime: currentTime
+        currentView:  action.currentView,
+        enterTime:    currentTime
       };
     }
     return state;
