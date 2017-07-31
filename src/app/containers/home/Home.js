@@ -33,13 +33,16 @@ const CurrentUser = gql`
 const HomeWithQuery = graphql(
   CurrentUser,
   {
-    options: {
-      // variables: (ownProps) => ({variables: {user: 'VXNlcjox'}})
-      variables: {
-        user: 'VXNlcjox'
+    options: ({ userAuth }) => {
+      return {
+        variables: {
+          user: userAuth.id ? userAuth.id : ''
+        }
       }
     },
+
     name: 'getCurrentUser',
+
     props: ({
       ownProps,
       getCurrentUser:
@@ -72,7 +75,9 @@ const HomeWithQuery = graphql(
 const mapStateToProps = (state) => {
   return {
     // view store:
-    currentView:  state.views.currentView
+    currentView:  state.views.currentView,
+    // userAuth:
+    userAuth:       state.userAuth
   };
 };
 

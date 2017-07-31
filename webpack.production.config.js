@@ -1,5 +1,4 @@
 // @flow weak
-require("babel-polyfill");
 
 const webpack           = require('webpack');
 const path              = require('path');
@@ -18,7 +17,6 @@ const config = {
       indexFile
     ],
     vendor: [
-      // 'animate.css',
       'apollo-client',
       'babel-polyfill',
       'bootstrap',

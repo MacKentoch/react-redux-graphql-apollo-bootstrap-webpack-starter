@@ -13,7 +13,7 @@
   "env": {
     "production": {
       "presets": [
-        // "react-optimize"
+        "react-optimize"
       ],
       "comments": false
     },

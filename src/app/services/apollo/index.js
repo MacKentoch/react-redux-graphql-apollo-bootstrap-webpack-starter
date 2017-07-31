@@ -1,30 +1,32 @@
 // @flow weak
 
-import ApolloClient, {
-  createNetworkInterface,
-  addTypename
-}                       from 'apollo-client';
-import { appConfig }    from '../../config';
 
-// networkInterface:
+import {
+  ApolloClient,
+  createNetworkInterface
+}                         from 'react-apollo';
+import { appConfig }      from '../../config';
+
 const networkInterface = createNetworkInterface({
-  uri: appConfig.apollo.networkInterface
+  uri: appConfig.apollo.networkInterface,
+  transportBatching: true
 });
 
-// when need token based authentication:
 networkInterface.use([{
   applyMiddleware(req, next) {
     if (!req.options.headers) {
       req.options.headers = {};  // Create the header object if needed.
     }
     // get the authentication token from local storage if it exists
-    req.options.headers.authorization = `Bearer ${localStorage.getItem('token') || null}`;
+    const token = localStorage.getItem('token');
+    req.options.headers.authorization = token ? `Bearer ${token}` : null;
     next();
   }
 }]);
 
-
 export const apolloClient = new ApolloClient({
-  networkInterface: networkInterface,
+  networkInterface,
   queryTransformer: addTypename
 });
+
+export default apolloClient;

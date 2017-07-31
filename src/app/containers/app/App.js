@@ -45,7 +45,11 @@ class App extends Component {
 
   render() {
     const { navModel } = this.state;
-    const { children, userIsAuthenticated } = this.props;
+
+    const {
+      children,
+      userIsAuthenticated
+    } = this.props;
 
 
     return (

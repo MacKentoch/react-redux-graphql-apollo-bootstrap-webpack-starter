@@ -9,7 +9,7 @@
     "test": "cross-env NODE_ENV=test nyc mocha test/.setup.js test/**/*.spec.js --recursive",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "dev": "rimraf docs/assets && cross-env NODE_ENV=dev webpack --display-entrypoints --config webpack.dev.config.js",
-    "prod": "rimraf docs/assets &&  cross-env NODE_ENV=production webpack -p --config webpack.production.config.js ",
+    "prod": "rimraf docs/assets && cross-env NODE_ENV=production webpack -p --config webpack.production.config.js",
     "start": "cross-env NODE_ENV=dev node server.hot.reload",
     "serve-spa-dev": "npm run dev && cross-env NODE_ENV=dev nodemon ./src/server/SPA/index.js",
     "serve-spa-prod": "npm run prod && cross-env NODE_ENV=production node ./src/server/SPA/index.js"

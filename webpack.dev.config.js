@@ -18,7 +18,6 @@ const config = {
       indexFile
     ],
     vendor: [
-      'animate.css',
       'apollo-client',
       'babel-polyfill',
       'bootstrap',
@@ -57,7 +56,7 @@ const config = {
       },
       {
         test: /\.css$/,
-        use:  SPLIT_STYLE 
+        use:  SPLIT_STYLE
           ? ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
@@ -73,7 +72,7 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use:  SPLIT_STYLE 
+        use:  SPLIT_STYLE
         ? ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
@@ -113,7 +112,7 @@ const config = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name:     'vendor',
-      filename: 'app.vendor.bundle.js' 
+      filename: 'app.vendor.bundle.js'
     })
   ]
 };

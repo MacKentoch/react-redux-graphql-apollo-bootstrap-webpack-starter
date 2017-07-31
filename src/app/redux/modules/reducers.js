@@ -18,5 +18,4 @@ const reducers = combineReducers({
   routing:  routerReducer
 });
 
-
 export default reducers;

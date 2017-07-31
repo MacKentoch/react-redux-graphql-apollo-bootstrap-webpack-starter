@@ -29,18 +29,18 @@ const RESET_LOG_ERRORS = 'RESET_LOG_ERRORS';
   Reducer
  ------------------------------------------*/
 const emptyUser = {
-  id:  null,
-  username: '',
-  lastLogin: '',
-  createdAt: '',
+  id:         null,
+  username:   '',
+  lastLogin:  '',
+  createdAt:  '',
   modifiedAt: ''
 };
 
 const initialState = {
-  isAuthenticated: false,
-  lastActionTime: null,
-  mutationLoading: false,
-  errors: null,
+  isAuthenticated:  false,
+  lastActionTime:   null,
+  mutationLoading:  false,
+  errors:           null,
   ...emptyUser
 };
 
