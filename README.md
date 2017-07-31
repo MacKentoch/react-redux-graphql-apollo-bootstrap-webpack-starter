@@ -1,8 +1,8 @@
 Full ES6+ React + React-Router + Redux + GraphQL + Apollo + Bootstrap with Hot Reload and redux-devtools STARTER
 ==========
 
-> My new `React + redux project starter`. This time I add `graphQL` and `Apollo Client` (*I better use Apollo Client than Relay*).
-This starter also embeds `JWT token based` `authentication` (check [Route](https://github.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/blob/master/src/app/routes/Route.js) to get an example of dealing with protected routes).
+> My new `React + redux project starter`. This time I add `graphQL` and `Apollo Client`.
+This starter also embeds `JWT token based` `authentication` (check [Route](https://github.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/blob/master/src/app/routes/MainRoutes.js#L29) to get an example of dealing with protected routes).
 
 
 
@@ -12,7 +12,7 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 - *`redux` + `devTools` + `hot reload`= how did I developed without them before?*
 - *graphQL makes API to be " `has been` "*
  - *no more struggle in redux with async thank to Apollo Client (you can even get rid of redux thunk or redux saga if you needed theses just for your asyncs. Otherwise keep them since they are nice :smile:)*
-
+- [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension#redux-devtools-extension) to make developments a pure pleasure.
 
 ## Detailed Content
 
@@ -110,18 +110,14 @@ export const appConfig = {
 npm install
 ```
 
-### run dev : hot reload mode (*+ redux-devtools*)
+### run dev : hot reload mode (*+ redux-devtools-extension*)
 
 
 ```bash
 npm run start
 ```
 
-
-##### Note : redux-devtools shortcuts
-- `ctrl+h`: to toggle devtools panel
-- `ctrl+q`: to change devtools panel position (*by default: on the right*)
-
+NOTE: be sure you already installed [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension#redux-devtools-extension) in your browser to get the best development experience.
 
 ### bundle dev mode (*+ redux-devtools*)
 
