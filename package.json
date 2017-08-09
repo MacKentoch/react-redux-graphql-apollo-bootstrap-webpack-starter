@@ -1,6 +1,6 @@
 {
   "name": "react-redux-graphql-apollo-bootstrap-webpack-starter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "react js + redux + graphQL + Apollo + react router4 + hot reload + devTools + bootstrap + webpack 3 starter",
   "main": "src/index.js",
   "scripts": {
@@ -120,6 +120,7 @@
     "history": "^4.6.3",
     "jquery": "^2.2.1",
     "js-base64": "^2.1.9",
+    "jwt-decode": "^2.2.0",
     "moment": "^2.18.1",
     "pretty-error": "^2.1.1",
     "prop-types": "^15.5.10",

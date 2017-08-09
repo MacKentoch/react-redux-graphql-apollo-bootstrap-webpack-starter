@@ -5,6 +5,7 @@ import React, {
 }                     from 'react';
 import PropTypes      from 'prop-types';
 import Jumbotron      from '../../components/jumbotron/Jumbotron';
+import cx             from 'classnames';
 
 class PageNotFound extends PureComponent {
   static propTypes = {
