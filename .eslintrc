@@ -11,10 +11,12 @@
 
   "plugins": [
     "react",
-    "mocha"
+    "mocha",
+    "flowtype"
   ],
   "extends": [
-      "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:flowtype/recommended"
   ],
   // eslint > 2.x
   "parserOptions": {
