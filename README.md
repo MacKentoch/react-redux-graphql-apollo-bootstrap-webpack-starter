@@ -1,14 +1,14 @@
 Full ES6+ React + React-Router + Redux + GraphQL + Apollo + Bootstrap with Hot Reload and redux-devtools STARTER
 ==========
 
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/Mp96tCWH2KdajZuBzqB6jwj8/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/Mp96tCWH2KdajZuBzqB6jwj8/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter.svg' />
+</a>
+
 > My new `React + redux project starter`. This time I add `graphQL` and `Apollo Client`.
 This starter also embeds `JWT token based` `authentication` (check [Route](https://github.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/blob/master/src/app/routes/MainRoutes.js#L29) to get an example of dealing with protected routes).
 
 ![preview](./preview/preview.png)
-
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/Mp96tCWH2KdajZuBzqB6jwj8/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/Mp96tCWH2KdajZuBzqB6jwj8/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter.svg' />
-</a>
 
 
 - *webpack is as simple as possible*
