@@ -147,7 +147,7 @@
     "graphql-tag": "^2.4.2",
     "helmet": "^3.8.1",
     "history": "^4.6.3",
-    "jquery": "^2.2.1",
+    "jquery": "^3.0.0",
     "js-base64": "^2.1.9",
     "jwt-decode": "^2.2.0",
     "moment": "^2.18.1",
