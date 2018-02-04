@@ -1,44 +1,33 @@
-// @flow weak
+// @flow
 
-import React, {
-  Component
-}                             from 'react';
-import PropTypes              from 'prop-types';
-import {
-  NavigationBar,
-  BackToTop
-}                             from '../../components';
-import navigationModel        from '../../models/navigation.json';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { NavigationBar, BackToTop } from '../../components';
+import navigationModel from '../../models/navigation.json';
 import { bindActionCreators } from 'redux';
-import { connect }            from 'react-redux';
-import * as viewsActions      from '../../redux/modules/views';
-import * as userAuthActions   from '../../redux/modules/userAuth';
-import MainRoutes             from '../../routes/MainRoutes';
-import {
-  withRouter
-}                             from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as viewsActions from '../../redux/modules/views';
+import * as userAuthActions from '../../redux/modules/userAuth';
+import MainRoutes from '../../routes/MainRoutes';
+import { withRouter } from 'react-router-dom';
 
 class App extends Component {
   static propTypes = {
     // react-router 4:
-    match:    PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    history:  PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
 
     // userAuth
-    userIsAuthenticated: PropTypes.bool.isRequired
-  }
+    userIsAuthenticated: PropTypes.bool.isRequired,
+  };
 
   state = {
-    navModel : navigationModel
+    navModel: navigationModel,
   };
 
   componentDidMount() {
-    const {
-      actions: {
-        checkIfUserIsAuthenticated
-      }
-    } = this.props;
+    const { actions: { checkIfUserIsAuthenticated } } = this.props;
 
     checkIfUserIsAuthenticated();
   }
@@ -46,11 +35,7 @@ class App extends Component {
   render() {
     const { navModel } = this.state;
 
-    const {
-      children,
-      userIsAuthenticated
-    } = this.props;
-
+    const { children, userIsAuthenticated } = this.props;
 
     return (
       <div id="appContainer">
@@ -61,64 +46,47 @@ class App extends Component {
           handleLeftNavItemClick={this.handleLeftNavItemClick}
           handleRightNavItemClick={this.handleRightNavItemClick}
         />
-      <h1>
-      </h1>
+        <h1 />
         <div className="container-fluid">
           <MainRoutes />
         </div>
-        <BackToTop
-          minScrollY={40}
-          scrollTo={'appContainer'}
-        />
+        <BackToTop minScrollY={40} scrollTo={'appContainer'} />
       </div>
     );
   }
 
   handleLeftNavItemClick = (event, viewName) => {
     if (viewName === 'logout') {
-      const {
-        actions: {
-          setUserLogout
-        }
-      } = this.props;
+      const { actions: { setUserLogout } } = this.props;
       setUserLogout();
     }
-  }
+  };
 
   handleRightNavItemClick = (event, viewName) => {
     if (viewName === 'logout') {
-      const {
-        actions: {
-          setUserLogout
-        }
-      } = this.props;
+      const { actions: { setUserLogout } } = this.props;
       setUserLogout();
     }
-  }
+  };
 }
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     // userAuth:
-    userIsAuthenticated: state.userAuth.isAuthenticated
+    userIsAuthenticated: state.userAuth.isAuthenticated,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    actions : bindActionCreators(
+    actions: bindActionCreators(
       {
         ...viewsActions,
-        ...userAuthActions
+        ...userAuthActions,
       },
-      dispatch)
+      dispatch,
+    ),
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(App)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

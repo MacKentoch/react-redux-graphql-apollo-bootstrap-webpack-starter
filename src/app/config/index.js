@@ -1,8 +1,9 @@
-// @flow weak
+// @flow
 
 export const appConfig = {
   // apollo client:
   apollo: {
-    networkInterface: 'https://us-west-2.api.scaphold.io/graphql/flawless-basketball'
-  }
+    networkInterface:
+      'https://us-west-2.api.scaphold.io/graphql/flawless-basketball',
+  },
 };

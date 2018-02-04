@@ -1,29 +1,34 @@
-// @flow weak
+// @flow
 
-import React, {
-  PureComponent
-}                     from 'react';
-import PropTypes      from 'prop-types';
-import cx             from 'classnames';
-import { Link }       from "react-router-dom";
+// #region imports
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+// #endregion
 
-class About extends PureComponent {
-  static propTypes= {
+// #region flow types
+type Props = any;
+type State = any;
+// #endregion
+
+class About extends PureComponent<Props, State> {
+  static propTypes = {
     // react-router 4:
-    match:    PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    history:  PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
 
     // views
-    currentView:  PropTypes.string.isRequired,
-    enterAbout:   PropTypes.func.isRequired,
-    leaveAbout:   PropTypes.func.isRequired
+    currentView: PropTypes.string.isRequired,
+    enterAbout: PropTypes.func.isRequired,
+    leaveAbout: PropTypes.func.isRequired,
   };
 
   state = {
-    viewEntersAnim: true
+    viewEntersAnim: true,
   };
 
+  // #region lifecycle
   componentDidMount() {
     const { enterAbout } = this.props;
     enterAbout();
@@ -38,11 +43,12 @@ class About extends PureComponent {
     const { viewEntersAnim } = this.state;
 
     return (
-      <div className={cx({ "view-enter": viewEntersAnim })}>
+      <div className={cx({ 'view-enter': viewEntersAnim })}>
         <h1>About</h1>
       </div>
     );
   }
+  // #endregion
 }
 
 export default About;

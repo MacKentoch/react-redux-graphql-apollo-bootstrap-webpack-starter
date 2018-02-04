@@ -1,39 +1,22 @@
-// @flow weak
+// @flow
 
-import React                 from 'react';
-import {
- Route,
- Switch,
- Redirect
-}                             from 'react-router-dom';
-import {
-  // app:
-  App,
-  // non protected views
-  ConnectedHome,
-  ConnectedAbout,
-  ConnectedLogin,
-  ConnectedRegister,
-  // protected views
-  ConnectedProtected
-}                               from '../containers';
-import {
-  PageNotFound
-}                               from '../views';
-import { auth }                 from '../services/auth';
-import PrivateRoute             from '../components/privateRoute/PrivateRoute';
-import LogoutRoute              from '../components/logoutRoute/LogoutRoute';
+// #region imports
+import React from 'react';
+import { Route, Switch } from 'react-router';
+import { ConnectedRegister, ConnectedProtected } from '../containers';
+import { PageNotFound } from '../views';
+import Home from '../views/home';
+import About from '../views/about';
+import PrivateRoute from '../components/privateRoute/PrivateRoute';
+// #endregion
 
 export const MainRoutes = () => {
   return (
     <Switch>
       {/* non protected views */}
-      <Route exact path="/" component={ConnectedHome} />
-      <Route path="/about" component={ConnectedAbout} />
-      <Route path="/login" component={ConnectedLogin} />
+      <Route exact path="/" component={Home} />
+      <Route path="/about" component={About} />
       <Route path="/register" component={ConnectedRegister} />
-      {/* logout: just redirects to home (App will take care of removing the token) */}
-      <LogoutRoute path="/logout" />
       {/* protected views */}
       <PrivateRoute path="/protected" component={ConnectedProtected} />
       {/* page not found */}

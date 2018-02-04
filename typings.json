@@ -1,7 +1,9 @@
 {
   "globalDependencies": {
+    "axios": "registry:dt/axios#0.9.1+20161016142654",
     "node": "registry:dt/node#7.0.0+20170322231424",
-    "react-router-dom": "registry:dt/react-router-dom#4.0.0+20170323201651"
+    "react-router-dom": "registry:dt/react-router-dom#4.0.0+20170323201651",
+    "recompose": "registry:dt/recompose#0.22.0+20170306203754"
   },
   "globalDevDependencies": {
     "jest": "registry:dt/jest#19.2.0+20170312200138"

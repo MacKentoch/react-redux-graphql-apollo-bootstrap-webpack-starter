@@ -1,35 +1,68 @@
-// @flow weak
+// @flow
 
+// #region imports
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { setContext } from 'apollo-link-context';
+import { from } from 'apollo-link';
+import { createHttpLink } from 'apollo-link-http';
+import { onError } from 'apollo-link-error';
+import { appConfig } from '../../config';
+// #endregion
 
-import {
-  ApolloClient,
-  createNetworkInterface,
-  addTypename
-}                         from 'react-apollo';
-import { appConfig }      from '../../config';
-
-const networkInterface = createNetworkInterface({
-  uri: appConfig.apollo.networkInterface
-  // connectToDevTools: true
-  // transportBatching: true
+// #region link, middleware
+const { networkInterface: uri } = appConfig.apollo;
+const httplink = createHttpLink({
+  uri,
 });
 
-networkInterface.use([{
-  applyMiddleware(req, next) {
-    if (!req.options.headers) {
-      req.options.headers = {};  // Create the header object if needed.
-    }
-    // get the authentication token from local storage if it exists
-    const token = localStorage.getItem('token');
-    if (token) {
-      req.options.headers.authorization = token ? `Bearer ${token}` : null;
-    }
-    next();
+// #region get user token from localStorage
+let token; // cached token to access localStorage just once
+async function getUserToken() {
+  if (token) {
+    return token;
   }
-}]);
 
-export const apolloClient = new ApolloClient({
-  networkInterface
+  return new Promise((resolve, reject) => {
+    const storedToken = window.localStorage.getItem('token');
+    resolve(storedToken);
+  });
+}
+// #endregion
+
+const authMiddleware = setContext(async (operation, { headers }) => {
+  const currentUsertoken = await getUserToken();
+  return {
+    headers: {
+      ...headers,
+      authorization: `Bearer ${currentUsertoken}` || null,
+    },
+  };
 });
+// #endregion
 
-export default apolloClient;
+// #region cache
+const cache = new InMemoryCache();
+// #endregion
+
+// #region afterware (lanage token expiration for exmaple)
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  console.log('error afterware, graphQLErrors: ', graphQLErrors);
+  console.log('error afterware, networkError: ', networkError);
+
+  if (networkError && networkError.statusCode === 401) {
+    // token expiration logic here
+  }
+});
+// #endregion
+
+const link = from([authMiddleware, errorLink, httplink]);
+// #region apollo client instanciation
+const client = new ApolloClient({
+  link,
+  cache,
+  queryDeduplication: true,
+});
+// #endregion
+
+export default client;

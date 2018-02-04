@@ -1,12 +1,13 @@
 {
   "presets": [
-    ["es2015"],
+    ["env", {
+      "modules": false
+    }],
     "react",
     "stage-2",
     "flow"
   ],
   "plugins": [
-    "react-hot-loader/babel",
     "transform-regenerator",
     "transform-async-to-generator"
   ],
@@ -14,13 +15,6 @@
     "production": {
       "presets": [
         "react-optimize"
-      ],
-      "comments": false
-    },
-    "server": {
-      "presets": [
-        "react-optimize",
-        "babili"
       ],
       "comments": false
     }
