@@ -7,8 +7,7 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import compose from 'recompose/compose';
 import * as viewsActions from '../../redux/modules/views';
-import { Home } from '../../views';
-
+import Home from './Home';
 // #endregion
 
 // #region Redux

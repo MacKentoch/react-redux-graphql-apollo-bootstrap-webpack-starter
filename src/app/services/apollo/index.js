@@ -32,10 +32,11 @@ async function getUserToken() {
 
 const authMiddleware = setContext(async (operation, { headers }) => {
   const currentUsertoken = await getUserToken();
+  const authorization = currentUsertoken ? `Bearer ${currentUsertoken}` : null;
   return {
     headers: {
       ...headers,
-      authorization: `Bearer ${currentUsertoken}` || null,
+      authorization,
     },
   };
 });
@@ -51,7 +52,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   console.log('error afterware, networkError: ', networkError);
 
   if (networkError && networkError.statusCode === 401) {
-    // token expiration logic here
+    throw new Error('Unauthorized');
   }
 });
 // #endregion

@@ -1,89 +1,30 @@
-// @flow weak
+// @flow
 
-/* eslint no-unused-vars:0 */
-import { connect }            from 'react-redux';
+// #region imports
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as viewsActions      from '../../redux/modules/views';
-import * as userAuthActions   from '../../redux/modules/userAuth';
-import { Login }              from '../../views';
-import gql                    from 'graphql-tag';
-import { graphql }            from 'react-apollo';
+import compose from 'recompose/compose';
+import * as viewsActions from '../../redux/modules/views';
+import * as userAuthActions from '../../redux/modules/userAuth';
+import { Login } from '../../views';
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
+// #endregion
 
-
-/* -----------------------------------------
-  GraphQL - Apollo client
- ------------------------------------------*/
-
-const logUser = gql`
-  mutation LoginUser($user: LoginUserInput!) {
-    loginUser(input: $user) {
-      token,
-      user {
-        id,
-        username,
-        createdAt,
-        modifiedAt,
-        lastLogin
-      }
-    }
-  }
-`;
-
-// 1- add queries:
-
-// 2- add mutation "logUser":
-const LoginWithMutation = graphql(
-  logUser,
-  {
-    name: 'logUserMutation',
-    props: ({ ownProps, logUserMutation }) => ({
-      loginUser(user) {
-        ownProps.setMutationLoading();
-
-        return logUserMutation(user)
-          .then(
-            (
-              {
-                data: {
-                  loginUser
-                }
-              }
-            ) => {
-              ownProps.onUserLoggedIn(loginUser.token, loginUser.user);
-              ownProps.unsetMutationLoading();
-              return Promise.resolve();
-            }
-          )
-          .catch(
-            (error)=> {
-              ownProps.onUserLogError(error);
-              ownProps.unsetMutationLoading();
-              return Promise.reject();
-            }
-          );
-      }
-    })
-  }
-)(Login);
-
-
-/* -----------------------------------------
-  Redux
- ------------------------------------------*/
-
-const mapStateToProps = (state) => {
+// #region Redux
+const mapStateToProps = state => {
   return {
     // views props:
-    currentView:  state.views.currentView,
+    currentView: state.views.currentView,
     // user Auth props:
     userIsAuthenticated: state.userAuth.isAuthenticated,
     mutationLoading: state.userAuth.mutationLoading,
     // errors:
-    error: state.userAuth.error
+    error: state.userAuth.error,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       // views actions:
@@ -95,13 +36,54 @@ const mapDispatchToProps = (dispatch) => {
       onUserLogError: userAuthActions.errorUserLoggedIn,
       setMutationLoading: userAuthActions.setLoadingStateForUserLogin,
       unsetMutationLoading: userAuthActions.unsetLoadingStateForUserLogin,
-      resetError: userAuthActions.resetLogError
+      resetError: userAuthActions.resetLogError,
     },
-    dispatch
+    dispatch,
   );
 };
+// #endregion
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginWithMutation);
+// #region  GraphQL - Apollo client
+
+// #region login user muation
+const logUserMutation = gql`
+  mutation LoginUser($user: LoginUserInput!) {
+    loginUser(input: $user) {
+      token
+      user {
+        id
+        username
+        createdAt
+        modifiedAt
+        lastLogin
+      }
+    }
+  }
+`;
+
+const logUserMutationOptions = {
+  props: ({ ownProps, mutate }) => ({
+    async loginUser(user) {
+      ownProps.setMutationLoading();
+      try {
+        const payload = { variables: { user } };
+        const { data: { loginUser } } = await mutate(payload);
+        ownProps.onUserLoggedIn(loginUser.token, loginUser.user);
+        ownProps.unsetMutationLoading();
+        return Promise.resolve();
+      } catch (error) {
+        ownProps.onUserLogError(error);
+        ownProps.unsetMutationLoading();
+        return Promise.reject();
+      }
+    },
+  }),
+};
+// #endregion
+
+// #endregion
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  graphql(logUserMutation, logUserMutationOptions),
+)(Login);
