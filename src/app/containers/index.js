@@ -2,7 +2,5 @@
 
 // non protected view containers:
 export { default as App } from './app/App';
-export { default as ConnectedLogin } from './login/Login';
-export { default as ConnectedRegister } from './register/Register';
 // protected view containers:
 export { default as ConnectedProtected } from './protected/Protected';

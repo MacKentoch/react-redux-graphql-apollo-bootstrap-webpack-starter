@@ -3,15 +3,15 @@
 // #region imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 import compose from 'recompose/compose';
 import * as viewsActions from '../../redux/modules/views';
 import * as userAuthActions from '../../redux/modules/userAuth';
-import { Login } from '../../views';
-import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
+import Register from './Register';
 // #endregion
 
-// #region Redux
+// #region  Redux
 const mapStateToProps = state => {
   return {
     // views props:
@@ -28,53 +28,51 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       // views actions:
-      enterLogin: viewsActions.enterLogin,
-      leaveLogin: viewsActions.leaveLogin,
+      ...viewsActions,
 
       // userAuth actions:
-      onUserLoggedIn: userAuthActions.receivedUserLoggedIn,
-      onUserLogError: userAuthActions.errorUserLoggedIn,
-      setMutationLoading: userAuthActions.setLoadingStateForUserLogin,
-      unsetMutationLoading: userAuthActions.unsetLoadingStateForUserLogin,
-      resetError: userAuthActions.resetLogError,
+      ...userAuthActions,
     },
     dispatch,
   );
 };
 // #endregion
 
-// #region  GraphQL - Apollo client
+// #region GraphQL - Apollo client
 
-// #region login user muation
-const logUserMutation = gql`
-  mutation LoginUser($user: LoginUserInput!) {
-    loginUser(input: $user) {
-      token
-      user {
+// #region create user mutation
+const createUserMutation = gql`
+  mutation CreateUser($user: CreateUserInput!) {
+    createUser(input: $user) {
+      changedUser {
         id
         username
         createdAt
         modifiedAt
         lastLogin
       }
+      token
     }
   }
 `;
 
-const logUserMutationOptions = {
+const createUserMutationOptions = {
   props: ({ ownProps, mutate }) => ({
-    async loginUser(user) {
+    async registerUser(user) {
       ownProps.setMutationLoading();
+
       try {
         const payload = { variables: { user } };
-        const { data: { loginUser } } = await mutate(payload);
-        ownProps.onUserLoggedIn(loginUser.token, loginUser.user);
+        const { data: { createUser: { changedUser, token } } } = await mutate(
+          payload,
+        );
+        ownProps.onUserRegisterSuccess(token, changedUser);
         ownProps.unsetMutationLoading();
         return Promise.resolve();
       } catch (error) {
-        ownProps.onUserLogError(error);
+        ownProps.onUserRegisterError(error);
         ownProps.unsetMutationLoading();
-        return Promise.reject();
+        return Promise.reject(error);
       }
     },
   }),
@@ -85,5 +83,5 @@ const logUserMutationOptions = {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  graphql(logUserMutation, logUserMutationOptions),
-)(Login);
+  graphql(createUserMutation, createUserMutationOptions),
+)(Register);

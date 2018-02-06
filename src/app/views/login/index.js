@@ -28,15 +28,10 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       // views actions:
-      enterLogin: viewsActions.enterLogin,
-      leaveLogin: viewsActions.leaveLogin,
+      ...viewsActions,
 
       // userAuth actions:
-      onUserLoggedIn: userAuthActions.receivedUserLoggedIn,
-      onUserLogError: userAuthActions.errorUserLoggedIn,
-      setMutationLoading: userAuthActions.setLoadingStateForUserLogin,
-      unsetMutationLoading: userAuthActions.unsetLoadingStateForUserLogin,
-      resetError: userAuthActions.resetLogError,
+      ...userAuthActions,
     },
     dispatch,
   );

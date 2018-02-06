@@ -3,12 +3,23 @@
 // #region imports
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { ErrorAlert } from '../../components';
+import styles from './login.scss';
 // #endregion
 
-class Login extends PureComponent {
+// #region flow types
+type Props = any;
+type State = any;
+// #endregion
+
+// #region constants
+// IMPORTANT: we need to bind classnames to CSSModule generated classes:
+const cx = classnames.bind(styles);
+// #endregion
+
+class Login extends PureComponent<Props, State> {
   static propTypes = {
     // react-router 4:
     match: PropTypes.object.isRequired,
@@ -110,7 +121,7 @@ class Login extends PureComponent {
                       Cancel
                     </Link>
                     <button
-                      className="btn btn-primary login-button"
+                      className="btn btn-primary loginButton"
                       disabled={mutationLoading}
                       onClick={this.handlesOnLogin}
                     >
