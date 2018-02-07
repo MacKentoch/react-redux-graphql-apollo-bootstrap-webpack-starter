@@ -3,12 +3,12 @@
 // #region imports
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import { ConnectedProtected } from '../containers';
-import { PageNotFound } from '../views';
 import Home from '../views/home';
 import About from '../views/about';
 import Register from '../views/register';
+import Protected from '../views/protected';
 import PrivateRoute from '../components/privateRoute/PrivateRoute';
+import PageNotFound from '../views/pageNotfound';
 // #endregion
 
 export const MainRoutes = () => {
@@ -19,7 +19,7 @@ export const MainRoutes = () => {
       <Route path="/about" component={About} />
       <Route path="/register" component={Register} />
       {/* protected views */}
-      <PrivateRoute path="/protected" component={ConnectedProtected} />
+      <PrivateRoute path="/protected" component={Protected} />
       {/* page not found */}
       <Route path="*" component={PageNotFound} />
     </Switch>

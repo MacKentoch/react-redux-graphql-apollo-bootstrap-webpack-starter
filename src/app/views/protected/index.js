@@ -3,9 +3,8 @@
 // #region imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import compose from 'recompose/compose';
 import * as viewsActions from '../../redux/modules/views';
-import { About } from '../../views';
+import { Protected } from '../../views';
 // #endregion
 
 // #region Redux
@@ -16,12 +15,13 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ ...viewsActions }, dispatch);
+  return bindActionCreators(
+    {
+      ...viewsActions,
+    },
+    dispatch,
+  );
 };
 // #endregion
 
-// #region apollo client
-
-// #endregion
-
-export default connect(mapStateToProps, mapDispatchToProps)(About);
+export default connect(mapStateToProps, mapDispatchToProps)(Protected);
