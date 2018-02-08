@@ -8,6 +8,7 @@ import { graphql } from 'react-apollo';
 import compose from 'recompose/compose';
 import * as viewsActions from '../../redux/modules/views';
 import Home from './Home';
+import withEnterAnimation from '../../hoc/withEnterAnimation';
 // #endregion
 
 // #region Redux
@@ -66,6 +67,7 @@ const getUserQueryOptions = {
 // #endregion
 
 export default compose(
+  withEnterAnimation(),
   connect(mapStateToProps, mapDispatchToProps),
   graphql(getUserQuery, getUserQueryOptions),
 )(Home);

@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
 import classnames from 'classnames';
-import styles from 'pageNotFoundStyle.scss';
+import styles from './pageNotFound.scss';
 // #endregion
 
 // #region flow types

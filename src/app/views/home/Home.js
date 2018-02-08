@@ -32,10 +32,6 @@ class Home extends PureComponent<Props, State> {
     leaveHome: PropTypes.func.isRequired,
   };
 
-  state = {
-    viewEntersAnim: true,
-  };
-
   // #region lifecycle
   componentDidMount() {
     const { enterHome } = this.props;
@@ -48,10 +44,8 @@ class Home extends PureComponent<Props, State> {
   }
 
   render() {
-    const { viewEntersAnim } = this.state;
-
     return (
-      <div key="homeView" className={cx({ 'view-enter': viewEntersAnim })}>
+      <div key="homeView">
         <Jumbotron>
           <h1>Full ES2015 ReactJS + Redux + graphQL + Apollo + Bootstrap</h1>
           <h2>with Hot Reload!!!</h2>

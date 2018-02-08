@@ -3,24 +3,24 @@
 // #region imports
 import React, { Component } from 'react';
 import wrapDisplayName from 'recompose/wrapDisplayName';
-import classnames from 'classnames';
-import styles from 'withEnterAnimation.scss';
+import cx from 'classnames';
+// import styles from './withEnterAnimation.scss';
 // #endregion
 
 // #region constants
 // IMPORTANT: we need to bind classnames to CSSModule generated classes:
-const cx = classnames.bind(styles);
+// const cx = classnames.bind(styles);
 // #endregion
 
 function withEnterAnimation() {
   return BaseComponent => {
     class WithEnterAnimation extends Component<any, any> {
       render() {
-        const { ...otherProps } = this.props;
+        const { ...passProps } = this.props;
 
         return (
-          <div className={cx({ 'view-enter': true })}>
-            <BaseComponent {...otherProps} />
+          <div className={cx({ viewEnter: true })}>
+            <BaseComponent {...passProps} />
           </div>
         );
       }
