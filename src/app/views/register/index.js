@@ -9,6 +9,7 @@ import compose from 'recompose/compose';
 import * as viewsActions from '../../redux/modules/views';
 import * as userAuthActions from '../../redux/modules/userAuth';
 import Register from './Register';
+import withEnterAnimation from '../../hoc/withEnterAnimation';
 // #endregion
 
 // #region  Redux
@@ -82,6 +83,7 @@ const createUserMutationOptions = {
 // #endregion
 
 export default compose(
+  withEnterAnimation(),
   connect(mapStateToProps, mapDispatchToProps),
   graphql(createUserMutation, createUserMutationOptions),
 )(Register);

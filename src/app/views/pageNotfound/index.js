@@ -1,4 +1,8 @@
 // @flow
 
+// #region imports
+import withEnterAnimation from '../../hoc/withEnterAnimation';
 import PageNotFound from './PageNotfound';
-export default PageNotFound;
+// #endregion
+
+export default withEnterAnimation()(PageNotFound);

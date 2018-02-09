@@ -13,7 +13,7 @@ import apolloClient from './services/apollo';
 import App from './containers/app/App';
 import ScrollToTop from './components/scrollToTop/ScrollToTop';
 import Login from './views/login';
-import PageNotFound from './views/pageNotFound/PageNotFound'; // not connected to redux (no index.js)
+import PageNotFound from './views/pageNotFound'; // not connected to redux (no index.js)
 import LogoutRoute from './components/logoutRoute/LogoutRoute';
 // #endregion
 

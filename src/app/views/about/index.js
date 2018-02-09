@@ -3,9 +3,10 @@
 // #region imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import compose from 'recompose/compose';
+import compose from 'recompose/compose';
 import * as viewsActions from '../../redux/modules/views';
-import { About } from '../../views';
+import About from './About';
+import withEnterAnimation from '../../hoc/withEnterAnimation';
 // #endregion
 
 // #region Redux
@@ -24,4 +25,7 @@ const mapDispatchToProps = dispatch => {
 
 // #endregion
 
-export default connect(mapStateToProps, mapDispatchToProps)(About);
+export default compose(
+  withEnterAnimation(),
+  connect(mapStateToProps, mapDispatchToProps),
+)(About);

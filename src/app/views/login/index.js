@@ -9,6 +9,7 @@ import compose from 'recompose/compose';
 import * as viewsActions from '../../redux/modules/views';
 import * as userAuthActions from '../../redux/modules/userAuth';
 import Login from './Login';
+import withEnterAnimation from '../../hoc/withEnterAnimation';
 // #endregion
 
 // #region Redux
@@ -79,6 +80,7 @@ const logUserMutationOptions = {
 // #endregion
 
 export default compose(
+  withEnterAnimation(),
   connect(mapStateToProps, mapDispatchToProps),
   graphql(logUserMutation, logUserMutationOptions),
 )(Login);
