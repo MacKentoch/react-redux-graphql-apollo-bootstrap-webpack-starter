@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { ErrorAlert } from '../../components';
 import styles from './login.scss';
+import * as Types from './types';
 // #endregion
 
 // #region flow types
@@ -19,7 +20,7 @@ type State = any;
 const cx = classnames.bind(styles);
 // #endregion
 
-class Login extends PureComponent<Props, State> {
+class Login extends PureComponent<Types.Props, Types.State> {
   static propTypes = {
     // react-router 4:
     match: PropTypes.object.isRequired,

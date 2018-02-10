@@ -1,13 +1,13 @@
 // @flow
 
+// #region imports
 import moment from 'moment';
 import { auth } from '../../services/auth';
+// #endregion
 
+// #region constants
 const dateFormat = 'DD/MM/YYYY HH:mm';
 
-/* -----------------------------------------
-  constants
- ------------------------------------------*/
 const CHECK_IS_USER_IS_AUTHENTICATED = 'CHECK_IS_USER_IS_AUTHENTICATED';
 
 const RECEIVED_USER_LOGGED_IN = 'RECEIVED_USER_LOGGED_IN';
@@ -25,10 +25,9 @@ const UNSET_LOADING_REGISTER = 'UNSET_LOADING_REGISTER';
 const SET_USER_LOGOUT = 'SET_USER_LOGOUT';
 
 const RESET_LOG_ERRORS = 'RESET_LOG_ERRORS';
+// #endregion
 
-/* -----------------------------------------
-  Reducer
- ------------------------------------------*/
+// #region  Reducer
 const emptyUser = {
   id: '',
   username: '',
@@ -123,10 +122,9 @@ export default function(state = initialState, action) {
       return state;
   }
 }
+// #endregion
 
-/* -----------------------------------------
-  action creators
- ------------------------------------------*/
+// #region  action creators
 
 // //////////////////
 // login sucess:
@@ -291,3 +289,5 @@ export function resetLogError() {
     type: RESET_LOG_ERRORS,
   };
 }
+
+// #endregion

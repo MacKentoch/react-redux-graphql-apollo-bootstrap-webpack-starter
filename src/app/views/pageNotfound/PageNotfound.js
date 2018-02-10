@@ -4,8 +4,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
-import classnames from 'classnames';
-import styles from './pageNotFound.scss';
+// import classnames from 'classnames';
+// import styles from './pageNotFound.scss';
 // #endregion
 
 // #region flow types
@@ -15,7 +15,7 @@ type State = any;
 
 // #region constants
 // IMPORTANT: we need to bind classnames to CSSModule generated classes:
-const cx = classnames.bind(styles);
+// const cx = classnames.bind(styles);
 // #endregion
 
 class PageNotFound extends PureComponent<Props, State> {
@@ -28,7 +28,7 @@ class PageNotFound extends PureComponent<Props, State> {
 
   render() {
     return (
-      <div className={cx({ 'view-enter': true })}>
+      <div>
         <Jumbotron>
           <h1>Sorry this page does not exists...</h1>
         </Jumbotron>

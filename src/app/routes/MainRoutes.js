@@ -8,7 +8,7 @@ import About from '../views/about';
 import Register from '../views/register';
 import Protected from '../views/protected';
 import PrivateRoute from '../components/privateRoute/PrivateRoute';
-import PageNotFound from '../views/pageNotfound';
+import PageNotFound from '../views/pageNotFound';
 // #endregion
 
 export const MainRoutes = () => {
