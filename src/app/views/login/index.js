@@ -60,16 +60,16 @@ const logUserMutation = gql`
 const logUserMutationOptions = {
   props: ({ ownProps, mutate }) => ({
     async loginUser(user) {
-      ownProps.setMutationLoading();
+      ownProps.setLoadingStateForUserLogin();
       try {
         const payload = { variables: { user } };
         const { data: { loginUser } } = await mutate(payload);
-        ownProps.onUserLoggedIn(loginUser.token, loginUser.user);
-        ownProps.unsetMutationLoading();
+        ownProps.receivedUserLoggedIn(loginUser.token, loginUser.user);
+        ownProps.unsetLoadingStateForUserLogin();
         return Promise.resolve();
       } catch (error) {
-        ownProps.onUserLogError(error);
-        ownProps.unsetMutationLoading();
+        ownProps.errorUserLoggedIn(error);
+        ownProps.unsetLoadingStateForUserLogin();
         return Promise.reject();
       }
     },

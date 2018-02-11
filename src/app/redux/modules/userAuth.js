@@ -282,7 +282,7 @@ function checkUserHasId(user) {
 }
 
 // ////////////////////////////////
-// reset ligon and register error:
+// reset login and register error:
 // ////////////////////////////////
 export function resetLogError() {
   return {

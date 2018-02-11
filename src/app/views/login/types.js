@@ -4,6 +4,13 @@
 import * as UserAuthTypes from '../../redux/modules/userAuth.types';
 // #endregion
 
+export type LoginUserPayload = {
+  user: {
+    username: string,
+    password: string
+  }
+};
+
 export type Props = {
   // react-router 4:
   match: any,
@@ -18,12 +25,17 @@ export type Props = {
   // user Auth props:
   userIsAuthenticated: boolean,
   mutationLoading: boolean,
+  receivedUserLoggedIn: UserAuthTypes.ReceivedUserLoggedIn,
+  errorUserLoggedIn: UserAuthTypes.ErrorUserLoggedIn,
+  resetLogError: UserAuthTypes.ResetLogError,
+  setLoadingStateForUserLogin: UserAuthTypes.SetLoadingStateForUserLogin,
+  unsetLoadingStateForUserLogin: UserAuthTypes.UnsetLoadingStateForUserLogin,
 
   // errors:
   error: any,
 
   // grpahql loginUser mutation
-  loginUser: () => Promise<any>,
+  loginUser: (user: LoginUserPayload) => Promise<any>,
 
   ...any,
 };

@@ -10,11 +10,6 @@ import styles from './login.scss';
 import * as Types from './types';
 // #endregion
 
-// #region flow types
-type Props = any;
-type State = any;
-// #endregion
-
 // #region constants
 // IMPORTANT: we need to bind classnames to CSSModule generated classes:
 const cx = classnames.bind(styles);
@@ -46,8 +41,8 @@ class Login extends PureComponent<Types.Props, Types.State> {
     loginUser: PropTypes.func.isRequired,
 
     // redux actions
-    onUserLoggedIn: PropTypes.func.isRequired,
-    resetError: PropTypes.func.isRequired,
+    receivedUserLoggedIn: PropTypes.func.isRequired,
+    resetLogError: PropTypes.func.isRequired,
   };
 
   state = {
@@ -179,8 +174,8 @@ class Login extends PureComponent<Types.Props, Types.State> {
 
   closeError = event => {
     event.preventDefault();
-    const { resetError } = this.props;
-    resetError();
+    const { resetLogError } = this.props;
+    resetLogError();
   };
 }
 
