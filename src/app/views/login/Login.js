@@ -46,8 +46,6 @@ class Login extends PureComponent<Types.Props, Types.State> {
   };
 
   state = {
-    viewEntersAnim: true,
-
     email: '',
     password: '',
   };
@@ -63,11 +61,11 @@ class Login extends PureComponent<Types.Props, Types.State> {
   }
 
   render() {
-    const { viewEntersAnim, email, password } = this.state;
+    const { email, password } = this.state;
     const { mutationLoading, error } = this.props;
 
     return (
-      <div className={cx({ 'view-enter': viewEntersAnim })}>
+      <div>
         <div className="row">
           <div className="col-md-4 col-md-offset-4">
             <form className="form-horizontal" noValidate>

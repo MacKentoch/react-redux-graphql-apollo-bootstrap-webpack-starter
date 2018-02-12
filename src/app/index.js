@@ -1,5 +1,6 @@
 // @flow
 
+// #region imports
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -12,6 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import './style/index.scss';
 import Root from './Root';
+// #endregion
 
 // #region smoothscroll polyfill
 smoothScrollPolyfill.polyfill();

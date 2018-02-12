@@ -7,8 +7,8 @@ import * as UserAuthTypes from '../../redux/modules/userAuth.types';
 export type LoginUserPayload = {
   user: {
     username: string,
-    password: string
-  }
+    password: string,
+  },
 };
 
 export type Props = {
@@ -41,5 +41,8 @@ export type Props = {
 };
 
 export type State = {
+  email: string,
+  password: string,
+
   ...any,
 };

@@ -1,101 +1,122 @@
-/* global $:true */
-// @flow weak
+// @flow
 
-import React, {
-  Component
-}                       from 'react';
-import PropTypes        from 'prop-types';
-import {smoothScroll}   from './lib/smoothScroll';
-import BackToTopButton  from './backToTopButton/BackToTopButton';
-import {
-  Motion,
-  spring,
-  presets
-}                       from 'react-motion';
+// #region imports
+import React, { Component } from 'react';
+import BackToTopButton from './backToTopButton/BackToTopButton';
+import { Motion, spring, presets } from 'react-motion';
+// #endregion
 
-class BackToTop extends Component {
-  static propTypes = {
-    minScrollY:   PropTypes.number,
-    scrollTo:     PropTypes.string.isRequired,
-    onScrollDone: PropTypes.func
-  };
+// #region flow types
+type Props = {
+  minScrollY: number,
+  scrollTo?: string,
+};
 
+type State = {
+  windowScrollY: number,
+  showBackButton: boolean,
+  tickingScrollObserve: boolean,
+};
+// #endregion
+
+class BackToTop extends Component<Props, State> {
   static defaultProps = {
-    minScrollY: 120
+    minScrollY: 120,
   };
 
   state = {
-    windowScrollY:  0,
-    showBackButton: false
+    windowScrollY: 0,
+    showBackButton: false,
+    tickingScrollObserve: false,
   };
 
+  // #region lifecycle
   componentWillMount() {
-    window.addEventListener('scroll', this.handleWindowScroll);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', this.handleWindowScroll);
+    }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleWindowScroll);
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('scroll', this.handleWindowScroll);
+    }
   }
 
   render() {
     const { showBackButton } = this.state;
+
     return (
       <Motion
         style={{
-          interpolatedX: spring(showBackButton ? 0 : 120, presets.stiff)
-        }}>
-        {
-          ({interpolatedX}) =>
-            <BackToTopButton
-              position={'bottom-right'}
-              onClick={this.handlesOnBackButtonClick}
-              motionStyle={{
-                WebkitTransform:  `translate3d(${interpolatedX}px, 0, 0)`,
-                transform:        `translate3d(${interpolatedX}px, 0, 0)`
-              }}
-            />
-        }
+          interpolatedX: spring(showBackButton ? 0 : 120, presets.stiff),
+        }}
+      >
+        {({ interpolatedX }) => (
+          <BackToTopButton
+            position={'bottom-right'}
+            onClick={this.handlesOnBackButtonClick}
+            motionStyle={{
+              WebkitTransform: `translate3d(${interpolatedX}px, 0, 0)`,
+              transform: `translate3d(${interpolatedX}px, 0, 0)`,
+            }}
+          />
+        )}
       </Motion>
     );
   }
+  // #endregion
 
+  // #region on window scroll callback
   handleWindowScroll = () => {
-    if ($) {
-      const { windowScrollY }    = this.state;
-      const { minScrollY }       = this.props;
-      const currentWindowScrollY = $(window).scrollTop();
+    if (window) {
+      const { windowScrollY, tickingScrollObserve } = this.state;
+      const { minScrollY } = this.props;
 
-      if (windowScrollY !== currentWindowScrollY) {
-        const shouldShowBackButton = currentWindowScrollY >= minScrollY ? true : false;
+      /* eslint-disable no-undefined */
+      const currentWindowScrollY =
+        window.pageYOffset !== undefined
+          ? window.pageYOffset
+          : (
+              document.documentElement ||
+              document.body.parentNode ||
+              document.body
+            ).scollTop;
+      /* eslint-enable no-undefined */
 
-        this.setState({
-          windowScrollY:  currentWindowScrollY,
-          showBackButton: shouldShowBackButton
+      if (!tickingScrollObserve) {
+        window.requestAnimationFrame(() => {
+          if (windowScrollY !== currentWindowScrollY) {
+            const shouldShowBackButton =
+              currentWindowScrollY >= minScrollY ? true : false;
+
+            this.setState({
+              windowScrollY: currentWindowScrollY,
+              showBackButton: shouldShowBackButton,
+            });
+          }
+          this.setState({ tickingScrollObserve: false });
         });
       }
-    } else {
-      /* eslint-disable no-throw-literal*/
-      throw 'BackToTop component requires jQuery';
-      /* eslint-enable no-throw-literal*/
+      this.setState({ tickingScrollObserve: true });
     }
-  }
+  };
+  // #endregion
 
-  scrollDone = () => {
-    const { onScrollDone } = this.props;
-    if (onScrollDone) {
-      onScrollDone();
+  // #region on button click (smoothscroll)
+  handlesOnBackButtonClick = event => {
+    if (event) {
+      event.preventDefault();
     }
-  }
+    const { minScrollY } = this.props;
+    const { windowScrollY } = this.state;
 
-  handlesOnBackButtonClick = (event) => {
-    event.preventDefault();
-    const { scrollTo, minScrollY } = this.props;
-    const { windowScrollY }        = this.state;
-
-    if (windowScrollY && windowScrollY > minScrollY) {
-      smoothScroll.scrollTo(scrollTo, this.scrollDone);
+    if (window && windowScrollY && windowScrollY > minScrollY) {
+      // using here smoothscroll polyfill
+      window.scroll({ top: 0, left: 0, behaviour: 'smooth' });
     }
-  }
+  };
+  // #endregion
 }
 
 export default BackToTop;
