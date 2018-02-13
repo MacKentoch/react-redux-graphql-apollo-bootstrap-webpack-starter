@@ -103,8 +103,8 @@ class BackToTop extends Component<Props, State> {
   };
   // #endregion
 
-  // #region on button click (smoothscroll)
-  handlesOnBackButtonClick = event => {
+  // #region on button click (smooth scroll)
+  handlesOnBackButtonClick = (event: SyntheticEvent<>) => {
     if (event) {
       event.preventDefault();
     }
@@ -112,8 +112,9 @@ class BackToTop extends Component<Props, State> {
     const { windowScrollY } = this.state;
 
     if (window && windowScrollY && windowScrollY > minScrollY) {
-      // using here smoothscroll polyfill
-      window.scroll({ top: 0, left: 0, behaviour: 'smooth' });
+      // using here smoothscroll-polyfill
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+      // smoothScroll.scrollTo(scrollTo, this.scrollDone);
     }
   };
   // #endregion
