@@ -17,10 +17,12 @@ const UpIcon = ({ color }: Props) => (
   </svg>
 );
 
+// #region static props
 UpIcon.defaultProps = {
   color: '#F1F1F1',
 };
 
 UpIcon.displayName = 'UpIcon';
+// #endregion
 
 export default UpIcon;

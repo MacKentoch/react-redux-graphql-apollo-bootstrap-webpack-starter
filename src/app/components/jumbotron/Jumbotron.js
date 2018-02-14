@@ -1,18 +1,19 @@
-// @flow weak
+// @flow
 
-import React            from 'react';
-import PropTypes        from 'prop-types';
+// #region imports
+import React from 'react';
+// #endregion
 
-const Jumbotron = ({
-  children
-}) => (
-  <div className="jumbotron">
-    { children }
-  </div>
+// #region flow types
+type Props = { children: React$Node, ...any };
+// #endregion
+
+const Jumbotron = ({ children }: Props) => (
+  <div className="jumbotron">{children}</div>
 );
 
-Jumbotron.propTypes = {
-  children: PropTypes.node
-};
+// #region static props
+Jumbotron.displayName = 'Jumbotron';
+// #endregion
 
 export default Jumbotron;

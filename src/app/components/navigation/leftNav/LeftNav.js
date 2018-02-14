@@ -1,41 +1,29 @@
-// @flow weak
+// @flow
 
-import React            from 'react';
-import PropTypes        from 'prop-types';
-import LeftNavButton    from './leftNavButton/LeftNavButton';
+// #region imports
+import React from 'react';
+import LeftNavButton from './leftNavButton/LeftNavButton';
+import * as CTypes from './types';
+// #endregion
 
-const LeftNav = ({
-  leftLinks,
-  onLeftNavButtonClick
-}) => (
+const LeftNav = ({ leftLinks, onLeftNavButtonClick }: CTypes.Props) => (
   <ul className="nav navbar-nav">
-    {
-      leftLinks.map(
-        (aLinkBtn, index) => {
-          return (
-            <LeftNavButton
-              key={index}
-              link={aLinkBtn.link}
-              label={aLinkBtn.label}
-              viewName={aLinkBtn.view}
-              onClick={onLeftNavButtonClick}
-            />
-          );
-        }
-      )
-    }
+    {leftLinks.map(({ link, label, viewName }, index) => {
+      return (
+        <LeftNavButton
+          key={index}
+          link={link}
+          label={label}
+          viewName={viewName}
+          onClick={onLeftNavButtonClick}
+        />
+      );
+    })}
   </ul>
 );
 
-LeftNav.propTypes = {
-  leftLinks: PropTypes.arrayOf(
-    PropTypes.shape({
-      link:     PropTypes.string,
-      label:    PropTypes.string,
-      viewName: PropTypes.string
-    })
-  ),
-  onLeftNavButtonClick: PropTypes.func
-};
+// #region static props
+LeftNav.displayName = 'LeftNav';
+// #endregion
 
 export default LeftNav;
