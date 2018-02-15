@@ -4,10 +4,6 @@
 import React from 'react';
 // #endregion
 
-// #region flow types
-
-// #endregion
-
 const Humburger = () => (
   <button
     className="navbar-toggle collapsed"
