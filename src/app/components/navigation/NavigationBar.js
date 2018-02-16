@@ -1,32 +1,50 @@
-// @flow weak
+// @flow
 
-import React              from 'react';
-import PropTypes          from 'prop-types';
-import Humburger          from './humburger/Humburger';
-import LeftNav            from './leftNav/LeftNav';
-import RightNav           from './rightNav/RightNav';
+// #region imports
+import React, { SyntheticEvent } from 'react';
+import PropTypes from 'prop-types';
+import Humburger from './humburger/Humburger';
+import LeftNav from './leftNav/LeftNav';
+import RightNav from './rightNav/RightNav';
+// #endregion
+
+// #region flow types
+type Props = {
+  brand?: string,
+  userIsAuthenticated?: boolean,
+  handleLeftNavItemClick: (event: SyntheticEvent<>, viewName: string) => any,
+  handleRightNavItemClick: (event: SyntheticEvent<>, viewName: string) => any,
+  navModel: {
+    leftLinks: Array<{
+      label: string,
+      link: string,
+    }>,
+    rightLinks: Array<{
+      label: string,
+      link: string,
+    }>,
+  },
+};
+// #endregion
 
 const NavigationBar = ({
   brand,
   navModel,
   handleLeftNavItemClick,
   handleRightNavItemClick,
-  userIsAuthenticated
-}) => {
+  userIsAuthenticated,
+}: Props) => {
   return (
     <nav className="navbar navbar-default">
       <div className="containersCustom">
         <div className="navbar-header">
-          {
-            <Humburger />
-          }
-          <a className="navbar-brand">
-            {brand}
-          </a>
+          {<Humburger />}
+          <a className="navbar-brand">{brand}</a>
         </div>
         <div
           className="collapse navbar-collapse"
-          id="bs-example-navbar-collapse-1">
+          id="bs-example-navbar-collapse-1"
+        >
           <ul className="nav navbar-nav">
             {
               <LeftNav
@@ -51,29 +69,33 @@ const NavigationBar = ({
   );
 };
 
+// #region static props
 NavigationBar.propTypes = {
-  brand:                    PropTypes.string,
-  userIsAuthenticated:      PropTypes.bool.isRequired,
-  handleLeftNavItemClick:   PropTypes.func,
-  handleRightNavItemClick:  PropTypes.func,
-  navModel:                 PropTypes.shape({
-    leftLinks:  PropTypes.arrayOf(
+  brand: PropTypes.string,
+  userIsAuthenticated: PropTypes.bool.isRequired,
+  handleLeftNavItemClick: PropTypes.func,
+  handleRightNavItemClick: PropTypes.func,
+  navModel: PropTypes.shape({
+    leftLinks: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string.isRequired,
-        link : PropTypes.string.isRequired
-      })
+        link: PropTypes.string.isRequired,
+      }),
     ).isRequired,
-    rightLinks:  PropTypes.arrayOf(
+    rightLinks: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string.isRequired,
-        link : PropTypes.string.isRequired
-      })
-    ).isRequired
-  })
+        link: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+  }),
 };
 
-NavigationBar.defaultProps  = {
-  brand  : 'brand'
+NavigationBar.defaultProps = {
+  brand: 'brand',
 };
+
+NavigationBar.displayName = 'NavigationBar';
+// #endregion
 
 export default NavigationBar;
