@@ -1,5 +1,6 @@
 // @flow
 
+// #region imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavigationBar, BackToTop } from '../../components';
@@ -10,6 +11,7 @@ import * as viewsActions from '../../redux/modules/views';
 import * as userAuthActions from '../../redux/modules/userAuth';
 import MainRoutes from '../../routes/MainRoutes';
 import { withRouter } from 'react-router-dom';
+// #endregion
 
 class App extends Component {
   static propTypes = {
@@ -34,8 +36,7 @@ class App extends Component {
 
   render() {
     const { navModel } = this.state;
-
-    const { children, userIsAuthenticated } = this.props;
+    const {  userIsAuthenticated } = this.props;
 
     return (
       <div id="appContainer">

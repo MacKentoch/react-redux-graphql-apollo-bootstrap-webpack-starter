@@ -1,45 +1,51 @@
-// @flow weak
+// @flow
 
-import React, {
-  Component
-}                         from 'react';
-import PropTypes          from 'prop-types';
-import {
-  Route,
-  Redirect,
-  withRouter
-}                         from "react-router-dom";
-import auth               from '../../services/auth';
+// #region imports
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Route, Redirect, withRouter } from 'react-router-dom';
+import auth from '../../services/auth';
+// #endregion
 
-class PrivateRoute extends Component {
+// #region flow types
+type State = { ...any };
+type Props = {
+  match: any,
+  location: any,
+  history: any,
+
+  component: any,
+  path: string,
+  ...any,
+};
+// #ednregino
+
+class PrivateRoute extends Component<Props, State> {
   static propTypes = {
     // react-router 4:
-    match:    PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    history:  PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
 
-    component:  PropTypes.any.isRequired,
-    path:       PropTypes.string
+    component: PropTypes.any.isRequired,
+    path: PropTypes.string,
   };
 
   render() {
-    const {
-      component: Component,
-      ...rest
-    } = this.props;
+    const { component: BaseComponent, ...rest } = this.props;
     const { location } = this.props;
 
     const isUserAuthenticated = this.isAuthenticated();
-    const isTokenExpired      = this.isExpired();
+    const isTokenExpired = this.isExpired();
 
     return (
       <Route
         {...rest}
-        render={
-          props => (
-            !isTokenExpired && isUserAuthenticated
-              ? <Component {...props} />
-              : <Redirect to={{ pathname: "/login", state: { from: location } }} />
+        render={props =>
+          !isTokenExpired && isUserAuthenticated ? (
+            <BaseComponent {...props} />
+          ) : (
+            <Redirect to={{ pathname: '/login', state: { from: location } }} />
           )
         }
       />
