@@ -2,16 +2,11 @@
 
 // #region imports
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { ErrorAlert, WarningAlert } from '../../components';
 import styles from './register.scss';
-// #endregion
-
-// #region flow types
-type Props = any;
-type State = any;
+import * as CTypes from './types';
 // #endregion
 
 // #region constants
@@ -19,33 +14,11 @@ type State = any;
 const cx = classnames.bind(styles);
 // #endregion
 
-class Register extends PureComponent<Props, State> {
-  static propTypes = {
-    // react-router 4:
-    match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-
-    // views props:
-    currentView: PropTypes.string.isRequired,
-    enterRegister: PropTypes.func.isRequired,
-    leaveRegister: PropTypes.func.isRequired,
-    // auth props:
-    userIsAuthenticated: PropTypes.bool.isRequired,
-    mutationLoading: PropTypes.bool.isRequired,
-    error: PropTypes.object,
-
-    // apollo actions
-    registerUser: PropTypes.func.isRequired,
-    // resetStore: PropTypes.func.isRequired,
-  };
-
+class Register extends PureComponent<CTypes.Props, CTypes.State> {
   state = {
     viewEntersAnim: true,
-
     email: '',
     password: '',
-
     warning: null,
   };
 
@@ -163,11 +136,9 @@ class Register extends PureComponent<Props, State> {
 
     const { email, password } = this.state;
 
-    const variables = {
-      user: {
-        username: email,
-        password: password,
-      },
+    const user = {
+      username: email,
+      password: password,
     };
 
     // const { resetStore } = this.props;
@@ -187,7 +158,7 @@ class Register extends PureComponent<Props, State> {
     }
 
     try {
-      await registerUser({ variables });
+      await registerUser({ user });
       history.push({ pathname: '/protected' });
     } catch (error) {
       console.log('register user went wrong..., error: ', error);

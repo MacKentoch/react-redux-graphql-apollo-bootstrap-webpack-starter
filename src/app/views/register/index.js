@@ -10,6 +10,7 @@ import * as viewsActions from '../../redux/modules/views';
 import * as userAuthActions from '../../redux/modules/userAuth';
 import Register from './Register';
 import withEnterAnimation from '../../hoc/withEnterAnimation';
+import * as CTypes from './types';
 // #endregion
 
 // #region  Redux
@@ -45,34 +46,31 @@ const mapDispatchToProps = dispatch => {
 const createUserMutation = gql`
   mutation CreateUser($user: CreateUserInput!) {
     createUser(input: $user) {
-      changedUser {
-        id
-        username
-        createdAt
-        modifiedAt
-        lastLogin
-      }
       token
     }
   }
 `;
 
 const createUserMutationOptions = {
-  props: ({ ownProps, mutate }) => ({
+  props: ({
+    ownProps,
+    mutate,
+  }: {
+    ownProps: CTypes.Props,
+    mutate: (...any) => any,
+  }) => ({
     async registerUser(user) {
-      ownProps.setMutationLoading();
+      ownProps.setLoadingStateForUserRegister();
 
       try {
-        const payload = { variables: { user } };
-        const { data: { createUser: { changedUser, token } } } = await mutate(
-          payload,
-        );
-        ownProps.onUserRegisterSuccess(token, changedUser);
-        ownProps.unsetMutationLoading();
+        const payload = { variables: { ...user } };
+        const { data: { createUser: { token } } } = await mutate(payload);
+        ownProps.receivedUserRegister(token, user);
+        ownProps.unsetLoadingStateForUserRegister();
         return Promise.resolve();
       } catch (error) {
-        ownProps.onUserRegisterError(error);
-        ownProps.unsetMutationLoading();
+        ownProps.errorUserRegister(error);
+        ownProps.unsetLoadingStateForUserRegister();
         return Promise.reject(error);
       }
     },
