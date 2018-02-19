@@ -5,7 +5,18 @@ import React from 'react';
 // #endregion
 
 // #region flow types
-type Props = { children: React$Node, ...any };
+export type Props = {
+  // react-router 4:
+  match: any,
+  location: any,
+  history: any,
+
+  children: React$Node,
+
+  ...any,
+};
+
+export type State = {};
 // #endregion
 
 const Jumbotron = ({ children }: Props) => (

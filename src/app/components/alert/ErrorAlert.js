@@ -6,14 +6,14 @@ import { Motion, spring, presets } from 'react-motion';
 // #endregion
 
 // #region flow types
-type Props = {
+export type Props = {
   showAlert: boolean,
   errorTitle: string,
   errorMessage: string,
   onClose: () => any,
 };
 
-type State = {};
+export type State = {};
 // #endregion
 
 class ErrorAlert extends PureComponent<Props, State> {

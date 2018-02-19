@@ -7,12 +7,12 @@ import { Motion, spring, presets } from 'react-motion';
 // #endregion
 
 // #region flow types
-type Props = {
+export type Props = {
   minScrollY: number,
   scrollTo?: string,
 };
 
-type State = {
+export type State = {
   windowScrollY: number,
   showBackButton: boolean,
   tickingScrollObserve: boolean,

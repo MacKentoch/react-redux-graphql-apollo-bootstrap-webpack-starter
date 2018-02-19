@@ -7,7 +7,7 @@ import cx from 'classnames';
 // #endregion
 
 // #region flow types
-type Props = {
+export type Props = {
   showAlert: boolean,
   errorTitle: string,
   errorMessage: string,
@@ -15,7 +15,7 @@ type Props = {
   type: 'warning' | 'error',
 };
 
-type State = {};
+export type State = {};
 // #endregion
 
 class Alert extends PureComponent<Props, State> {

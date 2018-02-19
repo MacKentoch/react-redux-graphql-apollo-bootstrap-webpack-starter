@@ -5,6 +5,7 @@ import {
   type SetLoadingStateForUserRegister,
   type UnsetLoadingStateForUserRegister,
   type ReceivedUserRegister,
+  type ErrorUserRegister,
 } from '../../redux/modules/userAuth.types';
 import {
   type Match,

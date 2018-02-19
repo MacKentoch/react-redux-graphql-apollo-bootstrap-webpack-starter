@@ -7,7 +7,7 @@ import UpIcon from './UpIcon';
 // #endregion
 
 // #region flow types
-type Props = {
+export type Props = {
   position: 'bottom-left' | 'bottom-right',
   onClick: (event: SyntheticEvent<>) => any,
   children: React$Node,

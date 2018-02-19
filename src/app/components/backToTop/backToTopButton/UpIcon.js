@@ -5,7 +5,7 @@ import React from 'react';
 // #endregion
 
 // #region flow types
-type Props = {
+export type Props = {
   color: string,
 };
 // #endregion
