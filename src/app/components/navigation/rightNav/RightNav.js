@@ -7,7 +7,7 @@ import RightNavButton from './rightNavButton/RightNavButton';
 // #endregion
 
 // #region flow types
-type Props = {
+export type Props = {
   rightLinks: Array<{
     link: string,
     label: string,

@@ -7,8 +7,8 @@ import { withRouter } from 'react-router';
 // #endregion
 
 // #region flow types
-type State = { ...any };
-type Props = {
+export type State = { ...any };
+export type Props = {
   match: any,
   location: any,
   history: any,
@@ -41,11 +41,7 @@ class ScrollToTop extends Component<Props, State> {
   render() {
     const { children } = this.props;
 
-    return (
-    <div>
-      {children}
-    </div>
-    );
+    return <div>{children}</div>;
   }
 }
 

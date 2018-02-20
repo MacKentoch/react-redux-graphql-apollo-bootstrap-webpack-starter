@@ -1,7 +1,7 @@
 // @flow
 
 // #region imports
-import React, { SyntheticEvent } from 'react';
+import React, { type SyntheticEvent } from 'react';
 import PropTypes from 'prop-types';
 import Humburger from './humburger/Humburger';
 import LeftNav from './leftNav/LeftNav';
@@ -9,7 +9,7 @@ import RightNav from './rightNav/RightNav';
 // #endregion
 
 // #region flow types
-type Props = {
+export type Props = {
   brand?: string,
   userIsAuthenticated?: boolean,
   handleLeftNavItemClick: (event: SyntheticEvent<>, viewName: string) => any,

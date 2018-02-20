@@ -3,10 +3,20 @@
 // #region imports
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import * as CTypes from './types';
 // #endregion
 
-class LeftNavButton extends PureComponent<CTypes.Props, CTypes.State> {
+// #region flow types
+export type Props = {
+  link: string,
+  label: string,
+  viewName: string,
+  onClick: (event: SyntheticEvent<>, viewName: string) => any,
+};
+
+export type State = { ...any };
+// #endregion
+
+class LeftNavButton extends PureComponent<Props, State> {
   // #region lifecycle
   render() {
     const { link, label } = this.props;

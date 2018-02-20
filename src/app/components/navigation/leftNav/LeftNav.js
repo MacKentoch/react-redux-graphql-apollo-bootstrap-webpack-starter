@@ -3,10 +3,24 @@
 // #region imports
 import React from 'react';
 import LeftNavButton from './leftNavButton/LeftNavButton';
-import * as CTypes from './types';
 // #endregion
 
-const LeftNav = ({ leftLinks, onLeftNavButtonClick }: CTypes.Props) => (
+// #region flow types
+export type NavItem = {
+  link: string,
+  label: string,
+  viewName: string,
+};
+
+export type Props = {
+  leftLinks: Array<NavItem>,
+  onLeftNavButtonClick: () => {},
+
+  ...any,
+};
+// #endregion
+
+const LeftNav = ({ leftLinks, onLeftNavButtonClick }: Props) => (
   <ul className="nav navbar-nav">
     {leftLinks.map(({ link, label, viewName }, index) => {
       return (

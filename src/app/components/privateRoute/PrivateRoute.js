@@ -8,8 +8,8 @@ import auth from '../../services/auth';
 // #endregion
 
 // #region flow types
-type State = { ...any };
-type Props = {
+export type State = { ...any };
+export type Props = {
   match: any,
   location: any,
   history: any,
