@@ -50,6 +50,7 @@ const getUserQueryOptions = {
       user: userAuth.id ? userAuth.id : '',
     },
   }),
+  skip: ({ isAuthenticated }) => !isAuthenticated,
   name: 'getCurrentUser',
   props: ({
     ownProps,
@@ -57,7 +58,7 @@ const getUserQueryOptions = {
   }) => {
     return {
       userLoading: loading,
-      user: { ...getUser, ...getRole },
+      user: { ...getRole, ...getUser },
       refetchUser: refetch,
     };
   },

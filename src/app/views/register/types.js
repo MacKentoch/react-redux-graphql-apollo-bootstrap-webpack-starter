@@ -7,12 +7,7 @@ import {
   type ReceivedUserRegister,
   type ErrorUserRegister,
 } from '../../redux/modules/userAuth.types';
-import {
-  type Match,
-  type Location,
-  type RouterHistory,
-  type ErrorUserRegister,
-} from 'react-router';
+import { type Match, type Location, type RouterHistory } from 'react-router';
 // #endregion
 
 // #region flow types

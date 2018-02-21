@@ -2,36 +2,53 @@
 
 // #region imports
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import { type Match, type Location, type RouterHistory } from 'react-router';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
-import classnames from 'classnames';
+// import classnames from 'classnames';
 import { Link } from 'react-router-dom';
-import styles from './home.scss';
+// import styles from './home.scss';
 // #endregion
 
 // #region flow types
-type Props = any;
-type State = any;
+export type UserProps = {
+  id: number,
+  username: string,
+  createdAt: string | Date,
+  modifiedAt: string | Date,
+  lastLogin: string | Date,
+};
+
+export type RoleProps = { id: number, name: string, createdAt: string | Date };
+
+export type Props = {
+  // react-router 4:
+  match: Match,
+  location: Location,
+  history: RouterHistory,
+
+  // getUser Query
+  userLoading: boolean,
+  user: UserProps & RoleProps,
+  refetchUser: () => any,
+
+  // view props:
+  currentView: string,
+
+  // view actions:
+  enterHome: () => any,
+  leaveHome: () => any,
+
+  ...any,
+};
+export type State = any;
 // #endregion
 
 // #region constants
 // IMPORTANT: we need to bind classnames to CSSModule generated classes:
-const cx = classnames.bind(styles);
+// const cx = classnames.bind(styles);
 // #endregion
 
 class Home extends PureComponent<Props, State> {
-  static propTypes = {
-    // react-router 4:
-    match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-    // view props:
-    currentView: PropTypes.string.isRequired,
-    // view actions:
-    enterHome: PropTypes.func.isRequired,
-    leaveHome: PropTypes.func.isRequired,
-  };
-
   // #region lifecycle
   componentDidMount() {
     const { enterHome } = this.props;
