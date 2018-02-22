@@ -3,19 +3,64 @@
 // #region imports
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+// import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { ErrorAlert } from '../../components';
 import styles from './login.scss';
-import * as Types from './types';
+import * as UserAuthTypes from '../../redux/modules/userAuth.types';
+// #endregion
+
+// #region flow types
+export type LoginUserPayload = {
+  user: {
+    username: string,
+    password: string,
+  },
+};
+
+export type Props = {
+  // react-router 4:
+  match: any,
+  location: any,
+  history: any,
+
+  // views props:
+  currentView: string,
+  enterLogin: () => any,
+  leaveLogin: () => any,
+
+  // user Auth props:
+  userIsAuthenticated: boolean,
+  mutationLoading: boolean,
+  receivedUserLoggedIn: UserAuthTypes.ReceivedUserLoggedIn,
+  errorUserLoggedIn: UserAuthTypes.ErrorUserLoggedIn,
+  resetLogError: UserAuthTypes.ResetLogError,
+  setLoadingStateForUserLogin: UserAuthTypes.SetLoadingStateForUserLogin,
+  unsetLoadingStateForUserLogin: UserAuthTypes.UnsetLoadingStateForUserLogin,
+
+  // errors:
+  error: any,
+
+  // grpahql loginUser mutation
+  loginUser: (user: LoginUserPayload) => Promise<any>,
+
+  ...any,
+};
+
+export type State = {
+  email: string,
+  password: string,
+
+  ...any,
+};
 // #endregion
 
 // #region constants
 // IMPORTANT: we need to bind classnames to CSSModule generated classes:
-const cx = classnames.bind(styles);
+// const cx = classnames.bind(styles);
 // #endregion
 
-class Login extends PureComponent<Types.Props, Types.State> {
+class Login extends PureComponent<Props, State> {
   static propTypes = {
     // react-router 4:
     match: PropTypes.object.isRequired,
