@@ -10,7 +10,6 @@ import * as viewsActions from '../../redux/modules/views';
 import * as userAuthActions from '../../redux/modules/userAuth';
 import Register from './Register';
 import withEnterAnimation from '../../hoc/withEnterAnimation';
-import * as CTypes from './types';
 // #endregion
 
 // #region  Redux

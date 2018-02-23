@@ -4,12 +4,19 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
+import { type Match, type Location, type RouterHistory } from 'react-router';
 // import classnames from 'classnames';
 // import styles from './pageNotFound.scss';
 // #endregion
 
 // #region flow types
-type Props = any;
+type Props = {
+  // react-router 4:
+  match: Match,
+  location: Location,
+  history: RouterHistory,
+  ...any,
+};
 type State = any;
 // #endregion
 

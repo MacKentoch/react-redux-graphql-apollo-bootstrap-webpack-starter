@@ -6,8 +6,9 @@ import PropTypes from 'prop-types';
 // import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { ErrorAlert } from '../../components';
-import styles from './login.scss';
 import * as UserAuthTypes from '../../redux/modules/userAuth.types';
+import { type Match, type Location, type RouterHistory } from 'react-router';
+// import styles from './login.scss';
 // #endregion
 
 // #region flow types
@@ -20,9 +21,9 @@ export type LoginUserPayload = {
 
 export type Props = {
   // react-router 4:
-  match: any,
-  location: any,
-  history: any,
+  match: Match,
+  location: Location,
+  history: RouterHistory,
 
   // views props:
   currentView: string,

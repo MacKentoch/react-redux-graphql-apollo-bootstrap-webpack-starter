@@ -5,7 +5,34 @@
 import React, { PureComponent } from 'react';
 import classnames from 'classnames';
 import styles from './protected.scss';
-import * as CTypes from './types';
+import { type Match, type Location, type RouterHistory } from 'react-router';
+// #endregion
+
+// #region flow types
+export type Props = {
+  // react-router 4:
+  match: Match,
+  location: Location,
+  history: RouterHistory,
+
+  // views props:
+  currentView: string,
+
+  // errors:
+  error: any,
+
+  // views
+  enterProtected: () => any,
+  leaveProtected: () => any,
+
+  ...any,
+};
+
+export type State = {
+  viewEntersAnim: boolean,
+
+  ...any,
+};
 // #endregion
 
 // #region constants
@@ -13,7 +40,7 @@ import * as CTypes from './types';
 const cx = classnames.bind(styles);
 // #endregion
 
-class Protected extends PureComponent<CTypes.Props, CTypes.State> {
+class Protected extends PureComponent<Props, State> {
   state = {
     viewEntersAnim: true,
   };
