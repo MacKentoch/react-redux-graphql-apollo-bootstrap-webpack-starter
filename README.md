@@ -6,23 +6,23 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 
 ![preview](./preview/preview.png)
 
-
 - *webpack is as simple as possible*
 - *ReactJS is written with `optimization tricks` (stateless, pure render...).*
 - *`pure front-end` = server independant (use whatever you want as server: NodeJS, Rails, .NET...)*
 - *`redux` + `devTools` + `hot reload`= how did I developed without them before?*
 - *graphQL makes API to be " `has been` "*
- - *no more struggle in redux with async thank to Apollo Client (you can even get rid of redux thunk or redux saga if you needed theses just for your asyncs. Otherwise keep them since they are nice :smile:)*
+  - *no more struggle in redux with async thank to Apollo Client (you can even get rid of redux thunk or redux saga if you needed theses just for your asyncs. Otherwise keep them since they are nice :smile:)*
 - [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension#redux-devtools-extension) to make developments a pure pleasure.
 
 
 ## Detailed Content
 
 **Front:**
-- React JS (15.6.x - [github :link:](https://github.com/facebook/react))
+
+- React JS (16.2.x - [github :link:](https://github.com/facebook/react))
 - Redux (*as you application grows managing state will be a serious concern, save pain with Redux*)
-- apollo-client 1.9.x (*futur of API. Learn about this beast [here in officiel website](http://dev.apollodata.com/)*)
-- React-Redux 3.7.x (*Redux is not specific to ReactJS, you could easily use it with Angular2 for instance*)
+- apollo-client 2.x (*futur of API. Learn about this beast [here in officiel website](http://dev.apollodata.com/)*)
+- React-Redux 5.x (*Redux is not specific to ReactJS, you could easily use it with Angular2 for instance*)
 - React-Router-Redux (*previously named react-simple-router*)
 - react-router (4.x- [github :link:](https://github.com/reactjs/react-router))
 - Bootstrap (3.x - [github :link:](https://github.com/twbs/bootstrap))
@@ -37,6 +37,7 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 - redux-devtool-extension ([github :link:](https://github.com/zalmoxisus/redux-devtools-extension#redux-devtools-extension))
 
 **Tool chain:**
+
 - babel 6+
 - eslint
 - hot reload
@@ -49,11 +50,8 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
   - svg and fonts formats
 
 **tests:**
-- Mocha
-- Chai (*+ dirty-chai*)
-- enzyme
-- Sinon
-- nyc
+
+- jest
 
 
 ## Usage
