@@ -12,6 +12,19 @@
     "transform-async-to-generator"
   ],
   "env": {
+    "test": {
+      "presets": [
+        ["env", {
+          "modules": true
+        }],
+        "react",
+        "stage-2"
+      ],
+      "plugins": [
+        "transform-regenerator",
+        "transform-async-to-generator"
+      ]
+    },
     "production": {
       "presets": [
         "react-optimize"
