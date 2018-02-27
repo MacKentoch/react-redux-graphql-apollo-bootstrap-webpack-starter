@@ -15,10 +15,9 @@
     "test": {
       "presets": [
         ["env", {
-          "modules": true
+          "modules": "commonjs"
         }],
-        "react",
-        "stage-2"
+        "jest"
       ],
       "plugins": [
         "transform-regenerator",
