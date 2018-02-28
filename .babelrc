@@ -17,6 +17,7 @@
         ["env", {
           "modules": "commonjs"
         }],
+        "flow",
         "jest"
       ],
       "plugins": [
