@@ -17,6 +17,8 @@
         ["env", {
           "modules": "commonjs"
         }],
+        "react",
+        "stage-2",
         "flow",
         "jest"
       ],
