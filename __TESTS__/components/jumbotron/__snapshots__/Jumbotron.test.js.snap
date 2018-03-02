@@ -5,7 +5,7 @@ exports[`Jumbotron component renders as expected 1`] = `
   className="jumbotron"
 >
   <p>
-    an alert
+    Jumbotron
   </p>
 </div>
 `;

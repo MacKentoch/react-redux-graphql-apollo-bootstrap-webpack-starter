@@ -7,7 +7,7 @@ describe('Jumbotron component', () => {
     const component = renderer
       .create(
         <Jumbotron>
-          <p>an alert</p>
+          <p>Jumbotron</p>
         </Jumbotron>,
       )
       .toJSON();
