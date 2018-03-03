@@ -1,17 +1,17 @@
 import React from 'react';
-import Alert from '../../../src/app/components/alert/Alert';
+import ErrorAlert from '../../../src/app/components/alert/ErrorAlert';
 import renderer from 'react-test-renderer'; // needed both for snpashot testing but also to prevent errors from enzyme
 import { mount } from 'enzyme';
 
-describe('Alert component', () => {
+describe('ErrorAlert component', () => {
   it('renders as expected', () => {
     const props = { showAlert: true, type: 'warning' };
 
     const component = renderer
       .create(
-        <Alert {...props}>
-          <p>an alert</p>
-        </Alert>,
+        <ErrorAlert {...props}>
+          <p>an error alert</p>
+        </ErrorAlert>,
       )
       .toJSON();
     expect(component).toMatchSnapshot();
@@ -26,9 +26,9 @@ describe('Alert component', () => {
     };
 
     const component = mount(
-      <Alert {...props}>
+      <ErrorAlert {...props}>
         <p>an alert</p>
-      </Alert>,
+      </ErrorAlert>,
     );
 
     expect(component.find('div.alert')).toBeDefined();
@@ -42,7 +42,7 @@ describe('Alert component', () => {
     const mockClickEvent = { preventDefault };
 
     const component = mount(
-      <Alert showAlert={true} type="warning" onClose={onClickMock} />,
+      <ErrorAlert showAlert={true} type="warning" onClose={onClickMock} />,
     );
 
     const button = component.find('button.close');
@@ -56,7 +56,7 @@ describe('Alert component', () => {
       showAlert: false,
     };
 
-    const component = mount(<Alert {...props} />);
+    const component = mount(<ErrorAlert {...props} />);
     const divAlert = component.find('div.alert');
     expect(divAlert).toBeDefined();
     expect(divAlert.prop('style')).toHaveProperty('transform', 'scale(0)');

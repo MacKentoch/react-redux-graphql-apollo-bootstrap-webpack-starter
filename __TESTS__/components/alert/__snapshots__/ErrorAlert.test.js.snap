@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorAlert component renders as expected 1`] = `
+<div
+  className="alert alert-dismissible alert-danger"
+  style={
+    Object {
+      "WebkitTransform": "scale(1)",
+      "transform": "scale(1)",
+    }
+  }
+>
+  <button
+    className="close"
+    onClick={undefined}
+    type="button"
+  >
+    ×
+  </button>
+  <p />
+</div>
+`;
