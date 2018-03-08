@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LeftNavButton (navigation) component renders as expected 1`] = `
+<div>
+  <li>
+    <a
+      href="link"
+      onClick={[Function]}
+    >
+      label
+    </a>
+  </li>
+</div>
+`;
