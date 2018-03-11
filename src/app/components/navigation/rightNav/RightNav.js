@@ -12,6 +12,10 @@ export type Props = {
     link: string,
     label: string,
     viewName: string,
+    btnLink: {
+      showWhenUserAuth: boolean,
+      alwaysShows: boolean,
+    },
   }>,
   onRightNavButtonClick: (event: SyntheticEvent<>) => any,
   userIsAuthenticated: boolean,
