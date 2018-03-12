@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationBar (navigation) component renders as expected (not authenticated) 1`] = `
+<div>
+  <nav
+    className="navbar navbar-default"
+  >
+    <div
+      className="containersCustom"
+    >
+      <div
+        className="navbar-header"
+      >
+        <button
+          className="navbar-toggle collapsed"
+          data-target="#bs-example-navbar-collapse-1"
+          data-toggle="collapse"
+          type="button"
+        >
+          <span
+            className="sr-only"
+          >
+            Toggle navigation
+          </span>
+          <span
+            className="icon-bar"
+          />
+          <span
+            className="icon-bar"
+          />
+          <span
+            className="icon-bar"
+          />
+        </button>
+        <a
+          className="navbar-brand"
+        >
+          brand
+        </a>
+      </div>
+      <div
+        className="collapse navbar-collapse"
+        id="bs-example-navbar-collapse-1"
+      >
+        <ul
+          className="nav navbar-nav"
+        >
+          <ul
+            className="nav navbar-nav"
+          >
+            <li>
+              <a
+                href="link"
+                onClick={[Function]}
+              >
+                label
+              </a>
+            </li>
+            <li>
+              <a
+                href="link"
+                onClick={[Function]}
+              >
+                label
+              </a>
+            </li>
+            <li>
+              <a
+                href="link"
+                onClick={[Function]}
+              >
+                label
+              </a>
+            </li>
+            <li>
+              <a
+                href="link"
+                onClick={[Function]}
+              >
+                label
+              </a>
+            </li>
+          </ul>
+        </ul>
+        <ul
+          className="nav navbar-nav navbar-right"
+        >
+          <ul
+            className="nav navbar-nav navbar-right"
+          />
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+`;

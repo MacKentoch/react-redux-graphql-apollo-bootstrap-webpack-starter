@@ -15,11 +15,3 @@ exports[`RightNav (navigation) component renders as expected (not authenticated)
   />
 </div>
 `;
-
-exports[`RightNav (navigation) component renders as expected 1`] = `
-<div>
-  <ul
-    className="nav navbar-nav navbar-right"
-  />
-</div>
-`;
