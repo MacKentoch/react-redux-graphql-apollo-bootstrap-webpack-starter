@@ -62,40 +62,12 @@ export type State = {
 // #endregion
 
 class Login extends PureComponent<Props, State> {
-  static propTypes = {
-    // react-router 4:
-    match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-
-    // views props:
-    currentView: PropTypes.string.isRequired,
-    enterLogin: PropTypes.func.isRequired,
-    leaveLogin: PropTypes.func.isRequired,
-
-    // apollo props:
-    user: PropTypes.shape({
-      username: PropTypes.string,
-    }),
-
-    // auth props:
-    userIsAuthenticated: PropTypes.bool.isRequired,
-    mutationLoading: PropTypes.bool.isRequired,
-    error: PropTypes.object,
-
-    // apollo actions
-    loginUser: PropTypes.func.isRequired,
-
-    // redux actions
-    receivedUserLoggedIn: PropTypes.func.isRequired,
-    resetLogError: PropTypes.func.isRequired,
-  };
-
   state = {
     email: '',
     password: '',
   };
 
+  // #region component lifecycle
   componentDidMount() {
     const { enterLogin } = this.props;
     enterLogin();
@@ -182,6 +154,7 @@ class Login extends PureComponent<Props, State> {
       </div>
     );
   }
+  // #endregion
 
   handlesOnEmailChange = event => {
     event.preventDefault();
