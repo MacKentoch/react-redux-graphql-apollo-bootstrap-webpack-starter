@@ -5,11 +5,20 @@ import { RouterHistory } from 'react-router';
 
 describe('Login component', () => {
   it('renders as expected', () => {
+    const props = {
+      currentView: 'login',
+      enterLogin: () => {},
+      leaveLogin: () => {},
+      loginUser: () => {},
+      userIsAuthenticated: false,
+      mutationLoading: false,
+    };
+
     const component = renderer
       .create(
         <div>
           <RouterHistory>
-            <Login />
+            <Login {...props} />
           </RouterHistory>
         </div>,
       )
