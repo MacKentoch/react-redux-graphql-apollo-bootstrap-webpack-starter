@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import WarningError from '../../../src/app/components/alert/ErrorAlert';
 import renderer from 'react-test-renderer'; // needed both for snpashot testing but also to prevent errors from enzyme

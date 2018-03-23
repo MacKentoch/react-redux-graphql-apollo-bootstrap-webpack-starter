@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import RightNavButton from '../../../../../src/app/components/navigation/rightNav/rightNavButton/RightNavButton';
 import renderer from 'react-test-renderer'; // needed both for snpashot testing but also to prevent errors from enzyme

@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import Home from '../../../src/app/views/home/Home';
 import renderer from 'react-test-renderer'; // needed both for snpashot testing but also to prevent errors from enzyme

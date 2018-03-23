@@ -4,7 +4,7 @@
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
-import { from } from 'apollo-link';
+import ApolloLink from 'apollo-link';
 import { createHttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
 import { appConfig } from '../../config';
@@ -12,9 +12,7 @@ import { appConfig } from '../../config';
 
 // #region link, middleware
 const { networkInterface: uri } = appConfig.apollo;
-const httplink = createHttpLink({
-  uri,
-});
+const httplink = createHttpLink({ uri });
 
 // #region get user token from localStorage
 let token; // cached token to access localStorage just once
@@ -30,15 +28,11 @@ async function getUserToken() {
 }
 // #endregion
 
-const authMiddleware = setContext(async (operation, { headers }) => {
+const authLink = setContext(async (operation, { headers }) => {
   const currentUsertoken = await getUserToken();
-  const authorization = currentUsertoken ? `Bearer ${currentUsertoken}` : null;
-  return {
-    headers: {
-      ...headers,
-      authorization,
-    },
-  };
+  return currentUsertoken
+    ? { headers: { ...headers, Authorization: `Bearer ${token}` } }
+    : { headers: { ...headers } };
 });
 // #endregion
 
@@ -52,16 +46,25 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   console.log('error afterware, networkError: ', networkError);
 
   if (networkError && networkError.statusCode === 401) {
-    throw new Error('Unauthorized');
+    // redirect to home
+    return global.window.location.replace('/');
   }
 });
 // #endregion
 
-const link = from([authMiddleware, errorLink, httplink]);
+// #region environment flag
+/* eslint-disable no-process-env */
+const isDevEnv = process.env.NODE_ENV !== 'production';
+/* eslint-enable no-process-env */
+// #endregion
+
+const link = ApolloLink.from([authLink, errorLink, httplink]);
+
 // #region apollo client instanciation
 const client = new ApolloClient({
   link,
   cache,
+  connectToDevTools: isDevEnv,
   queryDeduplication: true,
 });
 // #endregion

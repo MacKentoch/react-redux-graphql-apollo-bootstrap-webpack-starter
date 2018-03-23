@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import NavigationBar from '../../../src/app/components/navigation/NavigationBar';
 import renderer from 'react-test-renderer'; // needed both for snpashot testing but also to prevent errors from enzyme
