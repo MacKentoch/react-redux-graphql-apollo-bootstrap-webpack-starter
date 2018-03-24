@@ -4,7 +4,7 @@
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
-import ApolloLink from 'apollo-link';
+import { from } from 'apollo-link';
 import { createHttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
 import { appConfig } from '../../config';
@@ -58,7 +58,7 @@ const isDevEnv = process.env.NODE_ENV !== 'production';
 /* eslint-enable no-process-env */
 // #endregion
 
-const link = ApolloLink.from([authLink, errorLink, httplink]);
+const link = from([authLink, errorLink, httplink]);
 
 // #region apollo client instanciation
 const client = new ApolloClient({
