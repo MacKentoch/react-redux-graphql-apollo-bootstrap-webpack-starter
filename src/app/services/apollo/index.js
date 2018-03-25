@@ -41,15 +41,22 @@ const cache = new InMemoryCache();
 // #endregion
 
 // #region afterware (lanage token expiration for exmaple)
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  console.log('error afterware, graphQLErrors: ', graphQLErrors);
-  console.log('error afterware, networkError: ', networkError);
+const errorLink = onError(
+  ({ graphQLErrors, networkError, response, operation }) => {
+    console.log('error afterware, graphQLErrors: ', graphQLErrors);
+    console.log('error afterware, networkError: ', networkError);
 
-  if (networkError && networkError.statusCode === 401) {
-    // redirect to home
-    return global.window.location.replace('/');
-  }
-});
+    if (networkError && networkError.statusCode === 401) {
+      // redirect to home
+      return global.window.location.replace('/');
+    }
+
+    // example: add code to a specific operation
+    if (operation.operationName === 'getCurrentUser') {
+      console.log('just getting current user (getCurrentUser query)');
+    }
+  },
+);
 // #endregion
 
 // #region environment flag
