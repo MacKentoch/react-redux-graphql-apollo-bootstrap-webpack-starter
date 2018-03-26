@@ -173,15 +173,13 @@ class Login extends PureComponent<Props, State> {
 
     const { email, password } = this.state;
 
-    const variables = {
-      user: {
-        username: email,
-        password: password,
-      },
+    const user = {
+      username: email,
+      password: password,
     };
 
     try {
-      await loginUser({ variables });
+      await loginUser({ user });
       history.push({ pathname: '/protected' });
     } catch (error) {
       console.log('login went wrong..., error: ', error);

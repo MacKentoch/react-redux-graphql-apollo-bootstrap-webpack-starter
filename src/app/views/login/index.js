@@ -62,7 +62,7 @@ const logUserMutationOptions = {
     async loginUser(user) {
       ownProps.setLoadingStateForUserLogin();
       try {
-        const payload = { variables: { user } };
+        const payload = { variables: { ...user } };
         const { data: { loginUser } } = await mutate(payload);
         ownProps.receivedUserLoggedIn(loginUser.token, loginUser.user);
         ownProps.unsetLoadingStateForUserLogin();
