@@ -11,6 +11,7 @@ import * as viewsActions from '../../redux/modules/views';
 import * as userAuthActions from '../../redux/modules/userAuth';
 import MainRoutes from '../../routes/MainRoutes';
 import { withRouter } from 'react-router-dom';
+import registerServiceWorker from '../../services/sw/registerServiceWorker';
 // #endregion
 
 class App extends Component {
@@ -30,13 +31,14 @@ class App extends Component {
 
   componentDidMount() {
     const { actions: { checkIfUserIsAuthenticated } } = this.props;
-
+    // register service worker (no worry about multiple attempts to register, browser will ignore when already registered)
+    registerServiceWorker();
     checkIfUserIsAuthenticated();
   }
 
   render() {
     const { navModel } = this.state;
-    const {  userIsAuthenticated } = this.props;
+    const { userIsAuthenticated } = this.props;
 
     return (
       <div id="appContainer">

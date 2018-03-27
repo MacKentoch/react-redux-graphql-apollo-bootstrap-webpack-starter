@@ -3,6 +3,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const workboxPlugin = require('workbox-webpack-plugin');
 
 const assetsDir = path.resolve(__dirname, 'docs/assets');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
@@ -105,8 +106,14 @@ const config = {
       name: 'vendor',
       filename: 'app.vendor.bundle.js',
     }),
+    new workboxPlugin.GenerateSW({
+      swDest: 'sw.js',
+      clientsClaim: true,
+      skipWaiting: true,
+    }),
   ],
 };
+
 /*
 * here using hoisting so don't use `var NAME = function()...`
 */
