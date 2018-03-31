@@ -1,7 +1,6 @@
 // @flow
 
 // #region imports
-import PrettyError from 'pretty-error';
 // import { promisify } from 'util';
 import serialize from 'serialize-javascript';
 import React from 'react';
@@ -9,8 +8,8 @@ import { renderToString } from 'react-dom/server';
 import moment from 'moment';
 import { StaticRouter } from 'react-router';
 import { Provider } from 'react-redux';
-import configureStore from '../../../app/redux/store/configureStore';
-import App from '../../../app/containers/app/App';
+import configureStore from '../../../../app/redux/store/configureStore';
+import App from '../../../../app/containers/app/App';
 // #endregion
 
 export default function serverRender(req, res) {
