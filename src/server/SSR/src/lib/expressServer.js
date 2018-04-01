@@ -5,6 +5,8 @@ const express = require('express');
 const path = require('path');
 // const { promisify } = require('util');
 const chalk = require('chalk');
+const ssr = require('../middleware/ssr');
+const { error404, error500 } = require('../middleware/errors');
 const config = require('../../../config');
 // #endregion
 
@@ -21,11 +23,10 @@ const expressServer = (app = null, isDev = false) => {
     express.static(path.join(__dirname, config.get('server.assetsPath'))),
   );
 
-  app.get('/', (req, res) =>
-    res.sendFile(
-      path.join(__dirname, config.get('server.assetsPath'), 'index.html'),
-    ),
-  );
+  app.get('/*', ssr);
+
+  app.use(error404);
+  app.use(error500);
 
   /* eslint-disable no-console */
   app.listen(config.get('server.port'), config.get('server.host'), () =>
