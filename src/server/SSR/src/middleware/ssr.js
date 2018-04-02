@@ -8,62 +8,83 @@ import { renderToString } from 'react-dom/server';
 import moment from 'moment';
 import { StaticRouter } from 'react-router';
 import { Provider } from 'react-redux';
+import { ApolloProvider, getDataFromTree } from 'react-apollo';
+import { ApolloClient, createNetworkInterface } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import configureStore from '../../../../app/redux/store/configureStore';
 import App from '../../../../app/containers/app/App';
+import frontConfig from '../../../../app/config';
 // #endregion
 
-export default function serverRender(req, res) {
+// #region constants
+const { networkInterface: uri } = frontConfig.apollo;
+// #endregion
+
+// $FlowIgnore
+export default async function serverRender(req, res) {
   const location = req.url;
+  const apolloClient = new ApolloClient({
+    ssrMode: true,
+    networkInterface: createNetworkInterface({ uri }),
+    cache: new InMemoryCache(),
+  });
   const context = {};
-  // const memoryHistory = createHistory(req.path);
   let store = configureStore();
-  // const history       = syncHistoryWithStore(memoryHistory, store);
 
   // just for demo, replace with a "usefull" async. action to feed your state
-  return fakeFetch()
-    .then(({ info }) => {
-      const currentTime = moment().format();
-      const currentState = store.getState();
+  try {
+    const { info } = await fakeFetch();
+    const currentTime = moment().format();
+    const currentState = store.getState();
 
-      const preWarmedState = {
-        ...currentState,
-        views: {
-          ...currentState.views,
-          somePropFromServer: info,
-          serverTime: currentTime,
-        },
-      };
+    const preWarmedState = {
+      ...currentState,
+      views: {
+        ...currentState.views,
+        somePropFromServer: info,
+        serverTime: currentTime,
+      },
+    };
 
-      // update store to be preloaded:
-      store = configureStore(preWarmedState);
+    // update store to be preloaded:
+    store = configureStore(preWarmedState);
 
-      const InitialView = (
-        <Provider store={store}>
+    const InitialView = (
+      <Provider store={store}>
+        <ApolloProvider store={store} client={apolloClient}>
           <StaticRouter location={location} context={context}>
             <App />
           </StaticRouter>
-        </Provider>
-      );
+        </ApolloProvider>
+      </Provider>
+    );
 
-      let html = '';
-      try {
-        html = renderToString(InitialView);
-      } catch (error) {
-        console.log('error: ', error);
-      }
+    await getDataFromTree(InitialView);
 
-      if (context.url) {
-        return res.status.end({ location: context.url });
-      }
+    let html = '';
+    try {
+      html = renderToString(InitialView);
+    } catch (error) {
+      console.log('error: ', error);
+    }
 
-      const preloadedState = serialize(store.getState()); // serialize is better than JSON.stringify
+    if (context.url) {
+      return res.status.end({
+        location: context.url,
+      });
+    }
 
-      return res
-        .status(200)
-        .set('content-type', 'text/html')
-        .send(renderFullPage(html, preloadedState));
-    })
-    .catch(error => res.status(500).end('Internal server error: ', error));
+    // serialize is better than JSON.stringify
+    const preloadedState = serialize(store.getState());
+    const preloadedApolloState = serialize(apolloClient.cache.extract());
+
+    return res
+      .status(200)
+      .set('content-type', 'text/html')
+      .send(renderFullPage(html, preloadedState, preloadedApolloState));
+  } catch (error) {
+    return res.status(500).end('Internal server error: ', error);
+  }
 }
 
 function fakeFetch() {
@@ -72,7 +93,7 @@ function fakeFetch() {
   );
 }
 
-function renderFullPage(html, preloadedState = '') {
+function renderFullPage(html, preloadedState = '', preloadedApolloState: '') {
   // NOTE:
   // <section id="root">
   //   ${html}
@@ -86,20 +107,21 @@ function renderFullPage(html, preloadedState = '') {
     <!DOCTYPE html>
     <html>
       <head>
-        <title>React redux router SSR Starter</title>
+        <title>ReactJS Redux GraphQL Apollo Bootstrap Starter</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="react redux router SSR">
-        <meta name="author" content="Erwan DATIN">
+        <meta name="description" content="ReactJS Redux GraphQL Apollo Bootstrap Starter">
+        <meta name="author" content="Erwan DATIN (MacKentoch)">
         <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="/assets/app.styles.css">
+        <link rel='stylesheet' href='assets/app.styles.css'>
       </head>
-      <body class="skin-black" style="background-color:#f1f2f7">
+      <body>
         <section id="root"><div>${html}</div></section>
         <script type="text/javascript">window.__PRELOADED_STATE__ = ${preloadedState}</script>
-        <script type="text/javascript" src="/assets/app.vendor.bundle.js"></script>
-        <script type="text/javascript" src="/assets/app.bundle.js"></script>
+        <script type="text/javascript">window.__APOLLO_STATE__ = ${preloadedApolloState}</script>
+        <script type="text/javascript" src="assets/app.vendor.bundle.js"></script>
+        <script type="text/javascript" src="assets/app.bundle.js"></script>
       </body>
     </html>
   `,
