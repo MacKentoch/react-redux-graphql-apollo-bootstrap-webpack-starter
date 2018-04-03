@@ -3,7 +3,6 @@
 // #region imports
 const express = require('express');
 const path = require('path');
-// const { promisify } = require('util');
 const chalk = require('chalk');
 const ssr = require('../middleware/ssr');
 const { error404, error500 } = require('../middleware/errors');

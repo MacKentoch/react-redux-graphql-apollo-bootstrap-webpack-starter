@@ -13,7 +13,7 @@ import cx from 'classnames';
 // #endregion
 
 function withEnterAnimation() {
-  return BaseComponent => {
+  return (BaseComponent: any) => {
     class WithEnterAnimation extends Component<any, any> {
       render() {
         const { ...passProps } = this.props;

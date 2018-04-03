@@ -1,7 +1,7 @@
 // @flow
 
 // #region imports
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import RightNavButton from './rightNavButton/RightNavButton';
 // #endregion
@@ -12,10 +12,7 @@ export type Props = {
     link: string,
     label: string,
     viewName: string,
-    btnLink: {
-      showWhenUserAuth: boolean,
-      alwaysShows: boolean,
-    },
+    btnLink: { showWhenUserAuth: boolean, alwaysShows: boolean },
   }>,
   onRightNavButtonClick: (event: SyntheticEvent<>) => any,
   userIsAuthenticated: boolean,
