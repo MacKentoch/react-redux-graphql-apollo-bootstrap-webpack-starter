@@ -3,13 +3,32 @@
 // #region imports
 import React, { Component } from 'react';
 import wrapDisplayName from 'recompose/wrapDisplayName';
-import cx from 'classnames';
-// import styles from './withEnterAnimation.scss';
+import styled, { keyframes, css } from 'styled-components';
 // #endregion
 
-// #region constants
-// IMPORTANT: we need to bind classnames to CSSModule generated classes:
-// const cx = classnames.bind(styles);
+// #region styled component
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+`;
+
+const AnimatedDiv = styled.div`
+  ${({ viewEnter }) =>
+    viewEnter &&
+    css`
+      opacity: 0;
+      animation-name: ${fadeIn};
+      animation-timing-function: ease-in;
+      animation-duration: 0.7s;
+      animation-delay: 0s;
+      animation-fill-mode: both;
+    `};
+`;
 // #endregion
 
 function withEnterAnimation() {
@@ -19,9 +38,9 @@ function withEnterAnimation() {
         const { ...passProps } = this.props;
 
         return (
-          <div className={cx({ viewEnter: true })}>
+          <AnimatedDiv viewEnter={true}>
             <BaseComponent {...passProps} />
-          </div>
+          </AnimatedDiv>
         );
       }
     }

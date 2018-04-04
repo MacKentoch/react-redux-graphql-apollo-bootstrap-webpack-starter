@@ -1,7 +1,7 @@
 // @flow
 
 // #region imports
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 import cx from 'classnames';
 import UpIcon from './UpIcon';
 // #endregion

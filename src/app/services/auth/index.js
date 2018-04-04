@@ -39,11 +39,21 @@ export const auth = {
   ): ?string {
     // localStorage:
     if (fromStorage === APP_PERSIST_STORES_TYPES[0]) {
-      return (localStorage && localStorage.getItem(tokenKey)) || null;
+      return (
+        (window &&
+          window.localStorage &&
+          window.localStorage.getItem(tokenKey)) ||
+        null
+      );
     }
     // sessionStorage:
     if (fromStorage === APP_PERSIST_STORES_TYPES[1]) {
-      return (sessionStorage && sessionStorage.getItem(tokenKey)) || null;
+      return (
+        (window &&
+          window.sessionStorage &&
+          window.sessionStorage.getItem(tokenKey)) ||
+        null
+      );
     }
     // default:
     return null;
@@ -67,14 +77,14 @@ export const auth = {
     }
     // localStorage:
     if (toStorage === APP_PERSIST_STORES_TYPES[0]) {
-      if (localStorage) {
-        localStorage.setItem(tokenKey, value);
+      if (window && window.localStorage) {
+        window.localStorage.setItem(tokenKey, value);
       }
     }
     // sessionStorage:
     if (toStorage === APP_PERSIST_STORES_TYPES[1]) {
-      if (sessionStorage) {
-        sessionStorage.setItem(tokenKey, value);
+      if (window && window.sessionStorage) {
+        window.sessionStorage.setItem(tokenKey, value);
       }
     }
   },
@@ -106,7 +116,7 @@ export const auth = {
   ): boolean {
     // localStorage:
     if (fromStorage === APP_PERSIST_STORES_TYPES[0]) {
-      if (localStorage && localStorage.getItem(tokenKey)) {
+      if (window && window.localStorage && localStorage.getItem(tokenKey)) {
         return true;
       } else {
         return false;
@@ -114,7 +124,7 @@ export const auth = {
     }
     // sessionStorage:
     if (fromStorage === APP_PERSIST_STORES_TYPES[1]) {
-      if (sessionStorage && sessionStorage.getItem(tokenKey)) {
+      if (window && window.sessionStorage && sessionStorage.getItem(tokenKey)) {
         return true;
       } else {
         return false;
@@ -135,13 +145,13 @@ export const auth = {
     tokenKey: TokenKey = TOKEN_KEY,
   ): boolean {
     // localStorage:
-    if (localStorage && localStorage[tokenKey]) {
-      localStorage.removeItem(tokenKey);
+    if (window && window.localStorage && window.localStorage[tokenKey]) {
+      window.localStorage.removeItem(tokenKey);
       return true;
     }
     // sessionStorage:
-    if (sessionStorage && sessionStorage[tokenKey]) {
-      sessionStorage.removeItem(tokenKey);
+    if (window && window.sessionStorage && window.sessionStorage[tokenKey]) {
+      window.sessionStorage.removeItem(tokenKey);
       return true;
     }
 
@@ -197,12 +207,20 @@ export const auth = {
   ): ?string {
     // localStorage:
     if (fromStorage === APP_PERSIST_STORES_TYPES[0]) {
-      return (localStorage && parse(localStorage.getItem(userInfoKey))) || null;
+      return (
+        (window &&
+          window.localStorage &&
+          parse(window.localStorage.getItem(userInfoKey))) ||
+        null
+      );
     }
     // sessionStorage:
     if (fromStorage === APP_PERSIST_STORES_TYPES[1]) {
       return (
-        (sessionStorage && parse(sessionStorage.getItem(userInfoKey))) || null
+        (window &&
+          window.sessionStorage &&
+          parse(window.sessionStorage.getItem(userInfoKey))) ||
+        null
       );
     }
     // default:
@@ -227,14 +245,14 @@ export const auth = {
     }
     // localStorage:
     if (toStorage === APP_PERSIST_STORES_TYPES[0]) {
-      if (localStorage) {
-        localStorage.setItem(userInfoKey, stringify(value));
+      if (window && window.localStorage) {
+        window.localStorage.setItem(userInfoKey, stringify(value));
       }
     }
     // sessionStorage:
     if (toStorage === APP_PERSIST_STORES_TYPES[1]) {
-      if (sessionStorage) {
-        sessionStorage.setItem(userInfoKey, stringify(value));
+      if (window && window.sessionStorage) {
+        window.sessionStorage.setItem(userInfoKey, stringify(value));
       }
     }
   },
@@ -247,12 +265,12 @@ export const auth = {
    */
   clearUserInfo(userInfoKey: UserInfoKey = USER_INFO): any {
     // localStorage:
-    if (localStorage && localStorage[userInfoKey]) {
-      localStorage.removeItem(userInfoKey);
+    if (window && window.localStorage && window.localStorage[userInfoKey]) {
+      window.localStorage.removeItem(userInfoKey);
     }
     // sessionStorage:
-    if (sessionStorage && sessionStorage[userInfoKey]) {
-      sessionStorage.removeItem(userInfoKey);
+    if (window && window.sessionStorage && window.sessionStorage[userInfoKey]) {
+      window.sessionStorage.removeItem(userInfoKey);
     }
   },
 
@@ -265,11 +283,11 @@ export const auth = {
    * @returns {bool} success/failure flag
    */
   clearAllAppStorage(): any {
-    if (localStorage) {
-      localStorage.clear();
+    if (window && window.localStorage) {
+      window.localStorage.clear();
     }
-    if (sessionStorage) {
-      sessionStorage.clear();
+    if (window && window.sessionStorage) {
+      window.sessionStorage.clear();
     }
   },
 };
