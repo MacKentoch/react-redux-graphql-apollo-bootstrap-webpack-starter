@@ -1,30 +1,37 @@
 // @flow
 
 // #region imports
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { NavigationBar, BackToTop } from '../../components';
-import navigationModel from '../../models/navigation.json';
+import React, { PureComponent } from 'react';
+import { withRouter } from 'react-router-dom';
+import { type Match, type Location, type RouterHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as viewsActions from '../../redux/modules/views';
 import * as userAuthActions from '../../redux/modules/userAuth';
 import MainRoutes from '../../routes/MainRoutes';
-import { withRouter } from 'react-router-dom';
+import { NavigationBar, BackToTop } from '../../components';
+import navigationModel from '../../models/navigation.json';
 import registerServiceWorker from '../../services/sw/registerServiceWorker';
 // #endregion
 
-class App extends Component {
-  static propTypes = {
-    // react-router 4:
-    match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
+// #region flow types
+type Props = {
+  // react-router 4:
+  match: Match,
+  location: Location,
+  history: RouterHistory,
 
-    // userAuth
-    userIsAuthenticated: PropTypes.bool.isRequired,
-  };
+  // userAuth
+  userIsAuthenticated: boolean,
+  ...any,
+};
 
+type State = {
+  navModel: any,
+};
+// #endregion
+
+class App extends PureComponent<Props, State> {
   state = {
     navModel: navigationModel,
   };
@@ -58,20 +65,22 @@ class App extends Component {
     );
   }
 
-  handleLeftNavItemClick = (event, viewName) => {
+  handleLeftNavItemClick = (event: SyntheticEvent<>, viewName: string) => {
     if (viewName === 'logout') {
       const { actions: { setUserLogout } } = this.props;
       setUserLogout();
     }
   };
 
-  handleRightNavItemClick = (event, viewName) => {
+  handleRightNavItemClick = (event: SyntheticEvent<>, viewName: string) => {
     if (viewName === 'logout') {
       const { actions: { setUserLogout } } = this.props;
       setUserLogout();
     }
   };
 }
+
+// #region redux connection
 
 const mapStateToProps = state => {
   return {
@@ -91,5 +100,7 @@ const mapDispatchToProps = dispatch => {
     ),
   };
 };
+
+// #endregion
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

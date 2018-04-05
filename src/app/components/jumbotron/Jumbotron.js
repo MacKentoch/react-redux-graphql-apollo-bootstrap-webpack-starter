@@ -15,8 +15,6 @@ export type Props = {
 
   ...any,
 };
-
-export type State = {};
 // #endregion
 
 const Jumbotron = ({ children }: Props) => (
