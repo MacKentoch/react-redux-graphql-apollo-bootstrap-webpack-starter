@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { ErrorAlert } from '../../components';
 import * as UserAuthTypes from '../../redux/modules/userAuth.types';
 import { type Match, type Location, type RouterHistory } from 'react-router';
-// import styles from './login.scss';
+import styled from 'styled-components';
 // #endregion
 
 // #region flow types
@@ -55,9 +55,11 @@ export type State = {
 };
 // #endregion
 
-// #region constants
-// IMPORTANT: we need to bind classnames to CSSModule generated classes:
-// const cx = classnames.bind(styles);
+// #region styled components
+const LoginButton = styled.button`
+  margin-left: 10px;
+`;
+
 // #endregion
 
 class Login extends PureComponent<Props, State> {
@@ -131,13 +133,13 @@ class Login extends PureComponent<Props, State> {
                     <Link className="btn btn-default" to={'/'}>
                       Cancel
                     </Link>
-                    <button
-                      className="btn btn-primary loginButton"
+                    <LoginButton
+                      className="btn btn-primary"
                       disabled={mutationLoading}
                       onClick={this.handlesOnLogin}
                     >
                       Login
-                    </button>
+                    </LoginButton>
                   </div>
                 </div>
               </fieldset>
@@ -155,22 +157,32 @@ class Login extends PureComponent<Props, State> {
   }
   // #endregion
 
-  handlesOnEmailChange = event => {
-    event.preventDefault();
-    // should add some validator before setState in real use cases
-    this.setState({ email: event.target.value });
+  handlesOnEmailChange = (event: SyntheticEvent<>) => {
+    if (event) {
+      event.preventDefault();
+      // should add some validator before setState in real use cases
+      // $FlowIgnore
+      this.setState({ email: event.target.value });
+    }
   };
 
-  handlesOnPasswordChange = event => {
-    event.preventDefault();
-    // should add some validator before setState in real use cases
-    this.setState({ password: event.target.value });
+  handlesOnPasswordChange = (event: SyntheticEvent<>) => {
+    if (event) {
+      event.preventDefault();
+      // should add some validator before setState in real use cases
+      this.setState({
+        // $FlowIgnore
+        password: event.target.value,
+      });
+    }
   };
 
-  handlesOnLogin = async event => {
-    event.preventDefault();
+  handlesOnLogin = async (event: SyntheticEvent<>) => {
+    if (event) {
+      event.preventDefault();
+    }
+
     const { loginUser, history } = this.props;
-
     const { email, password } = this.state;
 
     const user = {
@@ -186,8 +198,10 @@ class Login extends PureComponent<Props, State> {
     }
   };
 
-  closeError = event => {
-    event.preventDefault();
+  closeError = (event: SyntheticEvent<>) => {
+    if (event) {
+      event.preventDefault();
+    }
     const { resetLogError } = this.props;
     resetLogError();
   };

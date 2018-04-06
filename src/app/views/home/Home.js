@@ -4,9 +4,7 @@
 import React, { PureComponent } from 'react';
 import { type Match, type Location, type RouterHistory } from 'react-router';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
-// import classnames from 'classnames';
 import { Link } from 'react-router-dom';
-// import styles from './home.scss';
 // #endregion
 
 // #region flow types
@@ -41,11 +39,6 @@ export type Props = {
   ...any,
 };
 export type State = any;
-// #endregion
-
-// #region constants
-// IMPORTANT: we need to bind classnames to CSSModule generated classes:
-// const cx = classnames.bind(styles);
 // #endregion
 
 class Home extends PureComponent<Props, State> {
