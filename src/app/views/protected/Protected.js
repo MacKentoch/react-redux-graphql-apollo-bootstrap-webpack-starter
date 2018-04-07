@@ -3,8 +3,6 @@
 
 // #region imports
 import React, { PureComponent } from 'react';
-import classnames from 'classnames';
-import styles from './protected.scss';
 import { type Match, type Location, type RouterHistory } from 'react-router';
 // #endregion
 
@@ -35,16 +33,7 @@ export type State = {
 };
 // #endregion
 
-// #region constants
-// IMPORTANT: we need to bind classnames to CSSModule generated classes:
-const cx = classnames.bind(styles);
-// #endregion
-
 class Protected extends PureComponent<Props, State> {
-  state = {
-    viewEntersAnim: true,
-  };
-
   // #region lifecycle
   componentDidMount() {
     const { enterProtected } = this.props;
@@ -57,9 +46,8 @@ class Protected extends PureComponent<Props, State> {
   }
 
   render() {
-    const { viewEntersAnim } = this.state;
     return (
-      <div className={cx({ 'view-enter': viewEntersAnim })}>
+      <div>
         <h1 className="text-danger">Here is a protected view!</h1>
         <h2 className="text-danger">
           {`You've just logged in to be able to enter this view.`}

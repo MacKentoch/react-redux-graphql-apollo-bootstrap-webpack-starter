@@ -2,7 +2,6 @@
 
 // #region imports
 import React, { PureComponent } from 'react';
-// import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { ErrorAlert } from '../../components';
 import * as UserAuthTypes from '../../redux/modules/userAuth.types';

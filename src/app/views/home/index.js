@@ -70,5 +70,6 @@ const getUserQueryOptions = {
 export default compose(
   withEnterAnimation(),
   connect(mapStateToProps, mapDispatchToProps),
+  // $FlowIgnore
   graphql(getUserQuery, getUserQueryOptions),
 )(Home);

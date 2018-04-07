@@ -2,10 +2,10 @@
 
 // #region imports
 import React, { PureComponent } from 'react';
-import classnames from 'classnames';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ErrorAlert, WarningAlert } from '../../components';
-import styles from './register.scss';
+
 import { type Match, type Location, type RouterHistory } from 'react-router';
 import {
   type SetLoadingStateForUserRegister,
@@ -68,9 +68,10 @@ export type State = {
 };
 // #endregion
 
-// #region constants
-// IMPORTANT: we need to bind classnames to CSSModule generated classes:
-const cx = classnames.bind(styles);
+// #region styled-components
+const RegisterButton = styled.button`
+  margin-left: 10px;
+`;
 // #endregion
 
 class Register extends PureComponent<Props, State> {
@@ -145,13 +146,13 @@ class Register extends PureComponent<Props, State> {
                     <Link className="btn btn-default" to={'/'}>
                       Cancel
                     </Link>
-                    <button
-                      className="btn btn-primary registerButton"
+                    <RegisterButton
+                      className="btn btn-primary"
                       disabled={mutationLoading}
                       onClick={this.handlesOnRegister}
                     >
                       Register
-                    </button>
+                    </RegisterButton>
                   </div>
                 </div>
               </fieldset>
@@ -176,20 +177,24 @@ class Register extends PureComponent<Props, State> {
     );
   }
 
-  handlesOnEmailChange = event => {
+  handlesOnEmailChange = (event: SyntheticEvent<>) => {
     event.preventDefault();
     // should add some validator before setState in real use cases
+    // $FlowIgnore
     const email = event.target.value;
     this.setState({ email });
   };
 
-  handlesOnPasswordChange = event => {
+  handlesOnPasswordChange = (event: SyntheticEvent<>) => {
     event.preventDefault();
     // should add some validator before setState in real use cases
-    this.setState({ password: event.target.value });
+    // $FlowIgnore
+    this.setState({
+      password: event.target.value,
+    });
   };
 
-  handlesOnRegister = async event => {
+  handlesOnRegister = async (event: SyntheticEvent<>) => {
     event.preventDefault();
     const { registerUser, history } = this.props;
 
@@ -224,7 +229,7 @@ class Register extends PureComponent<Props, State> {
     }
   };
 
-  isValidEmail(email = '') {
+  isValidEmail(email: string = '') {
     // basic validation, better user "validate.js" for real validation
     if (email && email.trim().length > 0) {
       return true;
@@ -232,7 +237,7 @@ class Register extends PureComponent<Props, State> {
     return false;
   }
 
-  isValidPassword(password = '') {
+  isValidPassword(password: string = '') {
     // basic validation, better user "validate.js" for real validation
     if (password && password.trim().length > 0) {
       return true;
@@ -240,13 +245,13 @@ class Register extends PureComponent<Props, State> {
     return false;
   }
 
-  closeError = event => {
+  closeError = (event: SyntheticEvent<>) => {
     event.preventDefault();
     // const { resetStore } = this.props;
     // resetStore();
   };
 
-  closeWarning = event => {
+  closeWarning = (event: SyntheticEvent<>) => {
     event.preventDefault();
     this.setState({ warning: null });
   };
