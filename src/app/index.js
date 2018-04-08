@@ -11,7 +11,6 @@ import 'jquery';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import './style/index.scss';
 import Root from './Root';
 // #endregion
 
@@ -33,6 +32,7 @@ const renderApp = RootComponent => {
     <AppContainer warnings={false}>
       <RootComponent />
     </AppContainer>,
+    // $FlowIgnore
     BootstrapedElement,
   );
 };

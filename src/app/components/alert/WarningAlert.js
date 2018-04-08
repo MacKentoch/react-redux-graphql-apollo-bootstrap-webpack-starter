@@ -10,7 +10,7 @@ type Props = {
   showAlert: boolean,
   warningTitle: string,
   warningMessage: string,
-  onClose: () => any,
+  onClose: (event: SyntheticEvent<>) => any,
 };
 
 type State = {};

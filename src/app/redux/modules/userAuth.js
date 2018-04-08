@@ -3,6 +3,7 @@
 // #region imports
 import moment from 'moment';
 import { auth } from '../../services/auth';
+import { type User } from './userAuth.types';
 // #endregion
 
 // #region constants
@@ -36,7 +37,7 @@ const emptyUser = {
   modifiedAt: '',
 };
 
-const initialState = {
+const initialState: User = {
   isAuthenticated: false,
   lastActionTime: null,
   mutationLoading: false,
@@ -44,7 +45,7 @@ const initialState = {
   ...emptyUser,
 };
 
-export default function(state = initialState, action) {
+export default function(state: User = initialState, action: any) {
   switch (action.type) {
     case RECEIVED_USER_LOGGED_IN:
     case RECEIVED_USER_REGISTER:
@@ -167,7 +168,7 @@ export function errorUserLoggedIn(
 // set loading state for login
 // /////////////////////////////
 export function setLoadingStateForUserLogin(
-  time = moment().format(dateFormat),
+  time: string = moment().format(dateFormat),
 ) {
   return {
     type: SET_LOADING_LOGGED_IN,
@@ -179,7 +180,7 @@ export function setLoadingStateForUserLogin(
 // unset loading state for login
 // /////////////////////////////
 export function unsetLoadingStateForUserLogin(
-  time = moment().format(dateFormat),
+  time: string = moment().format(dateFormat),
 ) {
   return {
     type: UNSET_LOADING_LOGGED_IN,
@@ -191,9 +192,9 @@ export function unsetLoadingStateForUserLogin(
 // register sucess:
 // //////////////////
 export function receivedUserRegister(
-  userToken = null,
+  userToken: ?string = null,
   user = emptyUser,
-  time = moment().format(dateFormat),
+  time: string = moment().format(dateFormat),
 ) {
   const isAuthenticated = userToken ? true : false;
 
@@ -212,8 +213,8 @@ export function receivedUserRegister(
 // register error:
 // //////////////////
 export function errorUserRegister(
-  error = null,
-  time = moment().format(dateFormat),
+  error: any = null,
+  time: string = moment().format(dateFormat),
 ) {
   auth.clearAllAppStorage(); // clear previous token
 
@@ -224,6 +225,7 @@ export function errorUserRegister(
     isAuthenticated: false,
   };
 }
+
 // /////////////////////////////
 // set loading state for register
 // /////////////////////////////
@@ -236,11 +238,12 @@ export function setLoadingStateForUserRegister(
     loading: true,
   };
 }
+
 // /////////////////////////////
 // unset loading state for register
 // /////////////////////////////
 export function unsetLoadingStateForUserRegister(
-  time = moment().format(dateFormat),
+  time: string = moment().format(dateFormat),
 ) {
   return {
     type: UNSET_LOADING_REGISTER,
@@ -251,7 +254,7 @@ export function unsetLoadingStateForUserRegister(
 // //////////////////
 // user logout:
 // //////////////////
-export function setUserLogout(time = moment().format(dateFormat)) {
+export function setUserLogout(time: string = moment().format(dateFormat)) {
   auth.clearAllAppStorage();
   return {
     type: SET_USER_LOGOUT,
@@ -263,7 +266,9 @@ export function setUserLogout(time = moment().format(dateFormat)) {
 // //////////////////////////////
 // check user auth (check token)
 // //////////////////////////////
-export function checkIfUserIsAuthenticated(time = moment().format(dateFormat)) {
+export function checkIfUserIsAuthenticated(
+  time: string = moment().format(dateFormat),
+) {
   const user = auth.getUserInfo() ? auth.getUserInfo() : emptyUser;
   // need token and user info in localStorage to be authenticated
   const isAuthenticated =
@@ -278,6 +283,7 @@ export function checkIfUserIsAuthenticated(time = moment().format(dateFormat)) {
 }
 
 function checkUserHasId(user) {
+  // $FlowIgnore
   return user && user.id && user.id.length > 0;
 }
 

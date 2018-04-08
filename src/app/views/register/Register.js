@@ -5,7 +5,6 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ErrorAlert, WarningAlert } from '../../components';
-
 import { type Match, type Location, type RouterHistory } from 'react-router';
 import {
   type SetLoadingStateForUserRegister,
@@ -32,8 +31,8 @@ export type Props = {
   // registerUser apollo mutation
   registerUser: ({
     user: {
-      username: email,
-      password: password,
+      username: string,
+      password: string,
     },
   }) => any,
 
@@ -59,7 +58,6 @@ export type Props = {
 };
 
 export type State = {
-  viewEntersAnim: boolean,
   email: string,
   password: string,
   warning: any,
@@ -93,12 +91,11 @@ class Register extends PureComponent<Props, State> {
   }
 
   render() {
-    const { viewEntersAnim, email, password, warning } = this.state;
-
+    const { email, password, warning } = this.state;
     const { mutationLoading, error } = this.props;
 
     return (
-      <div className={cx({ 'view-enter': viewEntersAnim })}>
+      <div>
         <div className="row">
           <div className="col-md-4 col-md-offset-4">
             <form className="form-horizontal" noValidate>
@@ -178,26 +175,32 @@ class Register extends PureComponent<Props, State> {
   }
 
   handlesOnEmailChange = (event: SyntheticEvent<>) => {
-    event.preventDefault();
-    // should add some validator before setState in real use cases
-    // $FlowIgnore
-    const email = event.target.value;
-    this.setState({ email });
+    if (event) {
+      event.preventDefault();
+      // should add some validator before setState in real use cases
+      // $FlowIgnore
+      const email = event.target.value;
+      this.setState({ email });
+    }
   };
 
   handlesOnPasswordChange = (event: SyntheticEvent<>) => {
-    event.preventDefault();
-    // should add some validator before setState in real use cases
-    // $FlowIgnore
-    this.setState({
-      password: event.target.value,
-    });
+    if (event) {
+      event.preventDefault();
+      // should add some validator before setState in real use cases
+      this.setState({
+        // $FlowIgnore
+        password: event.target.value,
+      });
+    }
   };
 
   handlesOnRegister = async (event: SyntheticEvent<>) => {
-    event.preventDefault();
-    const { registerUser, history } = this.props;
+    if (event) {
+      event.preventDefault();
+    }
 
+    const { registerUser, history } = this.props;
     const { email, password } = this.state;
 
     const user = {
@@ -246,13 +249,18 @@ class Register extends PureComponent<Props, State> {
   }
 
   closeError = (event: SyntheticEvent<>) => {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
+
     // const { resetStore } = this.props;
     // resetStore();
   };
 
   closeWarning = (event: SyntheticEvent<>) => {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
     this.setState({ warning: null });
   };
 }
