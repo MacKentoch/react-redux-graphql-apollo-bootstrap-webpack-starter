@@ -2,7 +2,6 @@
 
 // #region imports
 import React from 'react';
-import PropTypes from 'prop-types';
 import RightNavButton from './rightNavButton/RightNavButton';
 // #endregion
 
@@ -14,7 +13,7 @@ export type Props = {
     viewName: string,
     btnLink: { showWhenUserAuth: boolean, alwaysShows: boolean },
   }>,
-  onRightNavButtonClick: (event: SyntheticEvent<>) => any,
+  onRightNavButtonClick: (event: SyntheticEvent<>, viewName) => any,
   userIsAuthenticated: boolean,
 };
 // #endregion
@@ -60,18 +59,6 @@ const RightNav = ({
 );
 
 // #region static props
-RightNav.propTypes = {
-  rightLinks: PropTypes.arrayOf(
-    PropTypes.shape({
-      link: PropTypes.string,
-      label: PropTypes.string,
-      viewName: PropTypes.string,
-    }),
-  ),
-  onRightNavButtonClick: PropTypes.func,
-  userIsAuthenticated: PropTypes.bool.isRequired,
-};
-
 RightNav.displayName = 'RightNav';
 // #endregion
 

@@ -2,7 +2,6 @@
 
 // #region imports
 import React, { PureComponent } from 'react';
-import { type SyntheticEvent } from 'react';
 import { Link } from 'react-router-dom';
 // #endregion
 
@@ -33,7 +32,7 @@ class RightNavButton extends PureComponent<Props, State> {
     );
   }
 
-  handleRightNavItemClick = event => {
+  handleRightNavItemClick = (event: SyntheticEvent<>) => {
     const { onClick, viewName } = this.props;
     onClick(event, viewName);
   };

@@ -2,7 +2,7 @@
 
 // #region imports
 import React from 'react';
-import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Humburger from './humburger/Humburger';
 import LeftNav from './leftNav/LeftNav';
 import RightNav from './rightNav/RightNav';
@@ -11,7 +11,7 @@ import RightNav from './rightNav/RightNav';
 // #region flow types
 export type Props = {
   brand?: string,
-  userIsAuthenticated?: boolean,
+  userIsAuthenticated: boolean,
   handleLeftNavItemClick: (event: SyntheticEvent<>, viewName: string) => any,
   handleRightNavItemClick: (event: SyntheticEvent<>, viewName: string) => any,
   navModel: {
@@ -20,11 +20,20 @@ export type Props = {
       link: string,
     }>,
     rightLinks: Array<{
-      label: string,
       link: string,
+      label: string,
+      viewName: string,
+      btnLink: { showWhenUserAuth: boolean, alwaysShows: boolean },
     }>,
   },
 };
+// #endregion
+
+// #region styled components
+const Container = styled.div`
+  padding-left: 2%;
+  padding-right: 2%;
+`;
 // #endregion
 
 const NavigationBar = ({
@@ -36,7 +45,7 @@ const NavigationBar = ({
 }: Props) => {
   return (
     <nav className="navbar navbar-default">
-      <div className="containersCustom">
+      <Container>
         <div className="navbar-header">
           {<Humburger />}
           <a className="navbar-brand">{brand}</a>
@@ -64,35 +73,14 @@ const NavigationBar = ({
             }
           </ul>
         </div>
-      </div>
+      </Container>
     </nav>
   );
 };
 
-// #region static props
-NavigationBar.propTypes = {
-  brand: PropTypes.string,
-  userIsAuthenticated: PropTypes.bool.isRequired,
-  handleLeftNavItemClick: PropTypes.func,
-  handleRightNavItemClick: PropTypes.func,
-  navModel: PropTypes.shape({
-    leftLinks: PropTypes.arrayOf(
-      PropTypes.shape({
-        label: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    rightLinks: PropTypes.arrayOf(
-      PropTypes.shape({
-        label: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-  }),
-};
-
 NavigationBar.defaultProps = {
   brand: 'brand',
+  userIsAuthenticated: false,
 };
 
 NavigationBar.displayName = 'NavigationBar';
