@@ -11,6 +11,7 @@ import 'jquery';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import injectGlobalStyle from './style/injectGlobalStyle';
 import Root from './Root';
 // #endregion
 
@@ -26,6 +27,7 @@ const BootstrapedElement = document.getElementById(ELEMENT_TO_BOOTSTRAP);
 // #endregion
 
 injectTpEventPlugin();
+injectGlobalStyle();
 
 const renderApp = RootComponent => {
   render(

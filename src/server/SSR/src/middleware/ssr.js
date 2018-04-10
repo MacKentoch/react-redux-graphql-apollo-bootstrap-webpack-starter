@@ -5,6 +5,7 @@
 import serialize from 'serialize-javascript';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { ServerStyleSheet } from 'styled-components';
 import moment from 'moment';
 import { StaticRouter } from 'react-router';
 import { Provider } from 'react-redux';
@@ -30,6 +31,7 @@ export default async function serverRender(req, res) {
   });
   const context = {};
   let store = configureStore();
+  const sheet = new ServerStyleSheet();
 
   // just for demo, replace with a "usefull" async. action to feed your state
   try {
@@ -62,8 +64,10 @@ export default async function serverRender(req, res) {
     await getDataFromTree(InitialView);
 
     let html = '';
+    let styleTags = '';
     try {
-      html = renderToString(InitialView);
+      html = renderToString(sheet.collectStyles(InitialView));
+      styleTags = sheet.getStyleTags();
     } catch (error) {
       console.log('error: ', error);
     }
@@ -81,7 +85,9 @@ export default async function serverRender(req, res) {
     return res
       .status(200)
       .set('content-type', 'text/html')
-      .send(renderFullPage(html, preloadedState, preloadedApolloState));
+      .send(
+        renderFullPage(html, preloadedState, preloadedApolloState, styleTags),
+      );
   } catch (error) {
     return res.status(500).end('Internal server error: ', error);
   }
@@ -93,7 +99,12 @@ function fakeFetch() {
   );
 }
 
-function renderFullPage(html, preloadedState = '', preloadedApolloState: '') {
+function renderFullPage(
+  html,
+  preloadedState = '',
+  preloadedApolloState: '',
+  styleTags = '',
+) {
   // NOTE:
   // <section id="root">
   //   ${html}
@@ -115,6 +126,7 @@ function renderFullPage(html, preloadedState = '', preloadedApolloState: '') {
         <meta name="author" content="Erwan DATIN (MacKentoch)">
         <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
         <link rel='stylesheet' href='assets/app.styles.css'>
+        {styleTags}
       </head>
       <body>
         <section id="root"><div>${html}</div></section>

@@ -67,7 +67,7 @@ const serverConfig = {
       },
     ],
   },
-  plugin: [setNodeEnv()],
+  plugins: [setNodeEnv()],
 };
 
 function setNodeEnv() {
