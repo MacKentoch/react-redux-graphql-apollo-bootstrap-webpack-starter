@@ -68,7 +68,7 @@ export const auth = {
    * @returns {boolean} success/failure flag
    */
   setToken(
-    value: string = '',
+    value: ?string = '',
     toStorage: Storage = APP_PERSIST_STORES_TYPES[0],
     tokenKey: TokenKey = TOKEN_KEY,
   ): ?string {
@@ -236,11 +236,11 @@ export const auth = {
    * @returns {boolean} success/failure flag
    */
   setUserInfo(
-    value: string = '',
+    value: any,
     toStorage: Storage = APP_PERSIST_STORES_TYPES[0],
     userInfoKey: UserInfoKey = USER_INFO,
   ): any {
-    if (!value || value.length <= 0) {
+    if (!value) {
       return;
     }
     // localStorage:

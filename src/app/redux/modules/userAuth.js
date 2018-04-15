@@ -131,9 +131,9 @@ export default function(state: User = initialState, action: any) {
 // login sucess:
 // //////////////////
 export function receivedUserLoggedIn(
-  userToken = null,
-  user = emptyUser,
-  time = moment().format(dateFormat),
+  userToken: ?string = null,
+  user: any = emptyUser,
+  time: string = moment().format(dateFormat),
 ) {
   const isAuthenticated = userToken ? true : false;
 
@@ -152,8 +152,8 @@ export function receivedUserLoggedIn(
 // login error:
 // //////////////////
 export function errorUserLoggedIn(
-  error = null,
-  time = moment().format(dateFormat),
+  error: any = null,
+  time: string = moment().format(dateFormat),
 ) {
   auth.clearAllAppStorage(); // clear previous token
 
@@ -193,13 +193,13 @@ export function unsetLoadingStateForUserLogin(
 // //////////////////
 export function receivedUserRegister(
   userToken: ?string = null,
-  user = emptyUser,
+  user: any = emptyUser,
   time: string = moment().format(dateFormat),
 ) {
   const isAuthenticated = userToken ? true : false;
 
   auth.clearAllAppStorage(); // clear previous token
-  auth.setToken(userToken); // set token to default store = localStorage and to default token key = 'token'
+  auth.setToken(userToken || ''); // set token to default store = localStorage and to default token key = 'token'
   auth.setUserInfo(user);
 
   return {
@@ -230,7 +230,7 @@ export function errorUserRegister(
 // set loading state for register
 // /////////////////////////////
 export function setLoadingStateForUserRegister(
-  time = moment().format(dateFormat),
+  time: string = moment().format(dateFormat),
 ) {
   return {
     type: SET_LOADING_REGISTER,
