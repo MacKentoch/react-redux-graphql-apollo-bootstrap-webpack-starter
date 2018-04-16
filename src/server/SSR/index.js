@@ -494,7 +494,7 @@ function receivedUserRegister() {
   var isAuthenticated = userToken ? true : false;
 
   __WEBPACK_IMPORTED_MODULE_1__services_auth__["a" /* auth */].clearAllAppStorage();
-  __WEBPACK_IMPORTED_MODULE_1__services_auth__["a" /* auth */].setToken(userToken);
+  __WEBPACK_IMPORTED_MODULE_1__services_auth__["a" /* auth */].setToken(userToken || '');
   __WEBPACK_IMPORTED_MODULE_1__services_auth__["a" /* auth */].setUserInfo(user);
 
   return {
@@ -747,12 +747,11 @@ var auth = {
 
     return null;
   },
-  setUserInfo: function setUserInfo() {
-    var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  setUserInfo: function setUserInfo(value) {
     var toStorage = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : APP_PERSIST_STORES_TYPES[0];
     var userInfoKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : USER_INFO;
 
-    if (!value || value.length <= 0) {
+    if (!value) {
       return;
     }
 

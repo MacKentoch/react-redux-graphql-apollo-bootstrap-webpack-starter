@@ -2,7 +2,7 @@
 
 // #region imports
 const express = require('express');
-import PrettyError from 'pretty-error';
+const PrettyError = require('pretty-error');
 const expressServer = require('./lib/expressServer');
 const config = require('../../config');
 // #endregion
