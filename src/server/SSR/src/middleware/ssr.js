@@ -33,6 +33,8 @@ export default async function serverRender(req, res) {
   let store = configureStore();
   const sheet = new ServerStyleSheet();
 
+  console.log('serverRendering');
+
   // just for demo, replace with a "usefull" async. action to feed your state
   try {
     const { info } = await fakeFetch();

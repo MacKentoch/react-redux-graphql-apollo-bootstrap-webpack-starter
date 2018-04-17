@@ -1,10 +1,10 @@
 // @flow
 
 // #region imports
-const express = require('express');
-const PrettyError = require('pretty-error');
-const expressServer = require('./lib/expressServer');
-const config = require('../../config');
+import express from 'express';
+import PrettyError from 'pretty-error';
+import expressServer from './lib/expressServer';
+import config from '../../config';
 // #endregion
 
 // #region constants
@@ -17,4 +17,6 @@ try {
 
   const app = express();
   expressServer(app, dev);
-} catch (error) {}
+} catch (error) {
+  console.log('server error: ', error);
+}

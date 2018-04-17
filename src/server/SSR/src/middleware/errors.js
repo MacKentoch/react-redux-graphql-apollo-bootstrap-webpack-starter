@@ -1,7 +1,7 @@
 // @flow
 
 // $FlowIgnore
-exports.error404 = (req, res, next) => {
+export const error404 = (req, res, next) => {
   console.log('req.url: ', req.url);
 
   const err = new Error('Not found');
@@ -11,7 +11,7 @@ exports.error404 = (req, res, next) => {
 };
 
 // $FlowIgnore
-exports.error500 = (err, req, res, next) => {
+export const error500 = (err, req, res, next) => {
   if (err.status === 404) {
     res.status(404).send('Sorry nothing here for now...');
   }

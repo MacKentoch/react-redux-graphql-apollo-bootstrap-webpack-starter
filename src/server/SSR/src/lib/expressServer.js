@@ -1,12 +1,12 @@
 // @flow
 
 // #region imports
-const express = require('express');
-const path = require('path');
-const chalk = require('chalk');
-const ssr = require('../middleware/ssr');
-const { error404, error500 } = require('../middleware/errors');
-const config = require('../../../config');
+import express from 'express';
+import path from 'path';
+import chalk from 'chalk';
+import ssr from '../middleware/ssr';
+import { error404, error500 } from '../middleware/errors';
+import config from '../../../config';
 // #endregion
 
 // $FlowIgnore
@@ -42,4 +42,4 @@ const expressServer = (app = null, isDev = false) => {
   return app;
 };
 
-module.exports = expressServer;
+export default expressServer;

@@ -953,24 +953,31 @@ module.exports = require("babel-polyfill");
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_pretty_error__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_pretty_error___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_pretty_error__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_pretty_error__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_pretty_error___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_pretty_error__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lib_expressServer__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__config__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__config___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__config__);
 
-var express = __webpack_require__(14);
 
-var expressServer = __webpack_require__(28);
-var config = __webpack_require__(23);
 
-var dev = config.get('env') !== 'production';
-var pe = new __WEBPACK_IMPORTED_MODULE_0_pretty_error___default.a();
+
+
+
+var dev = __WEBPACK_IMPORTED_MODULE_3__config___default.a.get('env') !== 'production';
+var pe = new __WEBPACK_IMPORTED_MODULE_1_pretty_error___default.a();
 
 
 try {
   pe.start();
 
-  var app = express();
-  expressServer(app, dev);
-} catch (error) {}
+  var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
+  Object(__WEBPACK_IMPORTED_MODULE_2__lib_expressServer__["a" /* default */])(app, dev);
+} catch (error) {
+  console.log('server error: ', error);
+}
 
 /***/ }),
 /* 27 */
@@ -980,19 +987,26 @@ module.exports = require("pretty-error");
 
 /***/ }),
 /* 28 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(__dirname) {
-var express = __webpack_require__(14);
-var path = __webpack_require__(15);
-var chalk = __webpack_require__(29);
-var ssr = __webpack_require__(30);
+"use strict";
+/* WEBPACK VAR INJECTION */(function(__dirname) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_path__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_path___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_path__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chalk__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chalk___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_chalk__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__middleware_ssr__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__middleware_errors__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__config__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__config___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__config__);
 
-var _require = __webpack_require__(72),
-    error404 = _require.error404,
-    error500 = _require.error500;
 
-var config = __webpack_require__(23);
+
+
+
+
+
 
 var expressServer = function expressServer() {
   var app = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -1002,26 +1016,26 @@ var expressServer = function expressServer() {
     throw new Error('Server application instance is undefined');
   }
 
-  app.set('port', config.get('server.port'));
-  app.set('ipAdress', config.get('server.host'));
+  app.set('port', __WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.port'));
+  app.set('ipAdress', __WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.host'));
 
-  app.use(express.static(path.join(__dirname, config.get('server.assetsPath'))));
+  app.use(__WEBPACK_IMPORTED_MODULE_0_express___default.a.static(__WEBPACK_IMPORTED_MODULE_1_path___default.a.join(__dirname, __WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.assetsPath'))));
 
-  app.get('/*', ssr);
+  app.get('/*', __WEBPACK_IMPORTED_MODULE_3__middleware_ssr__["a" /* default */]);
 
-  app.use(error404);
-  app.use(error500);
+  app.use(__WEBPACK_IMPORTED_MODULE_4__middleware_errors__["a" /* error404 */]);
+  app.use(__WEBPACK_IMPORTED_MODULE_4__middleware_errors__["b" /* error500 */]);
 
-  app.listen(config.get('server.port'), config.get('server.host'), function () {
-    return console.log('\n      =====================================================\n      -> Server (' + chalk.bgBlue('SPA') + ') \uD83C\uDFC3 (running) on ' + chalk.green(config.get('server.host')) + ':' + chalk.green(config.get('server.port')) + '\n      =====================================================\n    ');
+  app.listen(__WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.port'), __WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.host'), function () {
+    return console.log('\n      =====================================================\n      -> Server (' + __WEBPACK_IMPORTED_MODULE_2_chalk___default.a.bgBlue('SPA') + ') \uD83C\uDFC3 (running) on ' + __WEBPACK_IMPORTED_MODULE_2_chalk___default.a.green(__WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.host')) + ':' + __WEBPACK_IMPORTED_MODULE_2_chalk___default.a.green(__WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.port')) + '\n      =====================================================\n    ');
   });
 
 
   return app;
 };
 
-module.exports = expressServer;
-/* WEBPACK VAR INJECTION */}.call(exports, "src/server/SSR/src/lib"))
+/* harmony default export */ __webpack_exports__["a"] = (expressServer);
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, "src/server/SSR/src/lib"))
 
 /***/ }),
 /* 29 */
@@ -1034,7 +1048,6 @@ module.exports = require("chalk");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_serialize_javascript__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_serialize_javascript___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_serialize_javascript__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
@@ -1082,7 +1095,7 @@ var uri = __WEBPACK_IMPORTED_MODULE_12__app_config__["a" /* default */].apollo.n
 
 var _ref3 = _jsx(__WEBPACK_IMPORTED_MODULE_11__app_containers_app_App__["a" /* default */], {});
 
-/* harmony default export */ __webpack_exports__["default"] = ((function () {
+/* harmony default export */ __webpack_exports__["a"] = ((function () {
   var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(req, res) {
     var location, apolloClient, context, store, sheet, _ref2, info, currentTime, currentState, preWarmedState, InitialView, html, styleTags, preloadedState, preloadedApolloState;
 
@@ -1099,11 +1112,15 @@ var _ref3 = _jsx(__WEBPACK_IMPORTED_MODULE_11__app_containers_app_App__["a" /* d
             context = {};
             store = __WEBPACK_IMPORTED_MODULE_10__app_redux_store_configureStore___default()();
             sheet = new __WEBPACK_IMPORTED_MODULE_3_styled_components__["ServerStyleSheet"]();
-            _context.prev = 5;
-            _context.next = 8;
+
+
+            console.log('serverRendering');
+
+            _context.prev = 6;
+            _context.next = 9;
             return fakeFetch();
 
-          case 8:
+          case 9:
             _ref2 = _context.sent;
             info = _ref2.info;
             currentTime = __WEBPACK_IMPORTED_MODULE_4_moment___default()().format();
@@ -1126,10 +1143,10 @@ var _ref3 = _jsx(__WEBPACK_IMPORTED_MODULE_11__app_containers_app_App__["a" /* d
               location: location,
               context: context
             }, void 0, _ref3)));
-            _context.next = 17;
+            _context.next = 18;
             return Object(__WEBPACK_IMPORTED_MODULE_7_react_apollo__["getDataFromTree"])(InitialView);
 
-          case 17:
+          case 18:
             html = '';
             styleTags = '';
 
@@ -1141,7 +1158,7 @@ var _ref3 = _jsx(__WEBPACK_IMPORTED_MODULE_11__app_containers_app_App__["a" /* d
             }
 
             if (!context.url) {
-              _context.next = 22;
+              _context.next = 23;
               break;
             }
 
@@ -1149,22 +1166,22 @@ var _ref3 = _jsx(__WEBPACK_IMPORTED_MODULE_11__app_containers_app_App__["a" /* d
               location: context.url
             }));
 
-          case 22:
+          case 23:
             preloadedState = __WEBPACK_IMPORTED_MODULE_0_serialize_javascript___default()(store.getState());
             preloadedApolloState = __WEBPACK_IMPORTED_MODULE_0_serialize_javascript___default()(apolloClient.cache.extract());
             return _context.abrupt('return', res.status(200).set('content-type', 'text/html').send(renderFullPage(html, preloadedState, preloadedApolloState, styleTags)));
 
-          case 27:
-            _context.prev = 27;
-            _context.t0 = _context['catch'](5);
+          case 28:
+            _context.prev = 28;
+            _context.t0 = _context['catch'](6);
             return _context.abrupt('return', res.status(500).end('Internal server error: ', _context.t0));
 
-          case 30:
+          case 31:
           case 'end':
             return _context.stop();
         }
       }
-    }, _callee, this, [[5, 27]]);
+    }, _callee, this, [[6, 28]]);
   }));
 
   function serverRender(_x, _x2) {
@@ -3380,10 +3397,13 @@ function registerServiceWorker() {
 
 /***/ }),
 /* 72 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return error404; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return error500; });
 
-exports.error404 = function (req, res, next) {
+var error404 = function error404(req, res, next) {
   console.log('req.url: ', req.url);
 
   var err = new Error('Not found');
@@ -3392,7 +3412,7 @@ exports.error404 = function (req, res, next) {
   next(err);
 };
 
-exports.error500 = function (err, req, res, next) {
+var error500 = function error500(err, req, res, next) {
   if (err.status === 404) {
     res.status(404).send('Sorry nothing here for now...');
   }
