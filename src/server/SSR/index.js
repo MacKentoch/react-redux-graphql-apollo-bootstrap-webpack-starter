@@ -1000,6 +1000,8 @@ module.exports = require("pretty-error");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__middleware_errors__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__config__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__config___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__config__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__asyncWrap__ = __webpack_require__(74);
+
 
 
 
@@ -1021,13 +1023,13 @@ var expressServer = function expressServer() {
 
   app.use(__WEBPACK_IMPORTED_MODULE_0_express___default.a.static(__WEBPACK_IMPORTED_MODULE_1_path___default.a.join(__dirname, __WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.assetsPath'))));
 
-  app.get('/*', __WEBPACK_IMPORTED_MODULE_3__middleware_ssr__["a" /* default */]);
+  app.get('/*', Object(__WEBPACK_IMPORTED_MODULE_6__asyncWrap__["a" /* default */])(__WEBPACK_IMPORTED_MODULE_3__middleware_ssr__["a" /* default */]));
 
   app.use(__WEBPACK_IMPORTED_MODULE_4__middleware_errors__["a" /* error404 */]);
   app.use(__WEBPACK_IMPORTED_MODULE_4__middleware_errors__["b" /* error500 */]);
 
   app.listen(__WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.port'), __WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.host'), function () {
-    return console.log('\n      =====================================================\n      -> Server (' + __WEBPACK_IMPORTED_MODULE_2_chalk___default.a.bgBlue('SPA') + ') \uD83C\uDFC3 (running) on ' + __WEBPACK_IMPORTED_MODULE_2_chalk___default.a.green(__WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.host')) + ':' + __WEBPACK_IMPORTED_MODULE_2_chalk___default.a.green(__WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.port')) + '\n      =====================================================\n    ');
+    return console.log('\n      =====================================================\n      -> Server (' + __WEBPACK_IMPORTED_MODULE_2_chalk___default.a.bgBlue('SSR') + ') \uD83C\uDFC3 (running) on ' + __WEBPACK_IMPORTED_MODULE_2_chalk___default.a.green(__WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.host')) + ':' + __WEBPACK_IMPORTED_MODULE_2_chalk___default.a.green(__WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.port')) + '\n      =====================================================\n    ');
   });
 
 
@@ -3426,6 +3428,25 @@ var error500 = function error500(err, req, res, next) {
 /***/ (function(module, exports) {
 
 module.exports = require("convict");
+
+/***/ }),
+/* 74 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+
+/* harmony default export */ __webpack_exports__["a"] = (function (fn) {
+  if (fn.length <= 3) {
+    return function (req, res, next) {
+      return fn(req, res, next).catch(next);
+    };
+  } else {
+    return function (err, req, res, next) {
+      return fn(err, req, res, next).catch(next);
+    };
+  }
+});
 
 /***/ })
 /******/ ]);

@@ -7,6 +7,7 @@ import chalk from 'chalk';
 import ssr from '../middleware/ssr';
 import { error404, error500 } from '../middleware/errors';
 import config from '../../../config';
+import asyncWrap from './asyncWrap';
 // #endregion
 
 // $FlowIgnore
@@ -22,7 +23,7 @@ const expressServer = (app = null, isDev = false) => {
     express.static(path.join(__dirname, config.get('server.assetsPath'))),
   );
 
-  app.get('/*', ssr);
+  app.get('/*', asyncWrap(ssr));
 
   app.use(error404);
   app.use(error500);
@@ -31,7 +32,7 @@ const expressServer = (app = null, isDev = false) => {
   app.listen(config.get('server.port'), config.get('server.host'), () =>
     console.log(`
       =====================================================
-      -> Server (${chalk.bgBlue('SPA')}) 🏃 (running) on ${chalk.green(
+      -> Server (${chalk.bgBlue('SSR')}) 🏃 (running) on ${chalk.green(
       config.get('server.host'),
     )}:${chalk.green(config.get('server.port'))}
       =====================================================
