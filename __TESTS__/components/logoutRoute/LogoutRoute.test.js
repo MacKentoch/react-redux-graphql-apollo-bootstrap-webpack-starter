@@ -1,11 +1,11 @@
 // @flow
 
 import React from 'react';
-import LogoutRoute from '../../../src/app/components/logoutRoute/LogoutRoute';
+import LogoutRoute from '../../../src/front/components/logoutRoute/LogoutRoute';
 import renderer from 'react-test-renderer'; // needed both for snpashot testing but also to prevent errors from enzyme
 import { MemoryRouter } from 'react-router';
 
-jest.mock('../../../src/app/services/auth', () => {
+jest.mock('../../../src/front/services/auth', () => {
   return {
     clearAllAppStorage() {
       return jest.fn(() => true);

@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import Login from '../../../src/app/views/login/Login';
+import Login from '../../../src/front/views/login/Login';
 import renderer from 'react-test-renderer'; // needed both for snpashot testing but also to prevent errors from enzyme
 import { RouterHistory } from 'react-router';
 

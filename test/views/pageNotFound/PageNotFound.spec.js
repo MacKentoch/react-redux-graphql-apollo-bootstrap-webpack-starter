@@ -1,7 +1,7 @@
 import React                from 'react';
 import chai, {expect}       from 'chai';
 import {shallow}            from 'enzyme';
-import PageNotFound         from '../../../src/app/views/pageNotFound/PageNotFound';
+import PageNotFound         from '../../../src/front/views/pageNotFound/PageNotFound';
 import dirtyChai            from 'dirty-chai';
 
 chai.use(dirtyChai);

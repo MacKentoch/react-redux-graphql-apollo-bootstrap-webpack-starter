@@ -2,7 +2,7 @@ import React              from 'react';
 import { shallow }        from 'enzyme';
 import chai, {expect}     from 'chai';
 import dirtyChai          from 'dirty-chai';
-import LeftNav            from '../../../../src/app/components/navigation/leftNav/LeftNav';
+import LeftNav            from '../../../../src/front/components/navigation/leftNav/LeftNav';
 
 chai.use(dirtyChai);
 

@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import RightNav from '../../../../src/app/components/navigation/rightNav/RightNav';
+import RightNav from '../../../../src/front/components/navigation/rightNav/RightNav';
 import renderer from 'react-test-renderer'; // needed both for snpashot testing but also to prevent errors from enzyme
 import { MemoryRouter } from 'react-router';
 

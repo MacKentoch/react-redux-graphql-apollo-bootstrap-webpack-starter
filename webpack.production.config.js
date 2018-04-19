@@ -7,7 +7,7 @@ const workboxPlugin = require('workbox-webpack-plugin');
 
 const assetsDir = path.resolve(__dirname, 'docs/assets');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
-const indexFile = path.resolve(__dirname, 'src/app/index.js');
+const indexFile = path.resolve(__dirname, 'src/front/index.js');
 
 const SPLIT_STYLE = true;
 

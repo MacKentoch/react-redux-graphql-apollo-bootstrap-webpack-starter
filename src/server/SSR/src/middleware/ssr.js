@@ -10,11 +10,13 @@ import moment from 'moment';
 import { StaticRouter } from 'react-router';
 import { Provider } from 'react-redux';
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
-import { ApolloClient, createNetworkInterface } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { ApolloClient } from 'apollo-client';
+import fetch from 'node-fetch';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import configureStore from '../../../../app/redux/store/configureStore';
-import App from '../../../../app/containers/app/App';
-import frontConfig from '../../../../app/config';
+import configureStore from '../../../../front/redux/store/configureStore';
+import App from '../../../../front/containers/app/App';
+import frontConfig from '../../../../front/config';
 // #endregion
 
 // #region constants
@@ -26,7 +28,7 @@ export default async function serverRender(req, res) {
   const location = req.url;
   const apolloClient = new ApolloClient({
     ssrMode: true,
-    networkInterface: createNetworkInterface({ uri }),
+    link: new HttpLink({ uri, fetch }),
     cache: new InMemoryCache(),
   });
   const context = {};
@@ -128,7 +130,7 @@ function renderFullPage(
         <meta name="author" content="Erwan DATIN (MacKentoch)">
         <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
         <link rel='stylesheet' href='assets/app.styles.css'>
-        {styleTags}
+        ${styleTags}
       </head>
       <body>
         <section id="root"><div>${html}</div></section>

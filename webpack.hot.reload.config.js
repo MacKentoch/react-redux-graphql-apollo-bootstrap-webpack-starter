@@ -5,7 +5,7 @@ const path = require('path');
 
 const assetsDir = path.join(__dirname, 'public/assets');
 const srcInclude = path.join(__dirname, 'src/app');
-const indexFile = path.join(__dirname, 'src/app/index.js');
+const indexFile = path.join(__dirname, 'src/front/index.js');
 
 const config = {
   devtool: 'cheap-module-source-map',

@@ -12,7 +12,7 @@
     "start-spa-dev": "npm run dev && cross-env NODE_ENV=dev nodemon ./src/server/SPA/index.js",
     "start-spa-prod": "npm run prod && cross-env NODE_ENV=production node ./src/server/SPA/index.js",
     "build-ssr": "cross-env NODE_ENV=production  webpack --color --config webpack.server.ssr.config.js",
-    "serve-ssr": "npm run build-ssr && cross-env NODE_ENV=production node ./src/server/SSR/index.js"
+    "serve-ssr": "npm run prod && npm run build-ssr && cross-env NODE_ENV=production node ./src/server/SSR/index.js"
   },
   "engines": {
     "node": ">=8.1.4",
@@ -172,6 +172,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "moment": "^2.20.1",
+    "node-fetch": "^2.1.2",
     "prettier-eslint": "^8.8.1",
     "pretty-error": "^2.1.1",
     "prop-types": "^15.6.0",

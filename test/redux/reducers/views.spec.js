@@ -1,5 +1,5 @@
 import {expect}             from 'chai';
-import views                from '../../../src/app/redux/modules/views';
+import views                from '../../../src/front/redux/modules/views';
 import moment               from 'moment';
 
 const dateFormat = 'DD/MM/YYYY HH:mm';

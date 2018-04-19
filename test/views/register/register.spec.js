@@ -6,7 +6,7 @@ import {
 import chai, {expect}       from 'chai';
 import sinon                from 'sinon';
 import dirtyChai            from 'dirty-chai';
-import Register             from '../../../src/app/views/register/Register';
+import Register             from '../../../src/front/views/register/Register';
 
 chai.use(dirtyChai);
 

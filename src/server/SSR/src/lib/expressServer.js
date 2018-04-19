@@ -20,7 +20,10 @@ const expressServer = (app = null, isDev = false) => {
   app.set('ipAdress', config.get('server.host'));
 
   app.use(
-    express.static(path.join(__dirname, config.get('server.assetsPath'))),
+    '/assets',
+    express.static(
+      path.resolve(__dirname, config.get('server.assetsPath'), '/assets/'),
+    ),
   );
 
   app.get('/*', asyncWrap(ssr));

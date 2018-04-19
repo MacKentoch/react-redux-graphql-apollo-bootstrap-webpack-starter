@@ -5,7 +5,7 @@ import {
 }                         from 'enzyme';
 import chai, {expect}     from 'chai';
 import dirtyChai          from 'dirty-chai';
-import { NavigationBar }  from '../../../src/app/components';
+import { NavigationBar }  from '../../../src/front/components';
 
 chai.use(dirtyChai);
 

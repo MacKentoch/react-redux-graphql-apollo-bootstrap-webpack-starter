@@ -2,7 +2,7 @@ import React                from 'react';
 import { mount }            from 'enzyme';
 import chai, {expect}       from 'chai';
 import dirtyChai            from 'dirty-chai';
-import DevTools             from '../../../src/app/redux/devTools/DevTools.jsx';
+import DevTools             from '../../../src/front/redux/devTools/DevTools.jsx';
 
 chai.use(dirtyChai);
 

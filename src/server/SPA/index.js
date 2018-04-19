@@ -1,12 +1,17 @@
 // @flow
+
+// #region imports
 const express = require('express');
 const path = require('path');
 const chalk = require('chalk');
+// #endregion
 
+// #region constants
 const app = express();
 const DOCS_PATH = '../../../docs/';
 const PORT = 8082;
 const IP_ADRESS = 'localhost';
+// #endregion
 
 app.set('port', PORT);
 app.set('ipAdress', IP_ADRESS);

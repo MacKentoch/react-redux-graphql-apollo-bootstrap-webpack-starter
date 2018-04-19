@@ -4,7 +4,7 @@ import {
 }                         from 'enzyme';
 import chai, {expect}     from 'chai';
 import dirtyChai          from 'dirty-chai';
-import RightNav           from '../../../../src/app/components/navigation/rightNav/RightNav';
+import RightNav           from '../../../../src/front/components/navigation/rightNav/RightNav';
 
 chai.use(dirtyChai);
 

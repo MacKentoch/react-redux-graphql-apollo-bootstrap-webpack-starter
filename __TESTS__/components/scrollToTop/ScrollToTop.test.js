@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import ScrollToTop from '../../../src/app/components/scrollToTop/ScrollToTop';
+import ScrollToTop from '../../../src/front/components/scrollToTop/ScrollToTop';
 import renderer from 'react-test-renderer'; // needed both for snpashot testing but also to prevent errors from enzyme
 import { MemoryRouter } from 'react-router';
 

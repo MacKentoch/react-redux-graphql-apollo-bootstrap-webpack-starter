@@ -2,7 +2,7 @@ Full ES6+ React + React-Router + Redux + GraphQL + Apollo + Bootstrap with Hot R
 ==========
 
 > My new `React + redux project starter`. This time I add `graphQL` and `Apollo Client`.
-This starter also embeds `JWT token based` `authentication` (check [Route](https://github.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/blob/master/src/app/routes/MainRoutes.js#L29) to get an example of dealing with protected routes).
+This starter also embeds `JWT token based` `authentication` (check [Route](https://github.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/blob/master/src/front/routes/MainRoutes.js#L29) to get an example of dealing with protected routes).
 
 ![preview](./preview/preview.png)
 
@@ -91,7 +91,7 @@ An Easy and fast way to get your graphql backend is to **register for free at [S
 
 In Scaphold click on `My API` and `copy your application link`.
 
-Then, past it (*to replace http://localhost:8080/graphql*) in your `networkInterface` in the app config (in `./src/app/config.index.js`):
+Then, past it (*to replace http://localhost:8080/graphql*) in your `networkInterface` in the app config (in `./src/front/config.index.js`):
 
 ```javascript
 export const appConfig = {

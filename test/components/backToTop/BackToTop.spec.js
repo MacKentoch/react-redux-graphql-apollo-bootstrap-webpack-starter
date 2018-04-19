@@ -6,7 +6,7 @@ import {
 import chai, {expect}       from 'chai';
 import sinon                from 'sinon';
 import dirtyChai            from 'dirty-chai';
-import BackToTop            from '../../../src/app/components/backToTop/BackToTop';
+import BackToTop            from '../../../src/front/components/backToTop/BackToTop';
 
 chai.use(dirtyChai);
 

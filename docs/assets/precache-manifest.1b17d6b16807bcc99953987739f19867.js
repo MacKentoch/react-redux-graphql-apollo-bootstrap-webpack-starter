@@ -16,15 +16,15 @@ self.__precacheManifest = [
     "url": "fontawesome-webfont.eot"
   },
   {
-    "revision": "df8ac21373a74996647b",
+    "revision": "98903c639c4186a59dde",
     "url": "app.vendor.bundle.js"
   },
   {
-    "revision": "721a242bb49452569975",
+    "revision": "689694efc3dabdc2ad51",
     "url": "app.styles.css"
   },
   {
-    "revision": "721a242bb49452569975",
+    "revision": "689694efc3dabdc2ad51",
     "url": "app.bundle.js"
   }
 ];

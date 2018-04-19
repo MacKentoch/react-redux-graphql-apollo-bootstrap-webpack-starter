@@ -3,7 +3,7 @@ import { shallow }          from 'enzyme';
 import chai, {expect}       from 'chai';
 import sinon                from 'sinon';
 import dirtyChai            from 'dirty-chai';
-import BackToTopButton      from '../../../../src/app/components/backToTop/backToTopButton/BackToTopButton';
+import BackToTopButton      from '../../../../src/front/components/backToTop/backToTopButton/BackToTopButton';
 
 chai.use(dirtyChai);
 

@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import Register from '../../../src/app/views/register/Register';
+import Register from '../../../src/front/views/register/Register';
 import renderer from 'react-test-renderer'; // needed both for snpashot testing but also to prevent errors from enzyme
 import { RouterHistory } from 'react-router';
 

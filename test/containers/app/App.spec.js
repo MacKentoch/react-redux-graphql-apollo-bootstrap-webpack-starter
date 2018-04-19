@@ -3,7 +3,7 @@ import {expect}             from 'chai';
 import {shallow}            from 'enzyme';
 import configureMockStore   from 'redux-mock-store';
 import thunk                from 'redux-thunk';
-import App                  from '../../../src/app/containers/app/App';
+import App                  from '../../../src/front/containers/app/App';
 import ApolloClient         from 'apollo-client';
 
 const apollo = new ApolloClient();

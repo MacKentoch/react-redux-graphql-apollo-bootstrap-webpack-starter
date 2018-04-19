@@ -3,7 +3,7 @@ import {expect}             from 'chai';
 import {shallow}            from 'enzyme';
 import configureMockStore   from 'redux-mock-store';
 import thunk                from 'redux-thunk';
-import HomeConnected       from '../../../src/app/containers/home/Home';
+import HomeConnected       from '../../../src/front/containers/home/Home';
 
 const mockStore = configureMockStore([ thunk ]);
 const storeStateMock = {

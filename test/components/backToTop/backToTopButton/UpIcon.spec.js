@@ -2,7 +2,7 @@ import React                from 'react';
 import { shallow }          from 'enzyme';
 import chai, {expect}       from 'chai';
 import dirtyChai            from 'dirty-chai';
-import UpIcon               from '../../../../src/app/components/backToTop/backToTopButton/UpIcon';
+import UpIcon               from '../../../../src/front/components/backToTop/backToTopButton/UpIcon';
 
 chai.use(dirtyChai);
 

@@ -4,7 +4,7 @@ import {
 }                         from 'enzyme';
 import chai, {expect}     from 'chai';
 import dirtyChai          from 'dirty-chai';
-import Humburger          from '../../../../src/app/components/navigation/humburger/Humburger';
+import Humburger          from '../../../../src/front/components/navigation/humburger/Humburger';
 
 chai.use(dirtyChai);
 

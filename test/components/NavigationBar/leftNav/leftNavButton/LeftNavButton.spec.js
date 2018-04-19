@@ -5,7 +5,7 @@ import {
 import chai, {expect}     from 'chai';
 import sinon              from 'sinon';
 import dirtyChai          from 'dirty-chai';
-import LeftNavButton      from '../../../../../src/app/components/navigation/leftNav/leftNavButton/LeftNavButton';
+import LeftNavButton      from '../../../../../src/front/components/navigation/leftNav/leftNavButton/LeftNavButton';
 
 chai.use(dirtyChai);
 

@@ -5,7 +5,7 @@ import {
 import chai, {expect} from 'chai';
 import dirtyChai      from 'dirty-chai';
 
-import { Jumbotron }  from '../../../src/app/components';
+import { Jumbotron }  from '../../../src/front/components';
 
 // avoid to eslint-disable for chai no-unsued-expressions
 chai.use(dirtyChai);
