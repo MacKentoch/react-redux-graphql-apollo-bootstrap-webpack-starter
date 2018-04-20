@@ -129,15 +129,15 @@ function renderFullPage(
         <meta name="description" content="ReactJS Redux GraphQL Apollo Bootstrap Starter">
         <meta name="author" content="Erwan DATIN (MacKentoch)">
         <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-        <link rel='stylesheet' href='assets/app.styles.css'>
+        <link rel='stylesheet' href='/assets/app.styles.css'>
         ${styleTags}
       </head>
       <body>
         <section id="root"><div>${html}</div></section>
         <script type="text/javascript">window.__PRELOADED_STATE__ = ${preloadedState}</script>
         <script type="text/javascript">window.__APOLLO_STATE__ = ${preloadedApolloState}</script>
-        <script type="text/javascript" src="assets/app.vendor.bundle.js"></script>
-        <script type="text/javascript" src="assets/app.bundle.js"></script>
+        <script type="text/javascript" src="/assets/app.vendor.bundle.js"></script>
+        <script type="text/javascript" src="/assets/app.bundle.js"></script>
       </body>
     </html>
   `,

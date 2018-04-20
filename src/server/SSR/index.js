@@ -913,7 +913,7 @@ var config = convict({
     assetsPath: {
       doc: 'assets path',
       format: String,
-      default: '../../docs/',
+      default: '../../../docs/',
       env: 'SERVER_ASSETS_PATH'
     },
     bodyParser: {
@@ -1021,7 +1021,7 @@ var expressServer = function expressServer() {
   app.set('port', __WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.port'));
   app.set('ipAdress', __WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.host'));
 
-  app.use('/assets', __WEBPACK_IMPORTED_MODULE_0_express___default.a.static(__WEBPACK_IMPORTED_MODULE_1_path___default.a.resolve(__dirname, __WEBPACK_IMPORTED_MODULE_5__config___default.a.get('server.assetsPath'), '/assets/')));
+  app.use('/assets', __WEBPACK_IMPORTED_MODULE_0_express___default.a.static(__WEBPACK_IMPORTED_MODULE_1_path___default.a.join(__dirname, '../../../../../docs/', 'assets/')));
 
   app.get('/*', Object(__WEBPACK_IMPORTED_MODULE_6__asyncWrap__["a" /* default */])(__WEBPACK_IMPORTED_MODULE_3__middleware_ssr__["a" /* default */]));
 
@@ -1213,7 +1213,7 @@ function renderFullPage(html) {
   var styleTags = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
   var indexHtml = {
-    template: '\n    <!DOCTYPE html>\n    <html>\n      <head>\n        <title>ReactJS Redux GraphQL Apollo Bootstrap Starter</title>\n        <meta charset="utf-8">\n        <meta http-equiv="X-UA-Compatible" content="IE=edge">\n        <meta name="viewport" content="width=device-width, initial-scale=1">\n        <meta name="description" content="ReactJS Redux GraphQL Apollo Bootstrap Starter">\n        <meta name="author" content="Erwan DATIN (MacKentoch)">\n        <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">\n        <link rel=\'stylesheet\' href=\'assets/app.styles.css\'>\n        ' + styleTags + '\n      </head>\n      <body>\n        <section id="root"><div>' + html + '</div></section>\n        <script type="text/javascript">window.__PRELOADED_STATE__ = ' + preloadedState + '</script>\n        <script type="text/javascript">window.__APOLLO_STATE__ = ' + preloadedApolloState + '</script>\n        <script type="text/javascript" src="assets/app.vendor.bundle.js"></script>\n        <script type="text/javascript" src="assets/app.bundle.js"></script>\n      </body>\n    </html>\n  '
+    template: '\n    <!DOCTYPE html>\n    <html>\n      <head>\n        <title>ReactJS Redux GraphQL Apollo Bootstrap Starter</title>\n        <meta charset="utf-8">\n        <meta http-equiv="X-UA-Compatible" content="IE=edge">\n        <meta name="viewport" content="width=device-width, initial-scale=1">\n        <meta name="description" content="ReactJS Redux GraphQL Apollo Bootstrap Starter">\n        <meta name="author" content="Erwan DATIN (MacKentoch)">\n        <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">\n        <link rel=\'stylesheet\' href=\'/assets/app.styles.css\'>\n        ' + styleTags + '\n      </head>\n      <body>\n        <section id="root"><div>' + html + '</div></section>\n        <script type="text/javascript">window.__PRELOADED_STATE__ = ' + preloadedState + '</script>\n        <script type="text/javascript">window.__APOLLO_STATE__ = ' + preloadedApolloState + '</script>\n        <script type="text/javascript" src="/assets/app.vendor.bundle.js"></script>\n        <script type="text/javascript" src="/assets/app.bundle.js"></script>\n      </body>\n    </html>\n  '
   };
   return indexHtml.template;
 }

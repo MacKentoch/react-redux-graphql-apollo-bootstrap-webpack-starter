@@ -21,9 +21,7 @@ const expressServer = (app = null, isDev = false) => {
 
   app.use(
     '/assets',
-    express.static(
-      path.resolve(__dirname, config.get('server.assetsPath'), '/assets/'),
-    ),
+    express.static(path.join(__dirname, '../../../../../docs/', 'assets/')),
   );
 
   app.get('/*', asyncWrap(ssr));
