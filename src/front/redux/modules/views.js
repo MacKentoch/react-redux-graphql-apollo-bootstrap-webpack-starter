@@ -31,7 +31,7 @@ const initialState = {
   leaveTime: null,
 };
 
-export default function(state = initialState, action) {
+export default function(state: any = initialState, action: any) {
   const currentTime = moment().format(dateFormat);
 
   switch (action.type) {

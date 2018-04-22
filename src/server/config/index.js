@@ -55,7 +55,7 @@ const config = convict({
     assetsPath: {
       doc: 'assets path',
       format: String,
-      default: '../../../docs/',
+      default: '../../../../../docs/',
       env: 'SERVER_ASSETS_PATH',
     },
     bodyParser: {
