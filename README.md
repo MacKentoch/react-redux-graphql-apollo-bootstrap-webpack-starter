@@ -9,14 +9,14 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 - *webpack is as simple as possible*
 - *ReactJS is written with `optimization tricks` (stateless, pure render...).*
 - *`pure front-end` = server independant (use whatever you want as server: NodeJS, Rails, .NET...)*
-- contains both [SPA](https://github.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/tree/master/src/server/SPA) and [SSR](https://github.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/tree/master/src/server/SSR/src) server implementation
+- contains both [`SPA`](https://github.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/tree/master/src/server/SPA) and [`SSR`](https://github.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/tree/master/src/server/SSR/src) server implementation
 - caching implementation with `workbox-webpack-plugin` (*so that it follows PWA path!*)
 - *`redux` + `devTools` + `hot reload`= how did I developed without them before?*
 - *graphQL makes API to be " `has been` "*
   - *no more struggle in redux with async thank to Apollo Client (you can even get rid of redux thunk or redux saga if you needed theses just for your asyncs. Otherwise keep them since they are nice :smile:)*
 - [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension#redux-devtools-extension) to make developments a pure pleasure.
 
-##Detailed Content
+## Detailed Content
 
 **Front:**
 
@@ -55,16 +55,16 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 
 - jest
 
-##Usage
+## Usage
 
-###Prerequisite
+### Prerequisite
 
-####Node JS version required is `>=6.x`.
+#### Node JS version required is `>=6.x`.
 *Build with node js v8.x but should be ok with node js 6.x.*
 
 > Better use [nvm](https://github.com/creationix/nvm) to manage your Node JS versions.
 
-###server
+### server
 
 An Easy and fast way to get your graphql backend is to **register for free at [Scaphold](https://scaphold.io)**.
 
@@ -88,7 +88,7 @@ An Easy and fast way to get your graphql backend is to **register for free at [S
 
 ![graphiQL_overview.png](https://raw.githubusercontent.com/MacKentoch/react-redux-graphql-apollo-bootstrap-webpack-starter/master/print_screens/graphiQL_overview.png)
 
-###Configure starter application:
+### Configure starter application:
 
 In Scaphold click on `My API` and `copy your application link`.
 
@@ -105,13 +105,13 @@ export const appConfig = {
 
 > from now you got all needed to run this starter
 
-###Install dependencies
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-###run dev : hot reload mode (*+ redux-devtools-extension*)
+### run dev : hot reload mode (*+ redux-devtools-extension*)
 
 
 ```bash
@@ -120,36 +120,36 @@ npm run start
 
 NOTE: be sure you already installed [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension#redux-devtools-extension) in your browser to get the best development experience.
 
-###bundle dev mode (*+ redux-devtools*)
+### bundle dev mode (*+ redux-devtools*)
 
 ```bash
 npm run dev
 ```
 
-###tests
+### tests
 
 ```bash
 npm run test
 ```
 
-###bundle production mode
+### bundle production mode
 
 ```bash
 npm run prod
 ```
 
-###run dev bundle
+### run dev bundle
 ```bash
 npm run start-spa-dev
 ```
 
-###run prod bundle
+### run prod bundle
 ```bash
 npm run start-spa-prod
 ```
 
 
-##License
+## License
 
 The MIT License (MIT)
 
