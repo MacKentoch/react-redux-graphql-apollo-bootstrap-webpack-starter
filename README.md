@@ -16,6 +16,12 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
   - *no more struggle in redux with async thank to Apollo Client (you can even get rid of redux thunk or redux saga if you needed theses just for your asyncs. Otherwise keep them since they are nice :smile:)*
 - [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension#redux-devtools-extension) to make developments a pure pleasure.
 
+## New 🎉 since v3.0.0!
+
+- Add `code splitting` by using `dynamic import` (*router level but you can extend to component level as you feel the need*)
+ - *NOTE: combined with SSR server and SW for caching, this is a good start to follow PWA path!*
+ - Want to know more about code splitting with SSR a React application, [read this complete beautiful article](https://marmelab.com/blog/2017/10/17/code-splitting.html) (don't forget to clap the author - no I don't even know him 😉 - but this is a really nice job)
+
 ## Detailed Content
 
 **Front:**
@@ -26,6 +32,7 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 - React-Redux 5.x (*Redux is not specific to ReactJS, you could easily use it with Angular2 for instance*)
 - React-Router-Redux (*previously named react-simple-router*)
 - react-router (4.x- [github :link:](https://github.com/reactjs/react-router))
+- loadable-components (1.4.x [github :link:](https://github.com/smooth-code/loadable-components))
 - styled-components (3.2.x- [github :link:](https://github.com/styled-components/styled-components))
 - Bootstrap (3.x - [github :link:](https://github.com/twbs/bootstrap))
 - React-Bootstrap ([github :link:](https://github.com/react-bootstrap/react-bootstrap))
