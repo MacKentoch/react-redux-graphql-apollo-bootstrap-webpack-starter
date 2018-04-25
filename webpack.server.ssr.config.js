@@ -8,7 +8,7 @@ const nodeExternals = require('webpack-node-externals');
 const nodeModulesDir = path.join(__dirname, 'node_modules');
 const indexFile = path.join(__dirname, 'src/server/SSR/src/server.js');
 const publicPath = path.join(__dirname, 'docs/public');
-const ouputDirectory = path.join(__dirname, 'src/server/SSR');
+const ouputDirectory = path.join(__dirname, 'src/server/SSR/output');
 const outputFile = 'index.js';
 
 const serverConfig = {

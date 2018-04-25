@@ -4,6 +4,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { loadComponents } from 'loadable-components';
 import injectTpEventPlugin from 'react-tap-event-plugin';
 import smoothScrollPolyfill from 'smoothscroll-polyfill';
 import 'animate.css';
@@ -39,7 +40,7 @@ const renderApp = RootComponent => {
   );
 };
 
-renderApp(Root);
+loadComponents().then(() => renderApp(Root));
 
 if (module.hot) {
   module.hot.accept('./Root', () => {

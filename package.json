@@ -13,7 +13,7 @@
     "start-spa-dev": "npm run dev && cross-env NODE_ENV=dev nodemon ./src/server/SPA/index.js",
     "start-spa-prod": "npm run prod && cross-env NODE_ENV=production node ./src/server/SPA/index.js",
     "build-ssr": "cross-env NODE_ENV=production  webpack --color --config webpack.server.ssr.config.js",
-    "serve-ssr": "npm run prod && npm run build-ssr && cross-env NODE_ENV=production node ./src/server/SSR/index.js"
+    "serve-ssr": "npm run prod && npm run build-ssr && cross-env NODE_ENV=production node ./src/server/SSR/output/index.js"
   },
   "engines": {
     "node": ">=8.1.4",
@@ -161,6 +161,7 @@
     "classnames": "^2.2.5",
     "compression": "^1.7.2",
     "convict": "^4.2.0",
+    "date-fns": "^1.29.0",
     "express": "^4.16.3",
     "express-promise-router": "^3.0.1",
     "express-rate-limit": "^2.11.0",

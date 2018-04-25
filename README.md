@@ -139,6 +139,12 @@ npm run dev
 npm run test
 ```
 
+### Analyze production bundle (*PWA friendly*)
+
+```bash
+npm run analyze
+```
+
 ### bundle production mode
 
 ```bash

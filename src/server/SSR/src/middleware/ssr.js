@@ -8,6 +8,7 @@ import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 import moment from 'moment';
 import { StaticRouter } from 'react-router';
+import { getLoadableState } from 'loadable-components/server';
 import { Provider } from 'react-redux';
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
 import { HttpLink } from 'apollo-link-http';
@@ -77,20 +78,26 @@ export default async function serverRender(req, res) {
     }
 
     if (context.url) {
-      return res.status.end({
-        location: context.url,
-      });
+      res.redirect(context.url);
+      return;
     }
 
     // serialize is better than JSON.stringify
     const preloadedState = serialize(store.getState());
     const preloadedApolloState = serialize(apolloClient.cache.extract());
+    const loadableState = await getLoadableState(appWithRouter);
 
     return res
       .status(200)
       .set('content-type', 'text/html')
       .send(
-        renderFullPage(html, preloadedState, preloadedApolloState, styleTags),
+        renderFullPage(
+          html,
+          preloadedState,
+          preloadedApolloState,
+          styleTags,
+          loadableState,
+        ),
       );
   } catch (error) {
     return res.status(500).end('Internal server error: ', error);
@@ -108,6 +115,7 @@ function renderFullPage(
   preloadedState = '',
   preloadedApolloState: '',
   styleTags = '',
+  loadableState = '',
 ) {
   // NOTE:
   // <section id="root">
@@ -138,6 +146,7 @@ function renderFullPage(
         <script type="text/javascript">window.__APOLLO_STATE__ = ${preloadedApolloState}</script>
         <script type="text/javascript" src="/assets/app.vendor.bundle.js"></script>
         <script type="text/javascript" src="/assets/app.bundle.js"></script>
+        ${loadableState.getScriptTag()}
       </body>
     </html>
   `,

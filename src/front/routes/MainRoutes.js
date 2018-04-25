@@ -3,12 +3,14 @@
 // #region imports
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import Home from '../views/home';
-import About from '../views/about';
-import Register from '../views/register';
-import Protected from '../views/protected';
-import PrivateRoute from '../components/privateRoute/PrivateRoute';
-import PageNotFound from '../views/pageNotFound';
+import {
+  Home,
+  About,
+  Protected,
+  Register,
+  PrivateRoute,
+  PageNotFound,
+} from './routes';
 // #endregion
 
 export const MainRoutes = () => {

@@ -106,6 +106,7 @@ const config = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: 'app.vendor.bundle.js',
+      minChunks: Infinity,
     }),
     new BundleAnalyzerPlugin(),
   ],
