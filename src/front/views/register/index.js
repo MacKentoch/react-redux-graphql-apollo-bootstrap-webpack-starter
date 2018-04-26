@@ -9,6 +9,7 @@ import compose from 'recompose/compose';
 import * as viewsActions from '../../redux/modules/views';
 import * as userAuthActions from '../../redux/modules/userAuth';
 import Register from './Register';
+import { type Props } from './Register';
 import withEnterAnimation from '../../hoc/withEnterAnimation';
 // #endregion
 
@@ -50,20 +51,24 @@ const createUserMutation = gql`
   }
 `;
 
-const createUserMutationOptions = {
+const createUserMutationOptions: any = {
   props: ({
     ownProps,
     mutate,
   }: {
-    ownProps: CTypes.Props,
+    ownProps: Props,
     mutate: (...any) => any,
-  }) => ({
+  }): any => ({
     async registerUser(user) {
       ownProps.setLoadingStateForUserRegister();
 
       try {
         const payload = { variables: { ...user } };
-        const { data: { createUser: { token } } } = await mutate(payload);
+        const {
+          data: {
+            createUser: { token },
+          },
+        } = await mutate(payload);
         ownProps.receivedUserRegister(token, user);
         ownProps.unsetLoadingStateForUserRegister();
         return Promise.resolve();

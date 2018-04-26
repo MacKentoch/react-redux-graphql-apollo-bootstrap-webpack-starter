@@ -2,7 +2,7 @@
 
 import type { Storage, TokenKey, UserInfoKey, STORES_TYPES } from './type';
 import decode from 'jwt-decode';
-import moment from 'moment';
+import { isAfter } from 'date-fns';
 
 const TOKEN_KEY = 'token';
 const USER_INFO = 'userInfo';
@@ -116,7 +116,11 @@ export const auth = {
   ): boolean {
     // localStorage:
     if (fromStorage === APP_PERSIST_STORES_TYPES[0]) {
-      if (window && window.localStorage && localStorage.getItem(tokenKey)) {
+      if (
+        window &&
+        window.localStorage &&
+        window.localStorage.getItem(tokenKey)
+      ) {
         return true;
       } else {
         return false;
@@ -124,7 +128,11 @@ export const auth = {
     }
     // sessionStorage:
     if (fromStorage === APP_PERSIST_STORES_TYPES[1]) {
-      if (window && window.sessionStorage && sessionStorage.getItem(tokenKey)) {
+      if (
+        window &&
+        window.sessionStorage &&
+        window.sessionStorage.getItem(tokenKey)
+      ) {
         return true;
       } else {
         return false;
@@ -185,8 +193,8 @@ export const auth = {
    */
   isExpiredToken(encodedToken: any): boolean {
     const expirationDate = this.getTokenExpirationDate(encodedToken);
-    const rightNow = moment();
-    const isExpiredToken = moment(rightNow).isAfter(moment(expirationDate));
+    const rightNow = new Date();
+    const isExpiredToken = isAfter(rightNow, expirationDate);
 
     return isExpiredToken;
   },
@@ -205,6 +213,10 @@ export const auth = {
     fromStorage: Storage = APP_PERSIST_STORES_TYPES[0],
     userInfoKey: UserInfoKey = USER_INFO,
   ): ?string {
+    if (!window) {
+      return '';
+    }
+
     // localStorage:
     if (fromStorage === APP_PERSIST_STORES_TYPES[0]) {
       return (

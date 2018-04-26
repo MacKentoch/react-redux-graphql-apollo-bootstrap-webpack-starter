@@ -1,7 +1,7 @@
 // @flow
 
 // #region imports
-import moment from 'moment';
+import { format } from 'date-fns';
 const dateFormat = 'DD/MM/YYYY HH:mm';
 // #endregion
 
@@ -32,7 +32,7 @@ const initialState = {
 };
 
 export default function(state: any = initialState, action: any) {
-  const currentTime = moment().format(dateFormat);
+  const currentTime = format(new Date(), dateFormat);
 
   switch (action.type) {
     // /////////////////////

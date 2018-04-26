@@ -8,9 +8,9 @@
     "flow"
   ],
   "plugins": [
+    "loadable-components/babel",
     "transform-regenerator",
-    "transform-async-to-generator",
-    "dynamic-import-webpack"
+    "transform-async-to-generator"
   ],
   "env": {
     "test": {
@@ -24,6 +24,7 @@
         "jest"
       ],
       "plugins": [
+        "loadable-components/babel",
         "transform-regenerator",
         "transform-async-to-generator"
       ]

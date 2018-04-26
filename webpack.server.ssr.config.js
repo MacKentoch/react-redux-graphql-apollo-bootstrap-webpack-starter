@@ -7,9 +7,9 @@ const nodeExternals = require('webpack-node-externals');
 
 const nodeModulesDir = path.join(__dirname, 'node_modules');
 const indexFile = path.join(__dirname, 'src/server/SSR/src/server.js');
-const publicPath = path.join(__dirname, 'docs/public');
+const publicPath = path.join(__dirname, 'docs/assets');
 const ouputDirectory = path.join(__dirname, 'src/server/SSR/output');
-const outputFile = 'index.js';
+const outputFile = 'server.js';
 
 const serverConfig = {
   entry: ['babel-polyfill', indexFile],

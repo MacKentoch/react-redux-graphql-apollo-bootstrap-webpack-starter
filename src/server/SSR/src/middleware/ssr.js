@@ -6,7 +6,7 @@ import serialize from 'serialize-javascript';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { StaticRouter } from 'react-router';
 import { getLoadableState } from 'loadable-components/server';
 import { Provider } from 'react-redux';
@@ -41,7 +41,7 @@ export default async function serverRender(req, res) {
   // just for demo, replace with a "usefull" async. action to feed your state
   try {
     const { info } = await fakeFetch();
-    const currentTime = moment().format();
+    const currentTime = format(new Date());
     const currentState = store.getState();
 
     const preWarmedState = {
@@ -74,7 +74,8 @@ export default async function serverRender(req, res) {
       html = renderToString(sheet.collectStyles(InitialView));
       styleTags = sheet.getStyleTags();
     } catch (error) {
-      console.log('error: ', error);
+      console.log('server rendering error: ', error);
+      throw error;
     }
 
     if (context.url) {
@@ -85,7 +86,7 @@ export default async function serverRender(req, res) {
     // serialize is better than JSON.stringify
     const preloadedState = serialize(store.getState());
     const preloadedApolloState = serialize(apolloClient.cache.extract());
-    const loadableState = await getLoadableState(appWithRouter);
+    const loadableState = await getLoadableState(InitialView);
 
     return res
       .status(200)
@@ -100,6 +101,7 @@ export default async function serverRender(req, res) {
         ),
       );
   } catch (error) {
+    console.log('Internal server error: ', error);
     return res.status(500).end('Internal server error: ', error);
   }
 }

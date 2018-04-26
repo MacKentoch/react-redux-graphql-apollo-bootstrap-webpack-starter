@@ -23,7 +23,7 @@ const config = {
       'graphql-tag',
       'jquery',
       'js-base64',
-      'moment',
+      'date-fns',
       'react',
       'react-apollo',
       'react-bootstrap',
@@ -42,7 +42,8 @@ const config = {
   },
   output: {
     path: assetsDir,
-    filename: 'app.bundle.js',
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
   },
   module: {
     rules: [
@@ -110,6 +111,7 @@ const config = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: 'app.vendor.bundle.js',
+      minChunks: Infinity,
     }),
     new workboxPlugin.GenerateSW({
       swDest: 'sw.js',
