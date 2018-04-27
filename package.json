@@ -202,6 +202,7 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "serialize-javascript": "^1.4.0",
+    "serve-favicon": "^2.5.0",
     "smoothscroll-polyfill": "^0.4.0",
     "styled-components": "^3.2.5"
   },

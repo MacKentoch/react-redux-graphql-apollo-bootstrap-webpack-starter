@@ -31,6 +31,12 @@ const serverConfig = {
         test: /\.jsx?$/,
         exclude: [nodeModulesDir],
         loader: 'babel-loader',
+        options: {
+          plugins: [
+            'loadable-components/babel',
+            'babel-plugin-dynamic-import-node',
+          ],
+        },
       },
       {
         test: /\.css$/,
