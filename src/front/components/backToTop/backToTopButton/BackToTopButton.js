@@ -12,6 +12,7 @@ export type Props = {
   onClick: (event: SyntheticEvent<>) => any,
   children: React$Node,
   motionStyle: any,
+  ...any,
 };
 // #endregion
 

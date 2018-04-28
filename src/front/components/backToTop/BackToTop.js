@@ -95,7 +95,9 @@ class BackToTop extends Component<Props, State> {
               showBackButton: shouldShowBackButton,
             });
           }
-          this.setState({ tickingScrollObserve: false });
+          this.setState({
+            tickingScrollObserve: false,
+          });
         });
       }
       this.setState({ tickingScrollObserve: true });

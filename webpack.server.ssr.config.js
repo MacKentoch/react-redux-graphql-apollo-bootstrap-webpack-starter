@@ -32,10 +32,7 @@ const serverConfig = {
         exclude: [nodeModulesDir],
         loader: 'babel-loader',
         options: {
-          plugins: [
-            'loadable-components/babel',
-            'babel-plugin-dynamic-import-node',
-          ],
+          plugins: ['loadable-components/babel', 'dynamic-import-node'],
         },
       },
       {

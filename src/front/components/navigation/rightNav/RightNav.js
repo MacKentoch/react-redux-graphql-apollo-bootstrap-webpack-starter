@@ -10,11 +10,14 @@ export type Props = {
   rightLinks: Array<{
     link: string,
     label: string,
-    viewName: string,
+    view: string,
+    showWhenUserAuth: boolean,
+    alwaysShows: boolean,
     btnLink: { showWhenUserAuth: boolean, alwaysShows: boolean },
   }>,
-  onRightNavButtonClick: (event: SyntheticEvent<>, viewName) => any,
+  onRightNavButtonClick: (event: SyntheticEvent<>, viewName: string) => any,
   userIsAuthenticated: boolean,
+  ...any,
 };
 // #endregion
 
@@ -26,31 +29,30 @@ const RightNav = ({
   <ul className="nav navbar-nav navbar-right">
     {userIsAuthenticated
       ? rightLinks
-          .filter(btnLink => btnLink.showWhenUserAuth === true)
-          .map((aLinkBtn, index) => {
+          .filter(({ showWhenUserAuth }) => showWhenUserAuth === true)
+          .map(({ showWhenUserAuth, link, view, label }, index) => {
             return (
               <RightNavButton
                 key={index}
-                link={aLinkBtn.link}
-                label={aLinkBtn.label}
-                viewName={aLinkBtn.view}
+                link={link}
+                label={label}
+                viewName={view}
                 onClick={onRightNavButtonClick}
               />
             );
           })
       : rightLinks
           .filter(
-            btnLink =>
-              btnLink.showWhenUserAuth === false ||
-              btnLink.alwaysShows === true,
+            ({ showWhenUserAuth, alwaysShows }) =>
+              showWhenUserAuth === false || alwaysShows === true,
           )
-          .map((aLinkBtn, index) => {
+          .map(({ showWhenUserAuth, link, view, label }, index) => {
             return (
               <RightNavButton
                 key={index}
-                link={aLinkBtn.link}
-                label={aLinkBtn.label}
-                viewName={aLinkBtn.view}
+                link={link}
+                label={label}
+                viewName={view}
                 onClick={onRightNavButtonClick}
               />
             );

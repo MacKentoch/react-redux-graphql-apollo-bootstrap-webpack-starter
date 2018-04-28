@@ -117,7 +117,7 @@ function renderFullPage(
   preloadedState = '',
   preloadedApolloState: '',
   styleTags = '',
-  loadableState = '',
+  loadableState,
 ) {
   // NOTE:
   // <section id="root">

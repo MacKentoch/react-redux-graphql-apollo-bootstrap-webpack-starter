@@ -53,6 +53,7 @@ class PrivateRoute extends Component<Props, State> {
   }
 
   isAuthenticated() {
+    // $FlowIgnore
     const checkUserHasId = user => user && user.id && user.id.length > 0;
     const user = auth.getUserInfo() ? auth.getUserInfo() : null;
     const isAuthenticated =
