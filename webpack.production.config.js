@@ -2,47 +2,29 @@
 
 const webpack = require('webpack');
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const workboxPlugin = require('workbox-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-const assetsDir = path.resolve(__dirname, 'docs/assets');
-const nodeModulesDir = path.resolve(__dirname, 'node_modules');
-const indexFile = path.resolve(__dirname, 'src/front/index.js');
-
-const SPLIT_STYLE = true;
+const assetsDir = path.join(__dirname, 'docs/assets');
+const publicAssets = 'assets/';
+const nodeModulesDir = path.join(__dirname, 'node_modules');
+const indexFile = path.join(__dirname, 'src/front/index.js');
 
 const config = {
-  entry: {
-    app: ['babel-polyfill', indexFile],
-    vendor: [
-      'apollo-client',
-      'babel-polyfill',
-      'bootstrap',
-      'classnames',
-      'graphql-tag',
-      'jquery',
-      'js-base64',
-      'date-fns',
-      'react',
-      'react-apollo',
-      'react-bootstrap',
-      'react-dom',
-      'react-motion',
-      'react-notification',
-      'react-redux',
-      'react-router',
-      'react-router-dom',
-      'history',
-      'react-router-redux',
-      'react-tap-event-plugin',
-      'redux',
-      'redux-thunk',
-    ],
+  mode: 'production',
+  entry: { app: indexFile },
+  resolve: {
+    modules: ['src/front', 'node_modules'],
+    extensions: ['.js', 'jsx'],
   },
   output: {
     path: assetsDir,
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].bundle.js',
+    publicPath: publicAssets,
+    filename: '[name].js',
+    chunkFilename: '[name].js',
   },
   module: {
     rules: [
@@ -53,37 +35,7 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: SPLIT_STYLE
-          ? ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: [
-                { loader: 'css-loader', options: { importLoaders: 1 } },
-                'postcss-loader',
-              ],
-            })
-          : [
-              'style-loader',
-              { loader: 'css-loader', options: { importLoaders: 1 } },
-              'postcss-loader',
-            ],
-      },
-      {
-        test: /\.scss$/,
-        use: SPLIT_STYLE
-          ? ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: [
-                { loader: 'css-loader', options: { importLoaders: 1 } },
-                'postcss-loader',
-                'sass-loader',
-              ],
-            })
-          : [
-              'style-loader',
-              { loader: 'css-loader', options: { importLoaders: 1 } },
-              'postcss-loader',
-              'sass-loader',
-            ],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
@@ -99,14 +51,48 @@ const config = {
       },
     ],
   },
+  optimization: {
+    runtimeChunk: false,
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+    },
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true,
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
+  },
   plugins: [
-    getImplicitGlobals(),
-    setNodeEnv(),
-    new ExtractTextPlugin('app.styles.css'),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'app.vendor.bundle.js',
-      minChunks: Infinity,
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new CompressionWebpackPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: new RegExp('\\.(js|css)$'),
+      threshold: 10240,
+      minRatio: 0.8,
     }),
     new workboxPlugin.GenerateSW({
       swDest: 'sw.js',
@@ -115,23 +101,5 @@ const config = {
     }),
   ],
 };
-
-/*
-* here using hoisting so don't use `var NAME = function()...`
-*/
-function getImplicitGlobals() {
-  return new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
-  });
-}
-
-function setNodeEnv() {
-  return new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: JSON.stringify('production'),
-    },
-  });
-}
 
 module.exports = config;

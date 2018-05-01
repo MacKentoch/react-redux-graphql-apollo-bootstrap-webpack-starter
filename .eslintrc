@@ -197,10 +197,6 @@
     "jsx-quotes": [1, "prefer-double"],
     "comma-spacing": 0,
     "no-multi-spaces": 0,
-    // "indent": [
-    //   1,
-    //   2, { "SwitchCase": 1 }
-    // ],
     "brace-style": 0,
     "camelcase": 0,
     "consistent-this": [1, "self"],

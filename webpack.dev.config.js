@@ -2,48 +2,30 @@
 
 const webpack = require('webpack');
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const workboxPlugin = require('workbox-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const assetsDir = path.resolve(__dirname, 'docs/assets');
-const nodeModulesDir = path.resolve(__dirname, 'node_modules');
-const indexFile = path.resolve(__dirname, 'src/front/index.js');
-
-const SPLIT_STYLE = true;
+const assetsDir = path.join(__dirname, 'docs/assets');
+const publicAssets = 'assets/';
+const nodeModulesDir = path.join(__dirname, 'node_modules');
+const indexFile = path.join(__dirname, 'src/front/index.js');
 
 const config = {
-  devtool: '#source-map',
+  mode: 'development',
+  devtool: 'source-map',
+  target: 'web',
   entry: {
-    app: ['babel-polyfill', indexFile],
-    vendor: [
-      'apollo-client',
-      'babel-polyfill',
-      'bootstrap',
-      'classnames',
-      'graphql-tag',
-      'jquery',
-      'js-base64',
-      'date-fns',
-      'react',
-      'react-apollo',
-      'react-bootstrap',
-      'react-dom',
-      'react-motion',
-      'react-notification',
-      'react-redux',
-      'react-router-dom',
-      'history',
-      'react-router',
-      'react-router-redux',
-      'react-tap-event-plugin',
-      'redux',
-      'redux-thunk',
-    ],
+    app: indexFile,
+  },
+  resolve: {
+    modules: ['src/front', 'node_modules'],
+    extensions: ['.js', 'jsx'],
   },
   output: {
     path: assetsDir,
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].bundle.js',
+    publicPath: publicAssets,
+    filename: '[name].js',
+    chunkFilename: '[name].js',
   },
   module: {
     rules: [
@@ -54,37 +36,7 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: SPLIT_STYLE
-          ? ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: [
-                { loader: 'css-loader', options: { importLoaders: 1 } },
-                'postcss-loader',
-              ],
-            })
-          : [
-              'style-loader',
-              { loader: 'css-loader', options: { importLoaders: 1 } },
-              'postcss-loader',
-            ],
-      },
-      {
-        test: /\.scss$/,
-        use: SPLIT_STYLE
-          ? ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: [
-                { loader: 'css-loader', options: { importLoaders: 1 } },
-                'postcss-loader',
-                'sass-loader',
-              ],
-            })
-          : [
-              'style-loader',
-              { loader: 'css-loader', options: { importLoaders: 1 } },
-              'postcss-loader',
-              'sass-loader',
-            ],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
@@ -100,18 +52,27 @@ const config = {
       },
     ],
   },
+  optimization: {
+    runtimeChunk: false,
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
   plugins: [
-    getImplicitGlobals(),
-    setNodeEnv(),
-    new ExtractTextPlugin({
-      filename: 'app.styles.css',
-      // disable: false,
-      // allChunks: true
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'app.vendor.bundle.js',
-      minChunks: Infinity,
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('dev'),
+      },
     }),
     new workboxPlugin.GenerateSW({
       swDest: 'sw.js',
@@ -120,23 +81,5 @@ const config = {
     }),
   ],
 };
-
-/*
-* here using hoisting so don't use `var NAME = function()...`
-*/
-function getImplicitGlobals() {
-  return new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
-  });
-}
-
-function setNodeEnv() {
-  return new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: JSON.stringify('dev'),
-    },
-  });
-}
 
 module.exports = config;

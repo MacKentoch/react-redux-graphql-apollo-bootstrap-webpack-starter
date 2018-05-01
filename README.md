@@ -40,7 +40,7 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 - animate.css ([github :link:](https://github.com/daneden/animate.css))
 - classnames ([github :link:](https://github.com/JedWatson/classnames))
 - react-motion ([github :link:](https://github.com/chenglou/react-motion))
-- Webpack 3.x ([github :link:](https://github.com/webpack/webpack))
+- Webpack 4.x ([github :link:](https://github.com/webpack/webpack))
 - postcss
 - babel 6+ ([github :link:](https://github.com/babel/babel))
 - redux-devtool-extension ([github :link:](https://github.com/zalmoxisus/redux-devtools-extension#redux-devtools-extension))
@@ -52,7 +52,6 @@ This starter also embeds `JWT token based` `authentication` (check [Route](https
 - hot reload
 - loaders
   - `js` / `jsx`
-  - sass
   - css
   - json
   - images formats
