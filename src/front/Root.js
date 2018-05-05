@@ -39,7 +39,7 @@ class Root extends Component<Props, State> {
                   <App />
                   {/* logout: just redirects to login (App will take care of removing the token) */}
                   <LogoutRoute path="/logout" />
-                  <Route component={PageNotFound} />
+                  <Route path="*" component={PageNotFound} />
                 </Switch>
               </ScrollToTop>
             </ConnectedRouter>

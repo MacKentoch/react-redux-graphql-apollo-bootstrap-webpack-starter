@@ -82,6 +82,7 @@ const config = {
     contentBase: rootPath,
     port: 3001,
     hot: true,
+    historyApiFallback: true,
   },
 };
 

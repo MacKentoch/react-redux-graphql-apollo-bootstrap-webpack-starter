@@ -79,7 +79,7 @@ class BackToTop extends Component<Props, State> {
           ? window.pageYOffset
           : (
               document.documentElement ||
-              document.body.parentNode ||
+              (document && document.body && document.body.parentNode) ||
               document.body
             ).scollTop;
       /* eslint-enable no-undefined */
