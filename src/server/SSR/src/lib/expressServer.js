@@ -11,6 +11,10 @@ import config from '../../../config';
 import asyncWrap from './asyncWrap';
 // #endregion
 
+// #region constants
+const DOCS_PATH = '../../../../../docs/';
+// #endregion
+
 // $FlowIgnore
 const expressServer = (app = null, isDev = false) => {
   try {
@@ -23,13 +27,12 @@ const expressServer = (app = null, isDev = false) => {
     app.set('ipAdress', config.get('server.host'));
 
     app.use(
-      favicon(
-        path.join(__dirname, '../../../../../docs/', 'statics/', 'favicon.ico'),
-      ),
+      favicon(path.join(__dirname, DOCS_PATH, 'statics/', 'favicon.ico')),
     );
+
     app.use(
       '/assets',
-      express.static(path.join(__dirname, '../../../../../docs/', 'assets/')),
+      express.static(path.join(__dirname, DOCS_PATH, 'assets/')),
     );
 
     app.get('/*', asyncWrap(ssr));

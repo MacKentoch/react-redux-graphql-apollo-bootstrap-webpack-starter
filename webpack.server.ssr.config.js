@@ -13,7 +13,8 @@ const nodeExternals = require('webpack-node-externals');
 // #region constants
 const nodeModulesDir = path.join(__dirname, 'node_modules');
 const indexFile = path.join(__dirname, 'src/server/SSR/src/server.js');
-const publicPath = path.join(__dirname, 'docs/assets');
+// const assetsDir = path.join(__dirname, 'docs/assets');
+const publicAssets = 'assets/';
 const ouputDirectory = path.join(__dirname, 'src/server/SSR/output');
 const outputFile = 'server.js';
 // #endregion
@@ -25,7 +26,7 @@ const serverConfig = {
   output: {
     path: ouputDirectory,
     filename: outputFile,
-    publicPath: publicPath,
+    publicPath: publicAssets,
     libraryTarget: 'commonjs2',
   },
   node: {

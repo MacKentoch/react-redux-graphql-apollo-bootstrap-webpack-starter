@@ -146,8 +146,8 @@ function renderFullPage(
         <section id="root"><div>${html}</div></section>
         <script type="text/javascript">window.__PRELOADED_STATE__ = ${preloadedState}</script>
         <script type="text/javascript">window.__APOLLO_STATE__ = ${preloadedApolloState}</script>
-        <script type="text/javascript" src="/assets/app.vendor.bundle.js"></script>
-        <script type="text/javascript" src="/assets/app.bundle.js"></script>
+        <script type="text/javascript" src="/assets/vendors.js"></script>
+        <script type="text/javascript" src="/assets/app.js"></script>
         ${loadableState.getScriptTag()}
       </body>
     </html>
