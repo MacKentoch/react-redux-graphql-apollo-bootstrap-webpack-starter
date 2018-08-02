@@ -3,9 +3,9 @@
 // #region imports
 import 'babel-polyfill';
 import React from 'react';
-import { render } from 'react-dom';
+import { hydrate, render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import { loadComponents } from 'loadable-components';
+import { loadComponents, getState } from 'loadable-components';
 import injectTpEventPlugin from 'react-tap-event-plugin';
 import smoothScrollPolyfill from 'smoothscroll-polyfill';
 import 'font-awesome/css/font-awesome.min.css';
@@ -18,31 +18,40 @@ import Root from './Root';
 smoothScrollPolyfill.polyfill();
 // force polyfill (even if browser partially implements it)
 window.__forceSmoothScrollPolyfill__ = true;
+window.snapSaveState = () => getState();
 // #endregion
 
 // #region constants
 const ELEMENT_TO_BOOTSTRAP = 'root';
-const BootstrapedElement = document.getElementById(ELEMENT_TO_BOOTSTRAP);
+const bootstrapedElement = document.getElementById(ELEMENT_TO_BOOTSTRAP);
 // #endregion
 
 injectTpEventPlugin();
 injectGlobalStyle();
 
 const renderApp = RootComponent => {
-  render(
-    <AppContainer warnings={false}>
+  const Application = () => (
+    <AppContainer>
       <RootComponent />
-    </AppContainer>,
-    // $FlowIgnore
-    BootstrapedElement,
+    </AppContainer>
   );
+
+  // $FlowIgnore
+  if (bootstrapedElement.hasChildNodes()) {
+    loadComponents().then(() => {
+      hydrate(<Application />, bootstrapedElement);
+    });
+  } else {
+    // $FlowIgnore
+    render(<Application />, bootstrapedElement);
+  }
 };
 
 // When SSR:
-loadComponents().then(() => renderApp(Root));
+// loadComponents().then(() => renderApp(Root));
 
 // when SPA:
-// renderApp(Root);
+renderApp(Root);
 
 if (module.hot) {
   module.hot.accept('./Root', () => {
