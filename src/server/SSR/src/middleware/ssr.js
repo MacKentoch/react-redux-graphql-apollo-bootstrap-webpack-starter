@@ -1,7 +1,6 @@
 // @flow
 
 // #region imports
-// import { promisify } from 'util';
 import serialize from 'serialize-javascript';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -144,11 +143,11 @@ function renderFullPage(
       </head>
       <body>
         <section id="root"><div>${html}</div></section>
+        ${loadableState.getScriptTag()}
         <script type="text/javascript">window.__PRELOADED_STATE__ = ${preloadedState}</script>
         <script type="text/javascript">window.__APOLLO_STATE__ = ${preloadedApolloState}</script>
         <script type="text/javascript" src="/assets/vendors.js"></script>
         <script type="text/javascript" src="/assets/app.js"></script>
-        ${loadableState.getScriptTag()}
       </body>
     </html>
   `,
